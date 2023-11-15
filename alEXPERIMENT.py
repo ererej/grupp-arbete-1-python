@@ -25,14 +25,20 @@ class command(Enum):
 
 # -----------------------------------------------------------------------------------------------
 
-LatestComm = command.IDLE
-def MAIN_LOOP():
-    LatestComm = command.IDLE
-    while (LatestComm != command.CLOSE_COMMAND):
-        while ((LatestComm in command._value2member_map_) == False):
-            LatestComm = input("  INPUT ------>>>  ")
+# command 'c' should restart the game, '
 
+def MAIN_LOOP():
+    LatestComm = "idle"
+    while (LatestComm != "CLOSE_COMMAND"):
+# OPENS the main loop.
+
+        while (LatestComm in ["CLOSE_COMMAND", ""]):
+            LatestComm = input("  INPUT ------>>>  ")
         
+        
+
+
+
 
 # -----------------------------------------------------------------------------------------------
 
