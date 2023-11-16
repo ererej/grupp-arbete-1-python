@@ -1,21 +1,48 @@
 import random as RND
+import math
+
+difficultyMultiplier = 1
+
+#| Jag tror det är en bra idé att lägga monsters hp på ~10 och player hp på ~25. 
+#| Med större nummer fungerar difficulty scaling och randomized damage bättre och tal blir mer förenliga.
+#| Varje difficulty level är en increment på 30% stats.
+#| 
 
 class Player():
     def __init__(self, name):
         pass
 
 class Monster():
-    def __init__(self, name) -> None:
-        self.name = name
+    def __init__(self, name, strength, health, threatTypes, attackMoveDesc, deathDesc) -> None:
 
-thisDict = {
-    1: [Monster("Karl"), Monster(), 1, 2, 3],
+        self.name = name
+        self.strength = RND.randint(math.ceil(0.8*strength), 1.2*strength) * difficultyMultiplier
+        self.health = RND.randint(math.ceil(0.8*health), 1.2*health) * difficultyMultiplier
+        self.threatType: list[str] = threatTypes
+        self.attackMoveDesc = attackMoveDesc
+        self.deathDesc = deathDesc
+
+    def CombatRound(playerResistances):
+        pass
+
+
+MonsterDict = {
+    1: [Monster("Karl", 4, 8, ["Mattenörd", "Papper"], """
+
+Karl kastar sin matteperm mot dig, och den träffar dig RÄTT I SKREVET! *critical strike* *oof*
+
+                """, """
+                
+Mattenörden Karl dog av din attack, och hans matteblod flödar ur såren. Han dör ledsen. Han tog alldrig reda på svaret på livets gåta -- 
+                hur man räknar ut arean under en graf...
+                
+                """), Monster("", 1, ""), 1, 2, 3],
     2: [Monster(), Monster()],
     3: [Monster("Pappersflygplansmonstret")],
     4: 123
 }
 
-someClassList: list[Monster] = thisDict[1]
+someClassList: list[Monster] = MonsterDict[1]
 
 someClass = someClassList[RND.randint(1, )]
 
