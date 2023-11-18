@@ -1,5 +1,14 @@
 import os
 from enum import Enum
+import keyboard
+
+
+
+#verkar nu fungera ish. 
+print("Press any key to continue...")
+key = keyboard.read_key()
+print(f"You pressed {key}")
+
 
 #class PlayerInventory:
     
