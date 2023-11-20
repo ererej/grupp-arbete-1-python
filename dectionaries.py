@@ -39,7 +39,15 @@ Karl kastar sin matteperm mot dig, och den träffar dig RÄTT I SKREVET! *critic
 Mattenörden Karl dog av din attack, och hans matteblod flödar ur såren. Han dör ledsen. Han tog alldrig reda på svaret på livets gåta -- 
                 hur man räknar ut arean under en funktions graf...
                 
-                """), Monster("Jesper", , , ""), 1, 2, 3],
+                """), Monster("Jesper", 6, 10, "Fysiklärare", """
+
+Jesper stänger dörren rätt i ditt ansikte!
+
+""", """
+
+
+
+"""), 1, 2, 3],
     2: [Monster(), Monster()],
     3: [Monster("Pappersflygplansmonstret")],
     4: 123

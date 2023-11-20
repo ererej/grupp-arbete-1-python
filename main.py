@@ -27,7 +27,8 @@ while (True):
     if key == "1":
         print("difficulty är inte implementerat")
     
-    if key == "2":
+    elif key == "2":
         mainloop()
-    if key == "3":
+    
+    elif key == "3":
         print(0/0)
