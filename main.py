@@ -16,7 +16,7 @@
 import keyboard
 
 print("""
-[1]difficulty
+[1]difficulty [impossible]
 [2]start
 [3]shut down
 """)
