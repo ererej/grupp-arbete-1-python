@@ -53,8 +53,8 @@ Jesper stänger dörren rätt i ditt ansikte!
     4: 123
 }
 
-someClassList: list[Monster] = MonsterDict[1]
+TypeSortedList: list[Monster] = MonsterDict[RND.randint(1, 4)]
 
-someClass = someClassList[RND.randint(1, )]
+SpawnedMonster = TypeSortedList[RND.randint(0, 3)]
 
 player1 = Player()
