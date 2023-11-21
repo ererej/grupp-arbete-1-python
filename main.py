@@ -22,9 +22,10 @@ print("""
 """)
 
 while (True):
-    key =keyboard.read_key()
-    
-    if key == "1":
+    key = keyboard.read_key()
+    if keyboard._Event == keyboard.KEY_DOWN:
+        continue
+    if key == "1": #den faking dubbel klickar!!!!
         print("difficulty är inte implementerat")
     
     elif key == "2":
@@ -32,3 +33,4 @@ while (True):
     
     elif key == "3":
         print(0/0)
+
