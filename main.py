@@ -1,13 +1,24 @@
-
+import os
 import keyboard
 
 difficulty = 2
 
-print("""
-[1]difficulty [impossible]
+def start_screen_printer(difficulty: int):
+    """printar start screenen :D"""
+    os.system("cls")
+    if difficulty == 1:
+        difficulty = "Easy"
+    elif difficulty == 2:
+        difficulty = "Normal"
+    else:
+        difficulty = "Hard"
+    print(f"""
+[1]difficulty [{difficulty}]
 [2]start
 [3]shut down
 """)
+
+start_screen_printer(difficulty)
 
 while (True):
     key = keyboard.read_key()
@@ -17,7 +28,7 @@ while (True):
         difficulty +=1
         if difficulty >= 4:
             difficulty = 1
-        print(f"svårhets graden är nu {difficulty}")    #radera när vi har en print funktion för start menyn
+        start_screen_printer(difficulty)
     
     elif key == "2":
         mainloop()
