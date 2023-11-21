@@ -1,25 +1,36 @@
-
-# | Tre dörrar framför dig. Vilken väljer du?|
-# |
-# | <description av dörr ett> [1]|
-# | 
-# | <description av dörr två> [2]|
-# |
-# | <description av dörr tre> [3]|
-# |
-# | |10 HP|11 STR|LVL 5|Inventory: [I]
+# YOOOOOOOOOOOOOOOO funkar detta
 
 
-# |
-# | <Description: Du har kommit in. Vad som händer, presents a choice>
-# |
-# | {player action}
-# |
-# | <Description av effekterna, vilka rewards/punishments>
-# |
-# | {if-sats som checkar om combat är färdig.}
-# |
-# | <Går tillbaka till Main description>
-# |
-# |
-# |
+#Wow, such fun
+
+# please work/ joneas 
+
+
+#Wow, amazing!
+
+
+
+#Haha! Lite text till och med kanske i mitten
+
+
+import keyboard
+
+print("""
+[1]difficulty [impossible]
+[2]start
+[3]shut down
+""")
+
+while (True):
+    key = keyboard.read_key()
+    if keyboard._Event == keyboard.KEY_DOWN:
+        continue
+    if key == "1": #den faking dubbel klickar!!!!
+        print("difficulty är inte implementerat")
+    
+    elif key == "2":
+        mainloop()
+    
+    elif key == "3":
+        print(0/0)
+

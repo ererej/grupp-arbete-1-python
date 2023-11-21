@@ -1,5 +1,14 @@
 import os
 from enum import Enum
+import keyboard
+
+
+
+#verkar nu fungera ish. 
+print("Press any key to continue...")
+key = keyboard.read_key()
+print(f"You pressed {key}")
+
 
 #class PlayerInventory:
     
@@ -16,23 +25,26 @@ class GameplayDescription:
     def NewDescription():
         os.system('cls')
 
-
-
-class command(Enum):
-    CLOSE_COMMAND = "c"
-    IDLE = "e"
-
-
 # -----------------------------------------------------------------------------------------------
 
-LatestComm = command.IDLE
+# command 'c' should restart the game, '
+
 def MAIN_LOOP():
-    LatestComm = command.IDLE
-    while (LatestComm != command.CLOSE_COMMAND):
-        while ((LatestComm in command._value2member_map_) == False):
+    LatestComm = "idle"
+
+    while (LatestComm != "CLOSE_COMMAND"):
+# OPENS the main loop.
+
+        while (LatestComm in ["CLOSE_COMMAND", ""]):
             LatestComm = input("  INPUT ------>>>  ")
 
+
+
+            
         
+        
+        
+# [ ( 1 : 2 ), ( 1 : 2) ]
 
 # -----------------------------------------------------------------------------------------------
 
