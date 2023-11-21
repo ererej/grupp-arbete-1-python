@@ -2,8 +2,9 @@
 #i terminalen skriv :
 # py -m pip install keyboard
 
-
 import keyboard
+
+difficulty = 2
 
 print("""
 [1]difficulty [impossible]
@@ -16,7 +17,10 @@ while (True):
     if keyboard._Event == keyboard.KEY_DOWN:
         continue
     if key == "1": #den faking dubbel klickar!!!!
-        print("difficulty är inte implementerat")
+        difficulty +=1
+        if difficulty >= 4:
+            difficulty = 1
+        print(f"svårhets graden är nu {difficulty}")    #radera när vi har en print funktion för start menyn
     
     elif key == "2":
         mainloop()
