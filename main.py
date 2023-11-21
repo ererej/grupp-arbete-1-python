@@ -1,16 +1,6 @@
-# YOOOOOOOOOOOOOOOO funkar detta
-
-
-#Wow, such fun
-
-# please work/ joneas 
-
-
-#Wow, amazing!
-
-
-
-#Haha! Lite text till och med kanske i mitten
+#fungerar inte programet?
+#i terminalen skriv :
+# py -m pip install keyboard
 
 
 import keyboard
