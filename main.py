@@ -15,7 +15,8 @@ def start_screen_printer(difficulty: int):
     print(f"""
 [1]difficulty [{difficulty}]
 [2]start
-[3]shut down
+[3]keybinds
+[4]shut down
 """)
 
 start_screen_printer(difficulty)
@@ -34,5 +35,14 @@ while (True):
         mainloop()
     
     elif key == "3":
+        #os.system("cls")
+        print("""
+Keybinds:
+Enter the left door:    [Q]            
+Enter the middle door:  [W]
+Enter the right door:   [E]
+""")
+
+    elif key == "4":
         print(0/0)
 
