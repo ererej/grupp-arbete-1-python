@@ -9,6 +9,7 @@ difficultyMultiplier = 1
 #| 
 
 class Player():
+
     def __init__(self, name):
         pass
 
@@ -16,6 +17,7 @@ class Monster():
     def __init__(self, name, strength, health, threatTypes, attackMoveDesc, deathDesc) -> None:
 
         self.name = name
+        
         self.strength = math.ceil(strength * difficultyMultiplier)
         self.health = math.ceil(health * difficultyMultiplier)
         self.threatType: list[str] = threatTypes
@@ -23,10 +25,11 @@ class Monster():
         self.attackMoveDesc = attackMoveDesc
         self.deathDesc = deathDesc
 
-
-
     def CombatRound(playerResistances):
         pass
+
+
+
 
 
 MonsterDict = {
@@ -52,6 +55,8 @@ Jesper stänger dörren rätt i ditt ansikte!
     3: [Monster("Pappersflygplansmonstret")],
     4: 123
 }
+
+
 
 TypeSortedList: list[Monster] = MonsterDict[RND.randint(1, 4)]
 
