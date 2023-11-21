@@ -1,6 +1,3 @@
-#fungerar inte programet?
-#i terminalen skriv :
-# py -m pip install keyboard
 
 import keyboard
 
