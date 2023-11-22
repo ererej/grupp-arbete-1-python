@@ -1,5 +1,6 @@
 import os
 import keyboard
+import time
 
 difficulty = 2
 
@@ -24,7 +25,7 @@ start_screen_printer(difficulty)
 while (True):
     key = keyboard.read_key()
     if keyboard._Event == keyboard.KEY_DOWN:
-        continue
+        print("sup")
     if key == "1": #den faking dubbel klickar!!!!
         difficulty +=1
         if difficulty >= 4:
@@ -32,7 +33,8 @@ while (True):
         start_screen_printer(difficulty)
     
     elif key == "2":
-        mainloop()
+        #mainloop()
+        pass
     
     elif key == "3":
         #os.system("cls")
@@ -42,7 +44,9 @@ Enter the left door:    [Q]
 Enter the middle door:  [W]
 Enter the right door:   [E]
 """)
-
+ 
     elif key == "4":
         print(0/0)
+
+    time.sleep(1)
 
