@@ -34,6 +34,20 @@ monsterDictionary = {
     5: [[], [], []]
 }
 
+def Input():
+    key =
+
 def Enter():
+
+    # När spelaren vunnit/förlorat spelet återvänder hen hit...
     while (True):
+
+        key = keyboard.read_hotkey()
         
+
+        if (key == "d"):
+            print("hej")
+        elif (key == "p"):
+            print("nej")
+
+Enter()
