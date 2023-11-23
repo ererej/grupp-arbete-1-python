@@ -10,9 +10,18 @@ descriptionText = ""
 
 
 
+class Item():
+    pass
+
+class Inventory():
+    pass
+
+class Player():
+    pass
+
 class Monster():
-    def __init__(self, monsterName, strength, health, weakness: list, attackMoveDesc, deathDesc):
-        
+    def __init__(self, monsterName, strength, health, weakness: list, enterDesc, attackMoveDesc, deathDesc):
+        # The weakness list contains its offensive and defensive weakness (in that order)
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
@@ -22,6 +31,7 @@ class Monster():
         self.weakness = weakness
         self.attackMoveDesc = attackMoveDesc
         self.deathDesc = deathDesc
+        self.enterDesc = enterDesc
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 1 contains fire monsters, 
 # group 2 shadow monsters, group 3 martial monsters, group 4 acid monsters, and group 5 stereotypes.
@@ -48,8 +58,6 @@ def Enter():
 
         key = Input()
         
-        print(key)
-
         if (key == "d"):
             print("hej")
         elif (key == "p"):
