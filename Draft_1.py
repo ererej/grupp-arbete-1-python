@@ -50,16 +50,19 @@ difficulties = {
 
 CanInput = True
 def Input():
-    keyboard.read_key()
+    keyboard.read_key() 
 
     returnedKey = keyboard.read_key()
 
-    return returnedKey
+    return returnedKey.lower()
 
 def Enter():
     os.system('cls')
 
-    print(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*4 + "Difficulty: " + difficulties[difficulty] + "\n"*4 + "For rules and keybinds, press [r] at any point in the game" + "\n"*4 + "Press [s] to start")
+    print(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*4 + "Difficulty: " + difficulties[difficulty] + "\n"*4 + "For rules and keybinds, press [R] at any point in the game" + "\n"*4 + "Press [S] to start" + "\n"*4 + "Press [Q] to rage quit")
     key = Input()
+
+    if key == "q":
+        0/0
 
 Enter()
