@@ -42,6 +42,11 @@ monsterDictionary = {
     4: [[], [], []],
     5: [[], [], []]
 }
+difficulties = {
+    1: "For Roblox Players",
+    1.2: "Normal",
+    1.4: "Dwayne Johnsson"
+}
 
 CanInput = True
 def Input():
@@ -52,15 +57,10 @@ def Input():
     return returnedKey
 
 def Enter():
+    os.system('cls')
 
-    # När spelaren vunnit/förlorat spelet återvänder hen hit...
-    while (True):
+    print(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*4 + "Difficulty: " + difficulties[difficulty] + "\n"*4 + "For rules and keybinds, press [r] at any point in the game" + "\n"*4 + "Press [s] to start")
 
-        key = Input()
-        
-        if (key == "d"):
-            print("hej")
-        elif (key == "p"):
-            print("nej")
+    key = Input()
 
 Enter()
