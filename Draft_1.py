@@ -43,14 +43,14 @@ monsterDictionary = {
     5: [[], [], []]
 }
 difficulties = {
-    1: "For Roblox Players",
+    1: "noob mode",
     1.2: "Normal",
-    1.4: "Dwayne Johnsson"
+    1.4: "Martin"
 }
 
 CanInput = True
 def Input():
-    discardKey = keyboard.read_key() #behöver vi ens asigna en variabel till keyboard.read_key()?
+    keyboard.read_key()
 
     returnedKey = keyboard.read_key()
 
@@ -60,7 +60,6 @@ def Enter():
     os.system('cls')
 
     print(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*4 + "Difficulty: " + difficulties[difficulty] + "\n"*4 + "For rules and keybinds, press [r] at any point in the game" + "\n"*4 + "Press [s] to start")
-
     key = Input()
 
 Enter()
