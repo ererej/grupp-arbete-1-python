@@ -35,7 +35,7 @@ monsterDictionary = {
 
 CanInput = True
 def Input():
-    discardKey = keyboard.read_key()
+    discardKey = keyboard.read_key() #behöver vi ens asigna en variabel till keyboard.read_key()?
 
     returnedKey = keyboard.read_key()
 
