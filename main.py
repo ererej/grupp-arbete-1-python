@@ -22,7 +22,14 @@ def start_screen_printer(difficulty: int):
 
 start_screen_printer(difficulty)
 
+ofset = 0
+
 while (True):
+    if ofset == 1:
+        ofset = 0
+        print()
+        continue
+    ofset = 1
     key = keyboard.read_key()
     if keyboard._Event == keyboard.KEY_DOWN:
         print("sup")
@@ -48,5 +55,4 @@ Enter the right door:   [E]
     elif key == "4":
         print(0/0)
 
-    time.sleep(1)
 

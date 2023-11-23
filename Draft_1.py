@@ -35,7 +35,7 @@ monsterDictionary = {
 }
 
 def Input():
-    key =
+    key = 
 
 def Enter():
 
