@@ -10,9 +10,18 @@ descriptionText = ""
 
 
 
+class Item():
+    pass
+
+class Inventory():
+    pass
+
+class Player():
+    pass
+
 class Monster():
-    def __init__(self, monsterName, strength, health, weakness: list, attackMoveDesc, deathDesc):
-        
+    def __init__(self, monsterName, strength, health, weakness: list, enterDesc, attackMoveDesc, deathDesc):
+        # The weakness list contains its offensive and defensive weakness (in that order)
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
@@ -22,6 +31,7 @@ class Monster():
         self.weakness = weakness
         self.attackMoveDesc = attackMoveDesc
         self.deathDesc = deathDesc
+        self.enterDesc = enterDesc
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 1 contains fire monsters, 
 # group 2 shadow monsters, group 3 martial monsters, group 4 acid monsters, and group 5 stereotypes.
@@ -31,6 +41,11 @@ monsterDictionary = {
     3: [[], [], []],
     4: [[], [], []],
     5: [[], [], []]
+}
+difficulties = {
+    1: "For Roblox Players",
+    1.2: "Normal",
+    1.4: "Dwayne Johnsson"
 }
 
 CanInput = True
@@ -42,17 +57,10 @@ def Input():
     return returnedKey
 
 def Enter():
+    os.system('cls')
 
-    # När spelaren vunnit/förlorat spelet återvänder hen hit...
-    while (True):
+    print(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*4 + "Difficulty: " + difficulties[difficulty] + "\n"*4 + "For rules and keybinds, press [r] at any point in the game" + "\n"*4 + "Press [s] to start")
 
-        key = Input()
-        
-        print(key)
-
-        if (key == "d"):
-            print("hej")
-        elif (key == "p"):
-            print("nej")
+    key = Input()
 
 Enter()
