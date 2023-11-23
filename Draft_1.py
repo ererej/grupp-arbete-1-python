@@ -1,7 +1,6 @@
 # The assembly line
 import os
 import keyboard 
-import time
 import random as RND
 import math
 
@@ -34,16 +33,22 @@ monsterDictionary = {
     5: [[], [], []]
 }
 
+CanInput = True
 def Input():
-    key =
+    discardKey = keyboard.read_key()
+
+    returnedKey = keyboard.read_key()
+
+    return returnedKey
 
 def Enter():
 
     # När spelaren vunnit/förlorat spelet återvänder hen hit...
     while (True):
 
-        key = keyboard.read_hotkey()
+        key = Input()
         
+        print(key)
 
         if (key == "d"):
             print("hej")
