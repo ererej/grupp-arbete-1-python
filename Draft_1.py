@@ -3,7 +3,7 @@ import os
 import keyboard 
 import random as RND
 import math
-
+from termcolor import colored
 difficulty = 1
 
 screen1 = ""
@@ -17,7 +17,10 @@ class Inventory():
     pass
 
 class Player():
-    pass
+    def __init__(self, level:int, health:int, strenght:int):
+        self.level = level
+        self.health = health
+        self.strenght = strenght
 
 class Monster():
     def __init__(self, monsterName, strength, health, weakness: list, enterDesc, attackMoveDesc, deathDesc):
@@ -59,12 +62,13 @@ def PrintRules():
 
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
 
+
 def Enter():
 
     while(True):
         os.system('cls')
     
-        screen1 = f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*3 + "Difficulty: " + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + "Press [S] to start" + "\n"*3 + "Press [Q] to rage quit"
+        screen1 = colored(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!", 'yellow') + "\n"*3 + "Difficulty: " + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
         print(screen1)
         key = Input()
 
@@ -75,7 +79,20 @@ def Enter():
             PrintRules()
         if key == "d":
             pass
-            
-        
+        if key == "s":
+            doorLoop()
+
+
+
+def doorLoop():
+     
+     while True:
+         os.system("cls")
+
+         screen2 = "du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}" + "\n"*3 + "Health: [" + f"{'■'*player.health}"+ "] " + f"Strength: {player.strenght} " + f"Level: {player.level} "
+         print(screen2)
+         input()
+
+player = Player(0, 10, 4)
 
 Enter()
