@@ -52,9 +52,10 @@ def Input():
     return returnedKey.lower()
 
 def PrintRules():
+    os.system('cls')
+    print("\n\nWOWIE THE RULELULES? IVE NO IDEA WHERE THEY WENT, AHAHAHAHHAHHAHHAHAHAHAHAHH IMBTKMSRNBRB EXCEPT I WONT XDDDDDDDD LIP (LAUGHING IN PAIN) press any key to go back to whereever u were also if you hold a key the game lags cuzz the library im using is garbage")
     while keyboard.read_key() != 'q':
-        os.system('cls')
-        print("\n\nWOWIE THE RULELULES? IVE NO IDEA WHERE THEY WENT, AHAHAHAHHAHHAHHAHAHAHAHAHH IMBTKMSRNBRB EXCEPT I WONT XDDDDDDDD LIP (LAUGHING IN PAIN) press any key to go back to whereever u were also if you hold a key the game lags cuzz the library im using is garbage")
+        pass
 
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
 
