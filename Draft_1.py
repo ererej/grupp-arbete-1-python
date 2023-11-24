@@ -45,7 +45,7 @@ monsterDictionary = {
 
 CanInput = True
 def Input():
-    thisdoesntwork = keyboard.read_key() 
+    keyboard.read_key() #varför asignde du en varieabel igen?
 
     returnedKey = keyboard.read_key()
 
