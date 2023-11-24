@@ -63,7 +63,7 @@ def Enter():
     while(True):
         os.system('cls')
     
-        screen1 = f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*3 + "Difficulty: " +  + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + "Press [S] to start" + "\n"*3 + "Press [Q] to rage quit"
+        screen1 = f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*3 + "Difficulty: " + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + "Press [S] to start" + "\n"*3 + "Press [Q] to rage quit"
         print(screen1)
         key = Input()
 
@@ -73,6 +73,7 @@ def Enter():
         if key == "r":
             PrintRules()
         if key == "d":
+            pass
             
         
 
