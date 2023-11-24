@@ -6,7 +6,7 @@ import math
 
 difficulty = 1
 
-descriptionText = ""
+screen1 = ""
 
 
 
@@ -50,19 +50,31 @@ difficulties = {
 
 CanInput = True
 def Input():
-    keyboard.read_key() 
+    thisdoesntwork = keyboard.read_key() 
 
     returnedKey = keyboard.read_key()
 
     return returnedKey.lower()
 
+def PrintRules():
+    while keyboard.read_key() != 'q':
+        os.system('cls')
+        print("\n\nWOWIE THE RULELULES? IVE NO IDEA WHERE THEY WENT, AHAHAHAHHAHHAHHAHAHAHAHAHH IMMAKMSRNBRB EXCEPT I WONT XDDDDDDDD LIP (LAUGHING IN PAIN) press any key to go back to whereever u were also if you hold a key the game lags cuzz the library im using is garbage")
+
+
 def Enter():
-    os.system('cls')
 
-    print(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*4 + "Difficulty: " + difficulties[difficulty] + "\n"*4 + "For rules and keybinds, press [R] at any point in the game" + "\n"*4 + "Press [S] to start" + "\n"*4 + "Press [Q] to rage quit")
-    key = Input()
+    while(True):
+        os.system('cls')
+    
+        screen1 = f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!" + "\n"*3 + "Difficulty: " + difficulties[difficulty] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + "Press [S] to start" + "\n"*3 + "Press [Q] to rage quit"
+        print(screen1)
+        key = Input()
 
-    if key == "q":
-        0/0
+        if key == "q":
+            exit()
+
+        if key == "r":
+            PrintRules()
 
 Enter()
