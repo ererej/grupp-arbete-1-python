@@ -87,11 +87,15 @@ def Enter():
 def doorLoop():
      
      while True:
-         os.system("cls")
+        os.system("cls")
 
-         screen2 = "du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}" + "\n"*3 + "Health: [" + f"{'■'*player.health}"+ "] " + f"Strength: {player.strenght} " + f"Level: {player.level} "
-         print(screen2)
-         input()
+        screen2 = "du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}" + "\n"*3 + colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green")
+        print(screen2)
+        key = input()
+
+        if key == "r": #varför fungerar den inte?!?!!??!!??!??
+            PrintRules()
+
 
 player = Player(0, 10, 4)
 
