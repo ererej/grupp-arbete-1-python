@@ -7,7 +7,7 @@ from termcolor import colored
 difficulty = 1
 
 screen1 = ""
-
+screen2 = ""
 
 
 class Item():
@@ -86,15 +86,16 @@ def Enter():
 
 def doorLoop():
      
-     while True:
-        os.system("cls")
+     while(True):
+        os.system('cls')
 
-        screen2 = "du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}" + "\n"*3 + colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green")
+        screen2 = "du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}" + "\n"*3 + colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory prevju place holder" + "|\n" + "-"*31 + "\n"
         print(screen2)
-        key = input()
-
-        if key == "r": #varför fungerar den inte?!?!!??!!??!??
+        key = Input()
+        if key == "r": 
             PrintRules()
+
+
 
 
 player = Player(0, 10, 4)
