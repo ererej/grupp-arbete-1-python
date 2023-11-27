@@ -1,4 +1,3 @@
-# The assembly line
 import os
 import keyboard 
 import random as RND
@@ -9,7 +8,21 @@ difficulty = 1
 screen1 = ""
 screen2 = ""
 
-doors = [description: ]
+doorDescriptions = ['''
+                    
+Hetta emnerar 
+                    
+                    ''', '''
+
+
+                    ''', '''
+
+
+
+                    ''', '''
+
+
+                    ''']
 
 class Item():
     pass
@@ -96,6 +109,7 @@ def Main():
         screen2 = f"du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}"
         print(screen2)
         key = Input()
+
         if key == "r": 
             PrintRules()
 
