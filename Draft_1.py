@@ -69,7 +69,7 @@ def Input():
 
 def PrintRules():
     os.system('cls')
-    print("\n\nWOWIE THE RULELULES? IVE NO IDEA WHERE THEY WENT, AHAHAHAHHAHHAHHAHAHAHAHAHH IMBTKMSRNBRB EXCEPT I WONT XDDDDDDDD LIP (LAUGHING IN PAIN) press any key to go back to whereever u were also if you hold a key the game lags cuzz the library im using is garbage")
+    print("\n\nRules: \n   1: There are no rules its anarky \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory")
     while keyboard.read_key() != 'q':
         pass
 
@@ -126,3 +126,4 @@ def PrintCharStats():
 player = Player(0, 10, 4)
 
 Enter()
+
