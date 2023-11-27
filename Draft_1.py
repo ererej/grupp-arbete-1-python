@@ -59,15 +59,17 @@ def PrintRules():
     while keyboard.read_key() != 'q':
         pass
 
+difficultyIndex = 1
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
-
 
 def Enter():
 
     while(True):
         os.system('cls')
+
+        currentDifficulty: list = difficultyMap[difficultyIndex]
     
-        screen1 = colored(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!", 'yellow') + "\n"*3 + "Difficulty: " + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
+        screen1 = colored(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!", 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
         print(screen1)
         key = Input()
 
@@ -77,7 +79,7 @@ def Enter():
         if key == "r":
             PrintRules()
         if key == "d":
-            pass
+            difficultyIndex -= 1
         if key == "s":
             doorLoop()
 
