@@ -9,6 +9,7 @@ difficulty = 1
 screen1 = ""
 screen2 = ""
 
+doors = [description: ]
 
 class Item():
     pass
@@ -81,22 +82,29 @@ def Enter():
         if key == "d":
             difficultyIndex -= 1
         if key == "s":
-            doorLoop()
+            Main()
 
 
 
-def doorLoop():
+def Main():
      
-     while(True):
+    while(True):
         os.system('cls')
 
-        screen2 = "du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}" + "\n"*3 + colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory prevju place holder" + "|\n" + "-"*31 + "\n"
+        
+
+        screen2 = f"du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}"
         print(screen2)
         key = Input()
         if key == "r": 
             PrintRules()
 
+def DoorSet():
+    for i in 3:
+        pass
 
+def PrintCharStats():
+    print(colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory prevju place holder" + "|\n" + "-"*31 + "\n")
 
 
 player = Player(0, 10, 4)
