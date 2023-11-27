@@ -59,11 +59,11 @@ def PrintRules():
     while keyboard.read_key() != 'q':
         pass
 
-difficultyIndex = 1
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
 
 def Enter():
 
+    difficultyIndex = 1
     while(True):
         os.system('cls')
 
