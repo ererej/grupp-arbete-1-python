@@ -94,6 +94,8 @@ def Enter():
             PrintRules()
         if key == "d":
             difficultyIndex -= 1
+            if difficultyIndex == -1:
+                difficultyIndex = 2
         if key == "s":
             Main()
 
