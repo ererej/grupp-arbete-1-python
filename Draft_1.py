@@ -46,7 +46,6 @@ monsterDictionary = {
     5: [[], [], []]
 }
 
-CanInput = True
 def Input():
     keyboard.read_key() #varför asignde du en varieabel igen?
 
