@@ -31,10 +31,12 @@ class Inventory():
     pass
 
 class Player():
-    def __init__(self, level:int, health:int, strenght:int):
+    def __init__(self, level:int, health:int, strenght:int, inventory):
+        #innehåller all data om spelaren.
         self.level = level
         self.health = health
         self.strenght = strenght
+        self.inventory = Inventory()
 
 class Monster():
     def __init__(self, monsterName, strength, health, weakness: list, enterDesc, attackMoveDesc, deathDesc):
