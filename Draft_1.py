@@ -10,9 +10,9 @@ doorSet = [0, 0, 0]
 
 
 doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
-[" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " colddoor_3"], 
-[" shadowdoor_1"," shadowdoor_2"," shadowdoor_3",], 
-[" weapondoor_1"," weapondoor_2"," weapondoor_3",]]
+[" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " Den tredje dörren verkar vara gjord av is."], 
+[" teacherdoor_1"," teacherdoor_2"," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",], 
+[" weapondoor_1"," weapondoor_2"," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",]]
 
 class Item():
     def __init__(self, name, strength, health, type,):
