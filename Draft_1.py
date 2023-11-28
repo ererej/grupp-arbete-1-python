@@ -69,7 +69,7 @@ def Input():
 
     return returnedKey.lower()
 
-def PrintRules():
+def PrintHelpMenu():
     os.system('cls')
     print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: HAHAHHSFDOIDSOJNWOKEJR=IOJF \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   ")
     while keyboard.read_key() != 'q':
@@ -96,11 +96,11 @@ def Enter():
             exit()
 
         if key == "r":
-            PrintRules()
+            PrintHelpMenu()
         if key == "d":
             difficultyIndex -= 1
             if difficultyIndex == -1:
-                difficultyIndex = 2
+                difficultyIndex = len(difficultyMap)-1
         if key == "s":
             Main()
 
@@ -118,7 +118,7 @@ def Main():
         key = Input()
 
         if key == "r": 
-            PrintRules()
+            PrintHelpMenu()
 
 def DoorSet():
     for i in 3:
