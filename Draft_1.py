@@ -6,6 +6,8 @@ from termcolor import colored
 difficulty = 1
 
 screen1 = ""
+doorSet = [0, 0, 0]
+
 
 doorDescriptions = [["Hetta emnerar från den första.", "Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", "Den tredje dörren är gjord utav kol."], 
 ["En stor istapp hänger från den första dörrens handtag."], 
@@ -85,6 +87,7 @@ def Enter():
 
         if key == "r":
             PrintHelpMenu()
+
         if key == "d":
             difficultyIndex -= 1
             if difficultyIndex == -1:
@@ -101,7 +104,6 @@ def Main():
         
         screen1 = f"I nästa sal ser du tre portar..."
 
-        doorSet = [0, 0, 0]
         for i in 3:
             doorSet[i-1] = ( RND.randint(0,3) )
  
