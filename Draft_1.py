@@ -109,7 +109,7 @@ def Main():
         doorSet = [0, 0, 0]
         for i in range(1, len(doorSet) + 1):
             doorSet[i-1] = ( RND.randint(0,3) )
-            screen1 += list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
+            screen1 += '\n'*2 + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
  
         print(screen1 + "\n"*3 + PrintCharStats())
         
