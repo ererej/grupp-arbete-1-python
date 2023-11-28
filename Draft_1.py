@@ -111,16 +111,18 @@ def Main():
             doorSet[i-1] = ( RND.randint(0,3) )
  
         for i in 3:
-            screen1 += list( doorDescriptions[ doorSet[i] ] )[i]
+            screen1 += list( doorDescriptions[ doorSet[i-1] ] )[i]
  
-        print(screen1)
+        print(screen1 + "\n"*3 + PrintCharStats())
         key = Input()
 
         if key == "r": 
             PrintHelpMenu()
 
+        
+
 def PrintCharStats():
-    print(colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
+    return (colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
 player = Player(0, 10, 4)
