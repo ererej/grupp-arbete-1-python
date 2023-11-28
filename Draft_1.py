@@ -107,10 +107,8 @@ def Main():
         screen1 = f"I nästa sal ser du tre portar..."
 
         doorSet = [0, 0, 0]
-        for i in 3:
+        for i in range(1, len(doorSet)):
             doorSet[i-1] = ( RND.randint(0,3) )
- 
-        for i in 3:
             screen1 += list( doorDescriptions[ doorSet[i-1] ] )[i]
  
         print(screen1 + "\n"*3 + PrintCharStats())
