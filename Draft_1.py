@@ -10,7 +10,7 @@ screen2 = ""
 
 doorDescriptions = ['''
                     
-Hetta emnerar 
+Hetta emnerar från dörren   
                     
                     ''', '''
 
@@ -31,7 +31,7 @@ class Inventory():
     pass
 
 class Player():
-    def __init__(self, level:int, health:int, strenght:int, inventory):
+    def __init__(self, level, health, strenght):
         #innehåller all data om spelaren.
         self.level = level
         self.health = health
