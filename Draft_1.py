@@ -106,7 +106,7 @@ def Main():
             doorSet[i-1] = ( RND.randint(0,3) )
  
         for i in 3:
-            screen1 += list(doorDescriptions[doorSet[i]])[i]
+            screen1 += list( doorDescriptions[ doorSet[i] ] )[i]
  
         print(screen1)
         key = Input()
