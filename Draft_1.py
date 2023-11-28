@@ -71,7 +71,7 @@ def Input():
 
 def PrintRules():
     os.system('cls')
-    print("\n\nRules: \n   1: There are no rules its anarky \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory")
+    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: HAHAHHSFDOIDSOJNWOKEJR=IOJF \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   ")
     while keyboard.read_key() != 'q':
         pass
 
