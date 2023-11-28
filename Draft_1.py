@@ -8,21 +8,10 @@ difficulty = 1
 screen1 = ""
 screen2 = ""
 
-doorDescriptions = ['''
-                    
-Hetta emnerar från dörren   
-                    
-                    ''', '''
-
-
-                    ''', '''
-
-
-
-                    ''', '''
-
-
-                    ''']
+doorDescriptions = [["Hetta emnerar från den första.", "Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", "Den tredje dörren är gjord utav kol."], 
+["En stor istapp hänger från den första dörrens handtag."], 
+[], 
+[]]
 
 class Item():
     pass
@@ -58,8 +47,7 @@ monsterDictionary = {
     1: [[], [], []],
     2: [[], [], []],
     3: [[], [], []],
-    4: [[], [], []],
-    5: [[], [], []]
+    4: [[], [], []]
 }
 
 def Input():
@@ -86,10 +74,10 @@ def Enter():
         currentDifficulty: list = difficultyMap[difficultyIndex]
     
         screen1 = colored("""
-.----.  .--.  .-.  .-..----.    .-. .-.  .--.  .-.  .-..----.    .----..---. .---.  .---. .---.  
-| |--' / {} \ }  \/  {} |__}    |  \{ | / {} \ }  \/  {} |__}    } |__}} }}_}} }}_}/ {-. \} }}_} 
-| }-`}/  /\  \| {  } |} '__}    | }\  {/  /\  \| {  } |} '__}    } '__}| } \ | } \ \ '-} /| } \  
-`----'`-'  `-'`-'  `-'`----'    `-' `-'`-'  `-'`-'  `-'`----'    `----'`-'-' `-'-'  `---' `-'-'  """, 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
+.----.   .--.   .-.  .-. .----.    .-. .-.   .--.   .-.  .-. .----.    .----. .---.  .---.   .---.  .---.  
+| |--'  / {} \  }  \/  { } |__}    |  \{ |  / {} \  }  \/  { } |__}    } |__} } }}_} } }}_} / {-. \ } }}_} 
+| }-`} /  /\  \ | {  } | } '__}    | }\  { /  /\  \ | {  } | } '__}    } '__} | } \  | } \  \ '-} / | } \  
+`----' `-'  `-' `-'  `-' `----'    `-' `-' `-'  `-' `-'  `-' `----'    `----' `-'-'  `-'-'   `---'  `-'-'  """, 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
         print(screen1)
         key = Input()
 
@@ -111,12 +99,16 @@ def Main():
     
     while(True):
         os.system('cls')
+        
+        screen1 = f"I nästa sal ser du tre portar..."
 
-        doorSet = []
+        doorSet = [0, 0, 0]
         for i in 3:
-            doorSet.append( RND.randint(0,3) )
-
-        screen1 = f"du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}"
+            doorSet[i-1] = ( RND.randint(0,3) )
+ 
+        for i in 3:
+            screen1 += list(doorDescriptions[doorSet[i]])[i]
+ 
         print(screen1)
         key = Input()
 
@@ -124,7 +116,7 @@ def Main():
             PrintHelpMenu()
 
 def PrintCharStats():
-    print(colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory prevju place holder" + "|\n" + "-"*31 + "\n")
+    print(colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
 player = Player(0, 10, 4)
