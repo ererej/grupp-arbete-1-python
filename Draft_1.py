@@ -14,10 +14,15 @@ doorDescriptions = [["Hetta emnerar från den första.", "Den andra har ett fön
 []]
 
 class Item():
-    pass
+    def __init__(self, name, strength, health, type,):
+        self.name = name
+        self.strength = strength
+        self.health = health
+        self.type = type
 
 class Inventory():
-    pass
+    def __init__(self):
+        pass
 
 class Player():
     def __init__(self, level, health, strenght):
