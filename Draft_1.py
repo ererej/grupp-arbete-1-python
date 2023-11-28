@@ -47,13 +47,12 @@ class Monster():
         self.deathDesc = deathDesc
         self.enterDesc = enterDesc
 
-# This dictionary contains all data on different monster types. They are sorted into different groups. Group 1 contains fire monsters, 
-# group 2 shadow monsters, group 3 martial monsters, group 4 acid monsters, and group 5 stereotypes.
+# This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 monsterDictionary = {
+    0: [[], [], []],
     1: [[], [], []],
     2: [[], [], []],
-    3: [[], [], []],
-    4: [[], [], []]
+    3: [['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
 }
 
 def Input():
@@ -100,7 +99,8 @@ def Enter():
         if key == "s":
             Main()
 
-
+def Combat(element):
+    pass
 
 def Main():
     
@@ -120,9 +120,16 @@ def Main():
         while key not in ['r', 'q', '1', '2', '3']:
             key = Input()
 
-
         if key == "r": 
             PrintHelpMenu()
+
+        if key == 'q':
+            break
+
+        if key in ['1', '2', '3']:
+            Combat(doorSet[int(key)] )
+
+        
 
         
 
