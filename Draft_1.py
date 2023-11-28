@@ -9,16 +9,21 @@ screen1 = ""
 doorSet = [0, 0, 0]
 
 
-doorDescriptions = [["Hetta emnerar från den första.", "Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", "Den tredje dörren är gjord utav kol."], 
-["En stor istapp hänger från den första dörrens handtag."], 
-[], 
-[]]
+doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
+[" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " colddoor_3"], 
+[" shadowdoor_1"," shadowdoor_2"," shadowdoor_3",], 
+[" weapondoor_1"," weapondoor_2"," weapondoor_3",]]
 
 class Item():
-    pass
+    def __init__(self, name, strength, health, type,):
+        self.name = name
+        self.strength = strength
+        self.health = health
+        self.type = type
 
 class Inventory():
-    pass
+    def __init__(self):
+        pass
 
 class Player():
     def __init__(self, level, health, strenght):
@@ -102,22 +107,27 @@ def Main():
     while(True):
         os.system('cls')
         
-        screen1 = f"I nästa sal ser du tre portar..."
+        screen1 = f"I nästa sal ser du tre portar... "
 
-        for i in 3:
+        doorSet = [0, 0, 0]
+        for i in range(1, len(doorSet) + 1):
             doorSet[i-1] = ( RND.randint(0,3) )
+            screen1 += '\n'*2 + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
  
-        for i in 3:
-            screen1 += list(doorDescriptions[doorSet[i]])[i]
- 
-        print(screen1)
-        key = Input()
+        print(screen1 + "\n"*3 + PrintCharStats())
+        
+        key = ''
+        while key not in ['r', 'q', '1', '2', '3']:
+            key = Input()
+
 
         if key == "r": 
             PrintHelpMenu()
 
+        
+
 def PrintCharStats():
-    print(colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
+    return (colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
 player = Player(0, 10, 4)
