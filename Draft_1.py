@@ -71,7 +71,7 @@ def Input():
 
 def PrintHelpMenu():
     os.system('cls')
-    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: HAHAHHSFDOIDSOJNWOKEJR=IOJF \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   ")
+    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   ")
     while keyboard.read_key() != 'q':
         pass
 
@@ -85,7 +85,8 @@ def Enter():
 
         currentDifficulty: list = difficultyMap[difficultyIndex]
     
-        screen1 = colored(""".----.  .--.  .-.  .-..----.    .-. .-.  .--.  .-.  .-..----.    .----..---. .---.  .---. .---.  
+        screen1 = colored("""
+.----.  .--.  .-.  .-..----.    .-. .-.  .--.  .-.  .-..----.    .----..---. .---.  .---. .---.  
 | |--' / {} \ }  \/  {} |__}    |  \{ | / {} \ }  \/  {} |__}    } |__}} }}_}} }}_}/ {-. \} }}_} 
 | }-`}/  /\  \| {  } |} '__}    | }\  {/  /\  \| {  } |} '__}    } '__}| } \ | } \ \ '-} /| } \  
 `----'`-'  `-'`-'  `-'`----'    `-' `-'`-'  `-'`-'  `-'`----'    `----'`-'-' `-'-'  `---' `-'-'  """, 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
@@ -107,22 +108,20 @@ def Enter():
 
 
 def Main():
-     
+    
     while(True):
         os.system('cls')
 
-        
+        doorSet = []
+        for i in 3:
+            doorSet.append( RND.randint(0,3) )
 
-        screen2 = f"du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}"
-        print(screen2)
+        screen1 = f"du går fram till tre dörrar" + "\n" + "bakom den vänstra dörren finns {door(1).description}" + "\n" + "bakom den mitersta dörren finns {door(1).description}" + "\n" + "bakom den högra dörren finns {door(1).description}"
+        print(screen1)
         key = Input()
 
         if key == "r": 
             PrintHelpMenu()
-
-def DoorSet():
-    for i in 3:
-        pass
 
 def PrintCharStats():
     print(colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory prevju place holder" + "|\n" + "-"*31 + "\n")
