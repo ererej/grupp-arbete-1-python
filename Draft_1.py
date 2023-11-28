@@ -1,12 +1,11 @@
 import os
-import keyboard 
+import keyboard
 import random as RND
 import math
 from termcolor import colored
 difficulty = 1
 
 screen1 = ""
-screen2 = ""
 
 doorDescriptions = [["Hetta emnerar från den första.", "Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", "Den tredje dörren är gjord utav kol."], 
 ["En stor istapp hänger från den första dörrens handtag."], 
