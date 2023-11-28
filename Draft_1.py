@@ -85,7 +85,10 @@ def Enter():
 
         currentDifficulty: list = difficultyMap[difficultyIndex]
     
-        screen1 = colored(f"Välkommen till Dungeon Delver Monkey, din favoritdejtingapp!", 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
+        screen1 = colored(""".----.  .--.  .-.  .-..----.    .-. .-.  .--.  .-.  .-..----.    .----..---. .---.  .---. .---.  
+| |--' / {} \ }  \/  {} |__}    |  \{ | / {} \ }  \/  {} |__}    } |__}} }}_}} }}_}/ {-. \} }}_} 
+| }-`}/  /\  \| {  } |} '__}    | }\  {/  /\  \| {  } |} '__}    } '__}| } \ | } \ \ '-} /| } \  
+`----'`-'  `-'`-'  `-'`----'    `-' `-'`-'  `-'`-'  `-'`----'    `----'`-'-' `-'-'  `---' `-'-'  """, 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
         print(screen1)
         key = Input()
 
