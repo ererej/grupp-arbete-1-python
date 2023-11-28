@@ -44,8 +44,8 @@ class Monster():
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
-        self.strength = math.ceil(RND.randint(strength * 0.7, strength * 1.3) * difficulty)
-        self.health = math.ceil(RND.randint(health * 0.7, health * 1.3) * difficulty)
+        self.strength = RND.randint(strength * 0.7, strength * 1.3) * difficulty
+        self.health = RND.randint(health * 0.7, health * 1.3) * difficulty
 
         self.weakness = weakness
         self.attackMoveDesc = attackMoveDesc
