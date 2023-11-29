@@ -10,10 +10,10 @@ screen1 = ""
 doorSet = [0, 0, 0]
 
 
-doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
-[" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " Den tredje dörren verkar vara gjord av is."], 
-[" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen."," weapondoor_2"," Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen."], 
-[" teacherdoor_1"," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
+doorDescriptions = [[" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", " Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", " Den tredje dörren verkar vara gjord utav kol."], 
+[" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren ser exakt ut som en snöflinga.", " Den tredje dörren verkar vara gjord av is."], 
+[" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen."," Den andra dörren har formen av en upp-och-ner vänd sköld."," Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen."], 
+[" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
 
 class Item():
     def __init__(self, name, strength, health, type):
