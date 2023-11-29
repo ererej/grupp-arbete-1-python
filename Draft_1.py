@@ -56,7 +56,7 @@ monsterDictionary = {
 }
 
 def Input():
-    keyboard.read_key() #varför asignde du en varieabel igen?
+    keyboard.read_key()
 
     returnedKey = keyboard.read_key()
 
