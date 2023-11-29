@@ -47,16 +47,14 @@ class Player():
 
 
 class Monster():
-    def __init__(self, monsterName, strength, health, weakness: list, enterDesc, attackMoveDesc, deathDesc):
-        # The weakness list contains its offensive and defensive weakness (in that order)
+    def __init__(self, monsterName, strength, health, enterDesc, attackMoveDesc, deathDesc):
+    
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
         self.strength = RND.randint(strength * 0.7, strength * 1.3) * difficulty
         self.health = RND.randint(health * 0.7, health * 1.3) * difficulty
 
-        self.weakness = []
-        self.weakness.append(weakness[0], weakness[1])
 
         self.attackMoveDesc = attackMoveDesc
         self.deathDesc = deathDesc
@@ -69,9 +67,9 @@ class Monster():
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = {
-    0: [[''], [''], [''], [''], ['']],
-    1: [[''], [''], [''], [''], ['']],
-    2: [[''], [''], [''], [''], ['']],
+    0: [[''], [''], ['fire_slime', 3, 6, "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], [''], ['dragon']],
+    1: [[''], [''], ['mad_snowman'], ['ice_spirit'], ['frozen_golem']],
+    2: [[''], [''], ['ancient_soldier'], ['WWI_soldier'], ['']],
     3: [[''], [''], ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
 }
 
