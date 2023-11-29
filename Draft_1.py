@@ -12,7 +12,7 @@ doorSet = [0, 0, 0]
 doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
 [" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " Den tredje dörren verkar vara gjord av is."],  
 [" weapondoor_1"," weapondoor_2"," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",],
-[" teacherdoor_1"," teacherdoor_2"," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
+[" teacherdoor_1","Du hör "," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
 
 class Item():
     def __init__(self, name, strength, health, type,):
@@ -49,10 +49,22 @@ class Monster():
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 monsterDictionary = {
-    0: [[], [], []],
-    1: [[], [], []],
-    2: [[], [], []],
-    3: [['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
+    0: [None, None, [], [], []],
+    1: [None, None, [], [], []],
+    2: [None, None, [], [], []],
+    3: [None, None, ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
+}
+trapDictionary = {
+    0: [None, []],
+    1: [None, []],
+    2: [None, []],
+    3: [None, []]
+}
+treasureDictionary = {
+    0: [],
+    1: [],
+    2: [],
+    3: []
 }
 
 def Input():
@@ -101,6 +113,10 @@ def Enter():
 
 def Combat(element):
     pass
+def Treasure(element):
+    pass
+def Trap(element):
+    pass
 
 def Main():
     
@@ -127,14 +143,22 @@ def Main():
             break
 
         if key in ['1', '2', '3']:
-            Combat(doorSet[int(key)] )
+            
+            encounterLevel = RND.randint(0, 5)
+
+            if(encounterLevel == 1):
+                Treasure(doorSet[int(key)-1])
+            elif(encounterLevel == 2):
+                Trap(doorSet[int(key)-1])
+            else:
+                Combat(doorSet[int(key)-1])
 
         
 
         
 
 def PrintCharStats():
-    return (colored("Health: [" + '■ '*(player.health-1) + "■] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
+    return (colored("Health: [" + '■'*(player.health-1) + "■] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
 player = Player(0, 10, 4)
