@@ -17,10 +17,17 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 
 class Item():
     def __init__(self, name, strength, health, type):
+
         self.name = name
         self.strength = strength
         self.health = health
         self.type = type
+
+    def CombatActive(self):
+
+
+
+    
 
 class Inventory():
     def __init__(self):
@@ -56,6 +63,11 @@ class Monster():
         self.enterDesc = enterDesc
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
+
+# Monster finns på horizontal index 2-4.
+# Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
+# Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
+
 encounterDictionary = {
     0: [[''], [''], [''], [''], ['']],
     1: [[''], [''], [''], [''], ['']],
@@ -119,8 +131,10 @@ def Combat(element):
 
         key = ''
         while key not in ['1','2','3','4','5','6'] and int(key) > len(player.inventory):
-            
             key = Input()
+
+        
+
 
 
         pass
