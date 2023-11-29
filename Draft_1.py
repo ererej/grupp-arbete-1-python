@@ -16,7 +16,7 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 [" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
 
 class Item():
-    def __init__(self, name, strength, health, type,):
+    def __init__(self, name, strength, health, type):
         self.name = name
         self.strength = strength
         self.health = health
@@ -26,14 +26,18 @@ class Inventory():
     def __init__(self):
         pass
 
+
 class Player():
-    def __init__(self, level, health, maxhealth, strenght):
+    def __init__(self, health, maxhealth, strenght):
         #innehåller all data om spelaren.
-        self.level = level
+        self.level = 1
+        self.exp = 0
         self.health = health
         self.maxhealth = maxhealth
         self.strenght = strenght
         self.inventory = Inventory()
+        self.weakness = [None, None]
+
 
 class Monster():
     def __init__(self, monsterName, strength, health, weakness: list, enterDesc, attackMoveDesc, deathDesc):
@@ -44,7 +48,9 @@ class Monster():
         self.strength = RND.randint(strength * 0.7, strength * 1.3) * difficulty
         self.health = RND.randint(health * 0.7, health * 1.3) * difficulty
 
-        self.weakness = weakness
+        self.weakness = []
+        self.weakness.append(weakness[0], weakness[1])
+
         self.attackMoveDesc = attackMoveDesc
         self.deathDesc = deathDesc
         self.enterDesc = enterDesc
@@ -105,14 +111,31 @@ def Enter():
 def Combat(element):
     MStats : list = list(encounterDictionary[element])[RND.randint(2, 2 + math.floor(player.level / 3))]
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
-    print('you encountered a monster. Its name is ' + encounteredMonster.name)
+    print(encounteredMonster.enterDesc)
+
+    while (encounteredMonster.health > 0 and player.health > 0):
+
+
+
+
+
+        pass
+
+
+
+
     Input()
+
+
 def Treasure(element):
     print('you encountered a treasure')
     Input()
+
+
 def Trap(element):
     print('you encoundered a trap')
     Input()
+
 
 def Main():
     
