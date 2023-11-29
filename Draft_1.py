@@ -48,24 +48,13 @@ class Monster():
         self.enterDesc = enterDesc
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
-monsterDictionary = {
-    0: [None, None, [], [], []],
-    1: [None, None, [], [], []],
-    2: [None, None, [], [], []],
-    3: [None, None, ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
+encounterDictionary = {
+    0: [[], [], [], [], []],
+    1: [[], [], [], [], []],
+    2: [[], [], [], [], []],
+    3: [[], [], ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
 }
-trapDictionary = {
-    0: [None, []],
-    1: [None, []],
-    2: [None, []],
-    3: [None, []]
-}
-treasureDictionary = {
-    0: [],
-    1: [],
-    2: [],
-    3: []
-}
+
 
 def Input():
     keyboard.read_key()
@@ -112,11 +101,16 @@ def Enter():
             Main()
 
 def Combat(element):
-    pass
+    MStats : list = list(encounterDictionary[element])[RND.randint(2, 2 + math.floor(player.level / 3))]
+    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+    print('you encountered a monster. Its name is ' + encounteredMonster.name)
+    Input()
 def Treasure(element):
-    pass
+    print('you encountered a treasure')
+    Input()
 def Trap(element):
-    pass
+    print('you encoundered a trap')
+    Input()
 
 def Main():
     
