@@ -67,7 +67,7 @@ def Input():
 
 def PrintHelpMenu():
     os.system('cls')
-    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1]: Enters the first door\n   [2]: Enters the second door\n   [3]: Enters the third door\n")
+    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door")
     while keyboard.read_key() != 'q':
         pass
 
