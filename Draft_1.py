@@ -13,7 +13,7 @@ doorSet = [0, 0, 0]
 doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
 [" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren har ett fönster där det har rasat ut en massa snö som blockar din syn in ", " Den tredje dörren verkar vara gjord av is."],  
 [" weapondoor_1"," weapondoor_2"," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",],
-[" teacherdoor_1"," teacherdoor_2"," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
+[" teacherdoor_1","Du hör "," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
 
 class Item():
     def __init__(self, name, strength, health, type,):
@@ -50,12 +50,13 @@ class Monster():
         self.enterDesc = enterDesc
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
-monsterDictionary = {
-    0: [[], [], []],
-    1: [[], [], []],
-    2: [[], [], []],
-    3: [['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
+encounterDictionary = {
+    0: [[], [], [], [], []],
+    1: [[], [], [], [], []],
+    2: [[], [], [], [], []],
+    3: [[], [], ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
 }
+
 
 def Input():
     keyboard.read_key()
@@ -102,7 +103,16 @@ def Enter():
             Main()
 
 def Combat(element):
-    pass
+    MStats : list = list(encounterDictionary[element])[RND.randint(2, 2 + math.floor(player.level / 3))]
+    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+    print('you encountered a monster. Its name is ' + encounteredMonster.name)
+    Input()
+def Treasure(element):
+    print('you encountered a treasure')
+    Input()
+def Trap(element):
+    print('you encoundered a trap')
+    Input()
 
 def Main():
     
@@ -129,7 +139,15 @@ def Main():
             break
 
         if key in ['1', '2', '3']:
-            Combat(doorSet[int(key)] )
+            
+            encounterLevel = RND.randint(0, 5)
+
+            if(encounterLevel == 1):
+                Treasure(doorSet[int(key)-1])
+            elif(encounterLevel == 2):
+                Trap(doorSet[int(key)-1])
+            else:
+                Combat(doorSet[int(key)-1])
 
         
 
