@@ -188,7 +188,7 @@ def PrintCharStats():
     return (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
-player = Player(1, 7, 10, 4)
+player = Player(7, 10, 4)
 
 Enter()
 
