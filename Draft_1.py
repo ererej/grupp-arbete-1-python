@@ -3,6 +3,7 @@ import keyboard
 import random as RND
 import math
 from termcolor import colored
+import roman
 difficulty = 1
 
 screen1 = ""
@@ -10,7 +11,7 @@ doorSet = [0, 0, 0]
 
 
 doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
-[" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " Den tredje dörren verkar vara gjord av is."],  
+[" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren har ett fönster där det har rasat ut en massa snö som blockar din syn in ", " Den tredje dörren verkar vara gjord av is."],  
 [" weapondoor_1"," weapondoor_2"," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",],
 [" teacherdoor_1"," teacherdoor_2"," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
 
@@ -135,10 +136,10 @@ def Main():
         
 
 def PrintCharStats():
-    return (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
+    return (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
-player = Player(0, 7, 10, 4)
+player = Player(1, 7, 10, 4)
 
 Enter()
 
