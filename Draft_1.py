@@ -51,10 +51,10 @@ class Monster():
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 encounterDictionary = {
-    0: [[], [], [], [], []],
-    1: [[], [], [], [], []],
-    2: [[], [], [], [], []],
-    3: [[], [], ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
+    0: [[''], [''], [''], [''], ['']],
+    1: [[''], [''], [''], [''], ['']],
+    2: [[''], [''], [''], [''], ['']],
+    3: [[''], [''], ['Jesper Engelmark'], ['Annika Westin'], ['Martin Loman']]
 }
 
 
