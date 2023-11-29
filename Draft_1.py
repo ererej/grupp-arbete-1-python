@@ -26,10 +26,11 @@ class Inventory():
         pass
 
 class Player():
-    def __init__(self, level, health, strenght):
+    def __init__(self, level, health, maxhealth, strenght):
         #innehåller all data om spelaren.
         self.level = level
         self.health = health
+        self.maxhealth = maxhealth
         self.strenght = strenght
         self.inventory = Inventory()
 
@@ -134,10 +135,10 @@ def Main():
         
 
 def PrintCharStats():
-    return (colored("Health: [" + '■ '*(player.health-1) + "■] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
+    return (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
-player = Player(0, 10, 4)
+player = Player(0, 7, 10, 4)
 
 Enter()
 
