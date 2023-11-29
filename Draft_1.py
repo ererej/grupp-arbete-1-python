@@ -114,12 +114,13 @@ def Combat(element):
 
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
-    print(encounteredMonster.enterDesc)
-
     while (encounteredMonster.health > 0 and player.health > 0):
+        print(encounteredMonster.enterDesc)
 
-
-
+        key = ''
+        while key not in ['1','2','3','4','5','6'] and int(key) > len(player.inventory):
+            
+            key = Input()
 
 
         pass
