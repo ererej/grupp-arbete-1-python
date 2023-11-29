@@ -56,7 +56,7 @@ monsterDictionary = { # OBS! Sortering just nu fel, i doorDescriptions är fire:
 }
 
 def Input():
-    keyboard.read_key() #varför asignde du en varieabel igen?
+    keyboard.read_key()
 
     returnedKey = keyboard.read_key()
 
@@ -134,7 +134,7 @@ def Main():
         
 
 def PrintCharStats():
-    return (colored("Health: [" + f"{'■'*player.health}"+ "] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
+    return (colored("Health: [" + '■ '*(player.health-1) + "■] ", "red") + colored(f"Strength: {player.strenght} ", "yellow") + colored(f"Level: {player.level} ", "green") + "\n" + "-"*31 + "\n|inventory preview place holder" + "|\n" + "-"*31 + "\n")
 
 
 player = Player(0, 10, 4)
