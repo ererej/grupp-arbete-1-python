@@ -11,9 +11,9 @@ doorSet = [0, 0, 0]
 
 
 doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
-[" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren har ett fönster där det har rasat ut en massa snö som blockar din syn in ", " Den tredje dörren verkar vara gjord av is."],  
-[" weapondoor_1"," weapondoor_2"," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",],
-[" teacherdoor_1","Du hör "," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
+[" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren har ett fönster där det har rasat ut en massa snö som blockar din syn in.", " Den tredje dörren verkar vara gjord av is."],  
+[" weapondoor_1"," I den andra dörren ser du en massa pilhuvuden och svärd sticka ut."," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",],
+[" teacherdoor_1"," Bakom den andra dörren hör du surrandet av en projector."," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",]]
 
 class Item():
     def __init__(self, name, strength, health, type,):
@@ -124,7 +124,7 @@ def Main():
         doorSet = [0, 0, 0]
         for i in range(1, len(doorSet) + 1):
             doorSet[i-1] = ( RND.randint(0,3) )
-            screen1 += '\n'*2 + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
+            screen1 += '\n'*2 + f"[{i}]" + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
  
         print(screen1 + "\n"*3 + PrintCharStats())
         
