@@ -16,32 +16,60 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 [" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
 
 class Item():
-    def __init__(self, name, strength, health, type):
+    def __init__(self, name, strength, health, element, consumable: bool, itemType, damageMultiplier, restoration):
 
         self.name = name
+
+
         self.strength = strength
         self.health = health
-        self.type = type
 
+
+        self.element = element
+        self.consumable = consumable
+        self.itemType = itemType
+        self.damageMultiplier = damageMultiplier
+
+    def ItemPickup(self):
+        player.health += self.health
+        player.maxhealth += self.health
+        player.strength += self.strength
+
+    def ItemDrop(self):
+        player.maxhealth -= self.health
+        player.strength -= self.strength
     def CombatActive(self):
+        
+        if self.itemType == "weapon":
+            return ["weapon", self.element, self.damageMultiplier]
+        
+        if self.itemType == "pot":
+            return ["pot", self.]
 
+        # Damage item
+        # Health potion
+        # Resistance potion
 
+        if self.consumable == True:
+            self.itemDrop()
+
+        pass
 
     
 
 class Inventory():
     def __init__(self):
-        pass
+        self.items = []
 
 
 class Player():
-    def __init__(self, health, maxhealth, strenght):
+    def __init__(self, health, maxhealth, strength):
         #innehåller all data om spelaren.
         self.level = 1
         self.exp = 0
         self.health = health
         self.maxhealth = maxhealth
-        self.strenght = strenght
+        self.strength = strength
         self.inventory = Inventory()
         self.weakness = [None, None]
 
