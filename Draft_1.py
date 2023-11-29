@@ -11,8 +11,8 @@ doorSet = [0, 0, 0]
 
 doorDescriptions = [[" Hetta emnerar från den första.", " Den andra har ett fönster, men du kan inte se in i rummet eftersom du blir bländad av elden där inne.", " Den tredje dörren är gjord utav kol."], 
 [" En stor istapp hänger från den första dörrens handtag.", " colddoor_2", " Den tredje dörren verkar vara gjord av is."], 
-[" teacherdoor_1"," teacherdoor_2"," Den tredje dörren verkar vara gjord linjaler, pennor och sudd.",], 
-[" weapondoor_1"," weapondoor_2"," Den tredje dörren verkar vara gjord för att efterlikna en mängd olika vapen.",]]
+[" teacherdoor_1"," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd.",], 
+[" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen."," weapondoor_2"," Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen.",]]
 
 class Item():
     def __init__(self, name, strength, health, type,):
@@ -48,7 +48,7 @@ class Monster():
         self.enterDesc = enterDesc
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
-monsterDictionary = {
+monsterDictionary = { # OBS! Sortering just nu fel, i doorDescriptions är fire:0, ice:1, men weapon är 3 och lärare 2. Bör fixas!
     0: [[], [], []],
     1: [[], [], []],
     2: [[], [], []],
