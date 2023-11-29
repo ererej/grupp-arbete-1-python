@@ -109,8 +109,11 @@ def Enter():
             Main()
 
 def Combat(element):
+    os.system('cls')
     MStats : list = list(encounterDictionary[element])[RND.randint(2, 2 + math.floor(player.level / 3))]
+
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+
     print(encounteredMonster.enterDesc)
 
     while (encounteredMonster.health > 0 and player.health > 0):
@@ -163,13 +166,18 @@ def Main():
 
         if key in ['1', '2', '3']:
             
-            encounterLevel = RND.randint(0, 5)
+            encounterLevel = RND.randint(1, 5)
 
             if(encounterLevel == 1):
+
                 Treasure(doorSet[int(key)-1])
+
             elif(encounterLevel == 2):
+
                 Trap(doorSet[int(key)-1])
+
             else:
+
                 Combat(doorSet[int(key)-1])
 
         
