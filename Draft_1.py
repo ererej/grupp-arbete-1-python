@@ -9,6 +9,9 @@ difficulty = 1
 screen1 = ""
 doorSet = [0, 0, 0]
 
+# 
+
+
 
 doorDescriptions = [[" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", " Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", " Den tredje dörren verkar vara gjord utav kol."], 
 [" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren ser exakt ut som en snöflinga.", " Den tredje dörren verkar vara gjord av is."], 
@@ -34,15 +37,16 @@ class Player():
         self.inventory = Inventory()
         self.weakness = [None, None]
 
-
+# the elements variable contains a list. 1: Take double damage of this type. 2: Take half damage of this type. 3: The monster deals this damage type.
 class Monster():
-    def __init__(self, monsterName, strength, health, enterDesc, attackMoveDesc, deathDesc):
+    def __init__(self, monsterName, strength, health, elements: list, enterDesc, attackMoveDesc, deathDesc):
     
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
         self.strength = RND.randint(strength * 0.7, strength * 1.3) * difficulty
         self.health = RND.randint(health * 0.7, health * 1.3) * difficulty
+        self.elements = elements
 
 
         self.attackMoveDesc = attackMoveDesc
@@ -51,7 +55,7 @@ class Monster():
 
 
 class Item():
-    def __init__(self, name, strength, health, element, consumable: bool, itemType, power, boostTypes):
+    def __init__(self, name, strength, health, element, consumable: bool, itemType, power, boostTypes: list):
 
         self.name = name
 
