@@ -20,7 +20,7 @@ class Item():
 
         self.name = name
 
-
+# These are stats given to the player who holds the item.
         self.strength = strength
         self.health = health
 
@@ -38,8 +38,10 @@ class Item():
     def ItemDrop(self):
         player.maxhealth -= self.health
         player.strength -= self.strength
+
     def CombatActive(self):
-        
+
+        # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
             return ["weapon", self.element, self.damageMultiplier]
         
@@ -121,6 +123,7 @@ def Enter():
     difficultyIndex = 1
 
     while(True):
+
         os.system('cls')
 
         currentDifficulty: list = difficultyMap[difficultyIndex]
@@ -148,7 +151,9 @@ def Enter():
 
 def Combat(element):
     os.system('cls')
-    MStats : list = list(encounterDictionary[element])[RND.randint(2, 2 + math.floor(player.level / 3))]
+
+    # Grams stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
+    MStats : list = list(encounterDictionary[element])[RND.randint(2, math.floor((player.level / 10) * (len(encounterDictionary[element]) - 2)))]
 
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
