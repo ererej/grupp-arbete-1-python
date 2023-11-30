@@ -53,7 +53,7 @@ class Item():
         # Resistance potion
 
         if self.consumable == True:
-            self.itemDrop()
+            self.ItemDrop()
 
         pass
 
@@ -164,7 +164,6 @@ def Combat(element):
         while key not in ['1','2','3','4','5','6'] and int(key) > len(player.inventory):
             key = Input()
 
-        
 
 
 
