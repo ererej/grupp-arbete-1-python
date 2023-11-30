@@ -15,54 +15,6 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 [" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen."," Den andra dörren har formen av en upp-och-ner vänd sköld."," Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen."], 
 [" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
 
-class Item():
-    def __init__(self, name, strength, health, element, consumable: bool, itemType, power, boostTypes):
-
-        self.name = name
-
-# These are stats given to the player who holds the item.
-        self.strength = strength
-        self.health = health
-
-# These are values critical to defining the functionality of the item. Element does not matter for pots.
-        self.element = element
-        self.consumable = consumable
-        self.itemType = itemType
-
-# Stats important for the functionality of specific items.
-        self.power = power
-        self.boostTypes = boostTypes
-
-    def ItemPickup(self):
-        player.health += self.health
-        player.maxhealth += self.health
-        player.strength += self.strength
-
-    def ItemDrop(self):
-        player.maxhealth -= self.health
-        player.strength -= self.strength
-
-        player.inventory.items.remove(self)
-
-
-    def CombatActive(self):
-
-        
-        if self.consumable == True:
-            self.ItemDrop()
-
-        # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
-        if self.itemType == "weapon":
-            return ["weapon", self.element, self.damageMultiplier]
-        
-        if self.itemType == "pot":
-            return ["pot", self.restoration]
-
-        if self.itemType == "boost":
-            return ["boost", ]
-        # Damage item
-        # Health potion
-        # Resistance potion
 
     
 
@@ -96,6 +48,56 @@ class Monster():
         self.attackMoveDesc = attackMoveDesc
         self.deathDesc = deathDesc
         self.enterDesc = enterDesc
+
+
+class Item():
+    def __init__(self, name, strength, health, element, consumable: bool, itemType, power, boostTypes):
+
+        self.name = name
+
+# These are stats given to the player who holds the item.
+        self.strength = strength
+        self.health = health
+
+# These are values critical to defining the functionality of the item. Element does not matter for pots.
+        self.element = element
+        self.consumable = consumable
+        self.itemType = itemType
+
+# Stats important for the functionality of specific items.
+        self.power = power
+        self.boostTypes = boostTypes
+
+    def ItemPickup(self):
+        player.health += self.health
+        player.maxhealth += self.health
+        player.strength += self.strength
+
+    def ItemDrop(self):
+        
+        player.maxhealth -= self.health
+        player.strength -= self.strength
+
+        player.inventory.items.remove(self)
+
+
+    def CombatActive(self, monster: Monster):
+
+        
+        if self.consumable == True:
+            self.ItemDrop()
+
+        # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
+        if self.itemType == "weapon":
+            monster 
+        
+        if self.itemType == "pot":
+            return ["pot", self.power]
+
+        if self.itemType == "boost":
+            return ["boost", ]
+
+    
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 
