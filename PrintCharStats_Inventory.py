@@ -9,7 +9,6 @@ difficulty = 1
 screen1 = ""
 doorSet = [0, 0, 0]
 
-# 
 
 
 
@@ -23,7 +22,7 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 
 class Inventory():
     def __init__(self):
-        self.items = []
+        self.items: list[Item] = []
 
 
 class Player():
@@ -44,14 +43,14 @@ class Monster():
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
-        self.strength = RND.randint(strength * 0.7, strength * 1.3) * difficulty
-        self.health = RND.randint(health * 0.7, health * 1.3) * difficulty
+        self.strength = math.ceil(RND.randint(strength * 0.7, strength * 1.3) * difficulty)
+        self.health = math.ceil(RND.randint(health * 0.7, health * 1.3) * difficulty)
         self.elements = elements
 
 
-        self.attackMoveDesc = attackMoveDesc
-        self.deathDesc = deathDesc
         self.enterDesc = enterDesc
+        self.attackMoveDesc = attackMoveDesc        
+        self.deathDesc = deathDesc
 
 
 class Item():
@@ -181,9 +180,14 @@ def Combat(element):
         key = ''
         while key not in ['1','2','3','4','5','6'] and int(key) > len(player.inventory):
             key = Input()
+        
+        usedItem = player.inventory.items[int(key) - 1]
 
+        print(f"Du använde {usedItem.name}!")
 
+        usedItem.CombatActive(encounteredMonster)
 
+        
 
         pass
 
@@ -256,19 +260,16 @@ def PrintCharStats():
         charStats += "|-" + "-"*(len(player.inventory.items[i].name))
     charStats += "-|"
 
-# Vad ska den här göra?
-    charStats += "-" * (5 * (6 - len(player.inventory.items)) + 1) + "\n|" 
-
-    #lägger till item namen till stringen
+    #lägger till item namen till strängen
+    charStats += "| "
     for i in range(0, len(player.inventory.items)):
-        charStats += player.inventory.items[i].name + "|"
+        charStats += player.inventory.items[i].name + " | "
+    charStats += "\n"
 
-        # Verkar inte heller ha någon poäng visuellt
-    charStats += "    |"*(6-len(player.inventory.items)) + "\n"
     #lägger till ett till långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "-"*(len(player.inventory.items[i].name))
-    charStats += "-"*(5*(6-len(player.inventory.items))+1)
+        charStats += "|-" + "-"*(len(player.inventory.items[i].name))
+    charStats += "-|"
     return charStats
         
 
