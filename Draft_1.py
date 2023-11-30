@@ -16,7 +16,7 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 [" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
 
 class Item():
-    def __init__(self, name, strength, health, element, consumable: bool, itemType, damageMultiplier, restoration):
+    def __init__(self, name, strength, health, element, consumable: bool, itemType, damageMultiplier, restoration, boostTypes):
 
         self.name = name
 
@@ -28,7 +28,10 @@ class Item():
         self.element = element
         self.consumable = consumable
         self.itemType = itemType
+
+
         self.damageMultiplier = damageMultiplier
+        self.restoration = restoration
 
     def ItemPickup(self):
         player.health += self.health
@@ -39,23 +42,27 @@ class Item():
         player.maxhealth -= self.health
         player.strength -= self.strength
 
+        player.inventory.items.remove(self)
+
+
     def CombatActive(self):
+
+        
+        if self.consumable == True:
+            self.ItemDrop()
 
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
             return ["weapon", self.element, self.damageMultiplier]
         
         if self.itemType == "pot":
-            return "hi"
+            return ["pot", self.restoration]
 
+        if self.itemType == "boost":
+            return ["boost", ]
         # Damage item
         # Health potion
         # Resistance potion
-
-        if self.consumable == True:
-            self.ItemDrop()
-
-        pass
 
     
 
@@ -97,7 +104,7 @@ class Monster():
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = {
-    0: [[''], [''], ["THE FIRE SLIME", 3, 6, "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], [''], ['dragon']],
+    0: [[''], [''], ["THE FIRE SLIME", 1, 6, "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], [''], ['dragon']],
     1: [[''], [''], ["THE MAD SNOWMAN", 4, 3, "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
         ["THE FROZEN SPIRIT"], ["THE GLACIER GOLEM"]],
     2: [[''], [''], ["THE RIDER IN THE DARK"], [""], ["THE THOUSAND-PIERCED BEAR"]],
