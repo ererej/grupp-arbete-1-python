@@ -245,19 +245,20 @@ def Main():
 
 def PrintCharStats():
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
-    return(charStats + "reworking printing inventory")
+    #return(charStats + "reworking printing inventory")
     #lägger till ett långt sträck till stringen
-    for i in range(0, len(player.Inventory.items)):
-        charStats += "-"*(len(player.Inventory.items[i].name))
-    charStats += "-"*4*(6-len(player.Inventory.items))
+    for i in range(0, len(player.inventory.items)):
+        charStats += "-"*(len(player.inventory.items[i].name))
+    charStats += "-"*(5*(6-len(player.inventory.items))+1) + "\n|" 
     #lägger till item namen till stringen
-    for i in range(0, len(player.Inventory.items)):
-        charStats += player.Inventory.items[i].name + "|"
-    charStats += "    |"*(6-len(player.Inventory.items)) + "\n"
+    for i in range(0, len(player.inventory.items)):
+        charStats += player.inventory.items[i].name + "|"
+    charStats += "    |"*(6-len(player.inventory.items)) + "\n"
     #lägger till ett till långt sträck till stringen
-    for i in range(0, len(player.Inventory.items)):
-        charStats += "-"*(len(player.Inventory.items[i].name))
-    charStats += "-"*4*(6-len(player.Inventory.items))
+    for i in range(0, len(player.inventory.items)):
+        charStats += "-"*(len(player.inventory.items[i].name))
+    charStats += "-"*(5*(6-len(player.inventory.items))+1)
+    return charStats
         
 
 player = Player(7, 10, 4)
