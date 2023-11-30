@@ -36,6 +36,8 @@ class Player():
         self.inventory = Inventory()
         self.weakness = [None, None]
 
+# Damage types: Physical (swords, clubs, nunchucks), Fire (lava, dragon's breath), Water (ice cannon, snowstorm, scroll of tsunami), and more!
+
 # the elements variable contains a list. 1: Take double damage of this type. 2: Take half damage of this type. 3: The monster deals this damage type.
 class Monster():
     def __init__(self, monsterName, strength, health, elements: list, enterDesc, attackMoveDesc, deathDesc):
@@ -54,7 +56,7 @@ class Monster():
 
 
 class Item():
-    def __init__(self, name, strength, health, element, consumable: bool, itemType, power, boostTypes: list):
+    def __init__(self, name, strength, health, elements, consumable: bool, itemType, power, boostTypes: list):
 
         self.name = name
 
@@ -63,7 +65,7 @@ class Item():
         self.health = health
 
 # These are values critical to defining the functionality of the item. Element does not matter for pots.
-        self.element = element
+        self.elements = elements
         self.consumable = consumable
         self.itemType = itemType
 
@@ -92,7 +94,15 @@ class Item():
 
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
-            monster 
+
+            damage: float = player.strength
+
+            if (monster.elements[0] in self.elements):
+                damage *= 2
+            if (monster.elements[1] in self.elements):
+                damage /= 2
+            
+            monster.health -= math.ceil(damage)
         
         if self.itemType == "pot":
             return ["pot", self.power]
