@@ -16,7 +16,7 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 [" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
 
 class Item():
-    def __init__(self, name, strength, health, element, consumable: bool, itemType, damageMultiplier, restoration, boostTypes):
+    def __init__(self, name, strength, health, element, consumable: bool, itemType, power, boostTypes):
 
         self.name = name
 
@@ -24,14 +24,14 @@ class Item():
         self.strength = strength
         self.health = health
 
-
+# These are values critical to defining the functionality of the item. Element does not matter for pots.
         self.element = element
         self.consumable = consumable
         self.itemType = itemType
 
-
-        self.damageMultiplier = damageMultiplier
-        self.restoration = restoration
+# Stats important for the functionality of specific items.
+        self.power = power
+        self.boostTypes = boostTypes
 
     def ItemPickup(self):
         player.health += self.health
