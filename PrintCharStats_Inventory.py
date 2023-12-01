@@ -8,7 +8,7 @@ difficulty = 1
 
 screen1 = ""
 doorSet = [0, 0, 0]
-
+isCombat = False
 
 
 
@@ -128,11 +128,26 @@ class Item():
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = {
-    0: [[''], [''], ["THE FIRE SLIME", 1, 6, "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], [''], ['dragon']],
-    1: [[''], [''], ["THE MAD SNOWMAN", 4, 3, "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
-        ["THE FROZEN SPIRIT"], ["THE GLACIER GOLEM"]],
-    2: [[''], [''], ["THE RIDER IN THE DARK"], [""], ["THE THOUSAND-PIERCED BEAR"]],
-    3: [[''], [''], ["JESPER ENGELMARK"], ["ANNIKA WESTIN"], ["MARTIN LOMAN"]]
+    0: [[""], 
+        [""], 
+        ["THE FIRE SLIME", 1, 6, [[], [], []], "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], 
+        ["", 0, 0, [[], [], []], "", "", ""], 
+        ["dragon"], 0, 0, [[], [], []], "", "", ""],
+    1: [[""], 
+        [""], 
+        ["THE MAD SNOWMAN", 4, 3, [[], [], []], "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
+        ["THE FROZEN SPIRIT", 0, 0, [[], [], []], "", "", ""], 
+        ["THE GLACIER GOLEM"], 0, 0, [[], [], []], "", "", ""],
+    2: [[""], 
+        [""], 
+        ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
+        ["", 0, 0, [[], [], []], "", "", ""], 
+        ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
+    3: [[""], 
+        [""], 
+        ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
+        ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
+        ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]
 }
 
 
@@ -184,7 +199,7 @@ def Enter(difficultyIndex):
 
 def Combat(element):
     os.system('cls')
-
+    isCombat = True
     # Grams stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
 
     try:
@@ -213,7 +228,7 @@ def Combat(element):
 
 
 
-
+        isCombat = False
     Input()
 
 
@@ -283,8 +298,16 @@ def PrintCharStats():
 
 
     for i in range(0, len(itemNames)):
-        charStats += "^──" + "─"*(len(itemNames[i]))
-    charStats += "| \n| "
+
+        if isCombat:
+            charStats += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
+        else:
+            charStats += "^──" + "─"*len(itemNames[i])
+
+
+
+
+    charStats += "╷ \n| "
 
     #lägger till item namen till stränge
     for i in range(0, len(itemNames)):
@@ -294,8 +317,8 @@ def PrintCharStats():
     #lägger till ett till långt sträck till stringen
 
     for i in range(0, len(itemNames)):
-        charStats += "|──" + "─"*(len(itemNames[i]))
-    charStats += "|"
+        charStats += "╵──" + "─"*(len(itemNames[i]))
+    charStats += "╵"
     return charStats
         
 
