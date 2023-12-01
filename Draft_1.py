@@ -253,22 +253,21 @@ def PrintCharStats():
     #return(charStats + "reworking printing inventory")
     #lägger till ett långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "|-" + "-"*(len(player.inventory.items[i].name))
-    charStats += "-|"
+        charStats += "" + "─"*(len(player.inventory.items[i].name))
 
-# Vad ska den här göra?
-    charStats += "-" * (5 * (6 - len(player.inventory.items)) + 1) + "\n|" 
+# Vad ska den här göra? ser till att vi altid har 6 rutor
+    charStats += "─" * (5 * (6 - len(player.inventory.items)) + 1) + "\n│" 
 
     #lägger till item namen till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += player.inventory.items[i].name + "|"
+        charStats += player.inventory.items[i].name + "│"
 
         # Verkar inte heller ha någon poäng visuellt
-    charStats += "    |"*(6-len(player.inventory.items)) + "\n"
+    charStats += "    │"*(6-len(player.inventory.items)) + "\n"
     #lägger till ett till långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "-"*(len(player.inventory.items[i].name))
-    charStats += "-"*(5*(6-len(player.inventory.items))+1)
+        charStats += "─"*(len(player.inventory.items[i].name))
+    charStats += "─"*(5*(6-len(player.inventory.items))+1)
     return charStats
         
 
