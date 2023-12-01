@@ -24,23 +24,26 @@ class Inventory():
     def __init__(self):
         self.items: list[Item] = []
 
+        self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
+
 
 class Player():
     def __init__(self, health, maxhealth, strength):
         #innehåller all data om spelaren.
         self.level = 1
         self.exp = 0
-        self.health = health
+        self.exp
+        self.health = math.floor(health / difficultyMap[difficultyIndex][0])
         self.maxhealth = maxhealth
         self.strength = strength
         self.inventory = Inventory()
-        self.weakness = [None, None]
+        self.elements = [[], [], []]
 
 # Damage types: Physical (swords, clubs, nunchucks), Fire (lava, dragon's breath), Water (ice cannon, snowstorm, scroll of tsunami), and more!
 
 # the elements variable contains a list. 1: Take double damage of this type. 2: Take half damage of this type. 3: The monster deals this damage type.
 class Monster():
-    def __init__(self, monsterName, strength, health, elements: list, enterDesc, attackMoveDesc, deathDesc):
+    def __init__(self, monsterName, strength, health, elements: list[list[str]], enterDesc, attackMoveDesc, deathDesc):
     
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
@@ -97,18 +100,21 @@ class Item():
 
             damage: float = player.strength
 
-            if (monster.elements[0] in self.elements):
-                damage *= 2
-            if (monster.elements[1] in self.elements):
-                damage /= 2
+            for i in monster.elements[0]:
+                if monster.elements[0][i] in self.elements:
+                    damage *= 2
+
+            for i in monster.elements[1]:
+                if monster.elements[0][i] in self.elements:
+                    damage /= 2
             
-            monster.health -= math.ceil(damage)
+            monster.health -= math.ceil(damage * self.power)
         
         if self.itemType == "pot":
-            return ["pot", self.power]
+            player.health += self.power
 
         if self.itemType == "boost":
-            return ["boost", ]
+            player.elements.append()
 
     
 
@@ -141,9 +147,10 @@ def PrintHelpMenu():
         pass
 
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
+difficultyIndex = 1
 
-def Enter():
-    difficultyIndex = 1
+def Enter(difficultyIndex):
+
 
     while(True):
 
@@ -285,5 +292,5 @@ def PrintCharStats():
 
 player = Player(7, 10, 4)
 
-Enter()
+Enter(difficultyIndex)
 
