@@ -275,7 +275,7 @@ def PrintCharStats():
     #lägger till ett långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
         charStats += "|-" + "-"*(len(player.inventory.items[i].name))
-    charStats += "-|"
+    charStats += "-| \n"
 
     #lägger till item namen till strängen
     charStats += "| "
