@@ -23,7 +23,9 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 
 class Inventory():
     def __init__(self):
-        self.items = []
+        self.items: list[Item] = []
+
+        self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
 
 
 class Player():
@@ -253,7 +255,7 @@ def PrintCharStats():
     #return(charStats + "reworking printing inventory")
     #lägger till ett långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "" + "─"*(len(player.inventory.items[i].name))
+        charStats += "" + "─"*(len(player.inventory.items[i].name)+1)
 
 # Vad ska den här göra? ser till att vi altid har 6 rutor
     charStats += "─" * (5 * (6 - len(player.inventory.items)) + 1) + "\n│" 
@@ -266,7 +268,7 @@ def PrintCharStats():
     charStats += "    │"*(6-len(player.inventory.items)) + "\n"
     #lägger till ett till långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "─"*(len(player.inventory.items[i].name))
+        charStats += "─"*(len(player.inventory.items[i].name)+1)
     charStats += "─"*(5*(6-len(player.inventory.items))+1)
     return charStats
         
