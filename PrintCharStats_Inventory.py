@@ -25,6 +25,7 @@ class Inventory():
         self.items: list[Item] = []
 
         self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
+        self.items.append(Item("another item's name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
 
 
 class Player():
@@ -274,8 +275,8 @@ def PrintCharStats():
     #return(charStats + "reworking printing inventory")
     #lägger till ett långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "|-" + "-"*(len(player.inventory.items[i].name))
-    charStats += "-| \n"
+        charStats += "|--" + "-"*(len(player.inventory.items[i].name))
+    charStats += "| \n"
 
     #lägger till item namen till strängen
     charStats += "| "
@@ -285,8 +286,8 @@ def PrintCharStats():
 
     #lägger till ett till långt sträck till stringen
     for i in range(0, len(player.inventory.items)):
-        charStats += "|-" + "-"*(len(player.inventory.items[i].name))
-    charStats += "-|"
+        charStats += "|--" + "-"*(len(player.inventory.items[i].name))
+    charStats += "|"
     return charStats
         
 
