@@ -9,7 +9,7 @@ difficulty = 1
 screen1 = ""
 doorSet = [0, 0, 0]
 isCombat = False
-
+isTresure = False
 
 
 doorDescriptions = [[" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", " Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", " Den tredje dörren verkar vara gjord utav kol."], 
@@ -26,6 +26,17 @@ class Inventory():
 
         self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
         self.items.append(Item("another item's name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
+    
+    def pickUpItem(self, item):
+        PrintInventory()
+        key = ""
+        while key not in ["0",'1','2','3','4','5','6'] and int(key) > len(player.inventory):
+            key = Input()
+        if key == 0:
+            return
+        self.items[key-1].ItemDrop()
+        self.items.append(item)
+
 
 
 class Player():
@@ -123,12 +134,15 @@ class Item():
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 
+# Tresures are on horizontal index 0
+# Tresures have 3 paramiters: Name(idk why but why not (deleate it later if i dont need it)), enter_discription, exit_discription 
+
 # Monster finns på horizontal index 2-4.
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = {
-    0: [[""], 
+    0: [["the lava pool"], 
         [""], 
         ["THE FIRE SLIME", 1, 6, [[], [], []], "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], 
         ["", 0, 0, [[], [], []], "", "", ""], 
@@ -143,7 +157,7 @@ encounterDictionary = {
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
-    3: [[""], 
+    3: [["Teacher desk drawer", " You enter the port and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
         [""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
         ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
@@ -233,8 +247,14 @@ def Combat(element):
 
 
 def Treasure(element):
-    print('you encountered a treasure')
-    Input()
+    os.system("cls")
+    print(encounterDictionary(element[1]))
+    try:
+        ItemStats : list = list(itemDictionary[element])[RND.randint(2, math.floor((player.level / 10) * (len(itemDictionary[element]) - 2)))]
+    except:
+        ItemStats: list = list(itemDictionary[element])[2]
+
+    foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6])
 
 
 def Trap(element):
@@ -283,14 +303,9 @@ def Main():
                 Combat(doorSet[int(key)-1])
 
         
-
-        
-
-def PrintCharStats():
-    charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
-
+def PrintInventory():
     itemNames = []
-
+    charInventory = ""
     for i in range(0, len(player.inventory.items)):
         itemNames.append((player.inventory.items[i]).name)
     for i in range (0, 6 - len(player.inventory.items)):
@@ -299,26 +314,30 @@ def PrintCharStats():
 
     for i in range(0, len(itemNames)):
 
-        if isCombat:
-            charStats += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
+        if isCombat or isTresure:
+            charInventory += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
         else:
-            charStats += "^──" + "─"*len(itemNames[i])
+            charInventory += "^──" + "─"*len(itemNames[i])
 
 
 
 
-    charStats += "╷ \n| "
+    charInventory += "╷ \n| "
 
     #lägger till item namen till stränge
     for i in range(0, len(itemNames)):
-        charStats += itemNames[i] + " | "
+        charInventory += itemNames[i] + " | "
         
-    charStats += "\n"
+    charInventory += "\n"
     #lägger till ett till långt sträck till stringen
 
     for i in range(0, len(itemNames)):
-        charStats += "╵──" + "─"*(len(itemNames[i]))
-    charStats += "╵"
+        charInventory += "╵──" + "─"*(len(itemNames[i]))
+    charInventory += "╵"
+
+def PrintCharStats():
+    charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
+    charStats += PrintInventory()
     return charStats
         
 
