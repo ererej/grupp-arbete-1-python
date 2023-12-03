@@ -27,15 +27,16 @@ class Inventory():
         self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
         self.items.append(Item("another item's name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
     
-    def pickUpItem(self, item):
-        PrintInventory()
-        key = ""
-        while key not in ["0",'1','2','3','4','5','6'] and int(key) > len(player.inventory):
+    def PickUpItem(self, foundItem):
+        print(f"you found a {foundItem.name}")
+        print(PrintInventory())
+        key = Input()
+        while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
-        if key == 0:
+        if key == "0":
             return
-        self.items[key-1].ItemDrop()
-        self.items.append(item)
+        self.items[int(key)-1].ItemDrop()
+        self.items.append(foundItem)
 
 
 
@@ -60,8 +61,8 @@ class Monster():
         # Denna kod executar när monstret skapas. Här ska olika variabler som namn etc etc skapas, och stats slumpmässigt väljas.
         self.name = monsterName
 
-        self.strength = math.ceil(RND.randint(strength * 0.7, strength * 1.3) * difficulty)
-        self.health = math.ceil(RND.randint(health * 0.7, health * 1.3) * difficulty)
+        self.strength = math.ceil(RND.randint(int(strength * 0.7), int(strength * 1.3) * difficulty))
+        self.health = math.ceil(RND.randint(int(health * 0.7), int(health * 1.3) * difficulty))
         self.elements = elements
 
 
@@ -130,6 +131,15 @@ class Item():
         if self.itemType == "boost":
             player.elements.append()
 
+#the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
+#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
+
+itemDictionary = {
+    0: [["fire item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["fire item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    1: [["ice item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["ice item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    2: [["knight item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["knight item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    3: [["awnser key", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["teacher item place holder", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+}  
     
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
@@ -142,17 +152,17 @@ class Item():
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = {
-    0: [["the lava pool"], 
+    0: [["the lava pool", " place holder enter disc", "place holder exit disc"], 
         [""], 
         ["THE FIRE SLIME", 1, 6, [[], [], []], "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], 
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["dragon"], 0, 0, [[], [], []], "", "", ""],
-    1: [[""], 
+    1: [["place holder tresure", " place holder enter disc", "place holder exit disc"], 
         [""], 
         ["THE MAD SNOWMAN", 4, 3, [[], [], []], "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
         ["THE FROZEN SPIRIT", 0, 0, [[], [], []], "", "", ""], 
         ["THE GLACIER GOLEM"], 0, 0, [[], [], []], "", "", ""],
-    2: [[""], 
+    2: [["place holder tresure", " place holder enter disc", "place holder exit disc"], 
         [""], 
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
         ["", 0, 0, [[], [], []], "", "", ""], 
@@ -209,10 +219,12 @@ def Enter(difficultyIndex):
             if difficultyIndex == -1:
                 difficultyIndex = len(difficultyMap)-1
         if key == "s":
+            os.system("cls")
             Main()
 
 def Combat(element):
     os.system('cls')
+    print("this is combat") #temp
     isCombat = True
     # Grams stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
 
@@ -226,8 +238,8 @@ def Combat(element):
     while (encounteredMonster.health > 0 and player.health > 0):
         print(encounteredMonster.enterDesc)
 
-        key = ''
-        while key not in ['1','2','3','4','5','6'] and int(key) > len(player.inventory):
+        key = Input()
+        while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
         
         usedItem = player.inventory.items[int(key) - 1]
@@ -248,24 +260,30 @@ def Combat(element):
 
 def Treasure(element):
     os.system("cls")
-    print(encounterDictionary(element[1]))
-    try:
-        ItemStats : list = list(itemDictionary[element])[RND.randint(2, math.floor((player.level / 10) * (len(itemDictionary[element]) - 2)))]
-    except:
-        ItemStats: list = list(itemDictionary[element])[2]
+    isTresure = True
+    print("you found a tresure")
+    print(encounterDictionary[element][0][1])
+    
+    ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
+    foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
+    player.inventory.PickUpItem(foundItem)
+    os.system("cls")
+    print(encounterDictionary[element][0][2] + "\n")
 
-    foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6])
+
+    isTresure = False
 
 
 def Trap(element):
     print('you encoundered a trap')
     Input()
+    os.system("cls")
 
 
 def Main():
     
     while(True):
-        os.system('cls')
+        #os.system('cls')
         
         screen1 = f"I nästa sal ser du tre portar... "
 
@@ -334,6 +352,7 @@ def PrintInventory():
     for i in range(0, len(itemNames)):
         charInventory += "╵──" + "─"*(len(itemNames[i]))
     charInventory += "╵"
+    return charInventory
 
 def PrintCharStats():
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
