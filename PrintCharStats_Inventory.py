@@ -29,14 +29,25 @@ class Inventory():
     
     def PickUpItem(self, foundItem):
         print(f"you found a {foundItem.name}")
-        print(PrintInventory())
+        print(PrintInventory(False)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
+        if len(player.inventory.items) < 6:
+            keybinds_string = f" [{len(player.inventory.items)+1}] to add the item to your inventory"
+        else:
+            keybinds_string = f" [1-{len(player.inventory.items)}] to replace an item i your iventory with the new item"
+        keybinds_string += "\n [0] to discard the item and move on"
+        print(keybinds_string)
         key = Input()
-        while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
+        #väntar på en valid input
+        while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
             key = Input()
+        
         if key == "0":
             return
-        self.items[int(key)-1].ItemDrop()
-        self.items.append(foundItem)
+        if len(player.inventory.items) < 6 and int(key) == len(player.inventory.items)+1:
+            self.items.append(foundItem) #ska troligen använda items.ItemPickup
+        else:
+            self.items[int(key)-1].ItemDrop()
+            self.items.append(foundItem) # kanske ska lägga till att den lägger till det nya itemet i samma slot 
 
 
 
@@ -135,10 +146,10 @@ class Item():
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
 
 itemDictionary = {
-    0: [["fire item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["fire item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    1: [["ice item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["ice item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    2: [["knight item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["knight item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    3: [["awnser key", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["teacher item place holder", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    0: [["Fire item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["Fire item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    1: [["Ice item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["iqce item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    2: [["Knight item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["knight item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    3: [["Exam awnser key", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["teacher item place holder", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
 }  
     
 
@@ -187,6 +198,7 @@ def PrintHelpMenu():
     print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door")
     while keyboard.read_key() != 'q':
         pass
+    os.system("cls")
 
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
 difficultyIndex = 1
@@ -321,7 +333,7 @@ def Main():
                 Combat(doorSet[int(key)-1])
 
         
-def PrintInventory():
+def PrintInventory(allData: bool):
     itemNames = []
     charInventory = ""
     for i in range(0, len(player.inventory.items)):
@@ -329,34 +341,37 @@ def PrintInventory():
     for i in range (0, 6 - len(player.inventory.items)):
         itemNames.append(".........")
 
+    if allData == True:
+        pass
+    else:
 
-    for i in range(0, len(itemNames)):
+        for i in range(0, len(itemNames)):
 
-        if isCombat or isTresure:
-            charInventory += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
-        else:
-            charInventory += "^──" + "─"*len(itemNames[i])
-
-
+            if isCombat or isTresure:
+                charInventory += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
+            else:
+                charInventory += "^──" + "─"*len(itemNames[i])
 
 
-    charInventory += "╷ \n| "
 
-    #lägger till item namen till stränge
-    for i in range(0, len(itemNames)):
-        charInventory += itemNames[i] + " | "
+
+        charInventory += "╷ \n| "
+
+        #lägger till item namen till stränge
+        for i in range(0, len(itemNames)):
+            charInventory += itemNames[i] + " | "
         
-    charInventory += "\n"
-    #lägger till ett till långt sträck till stringen
+        charInventory += "\n"
+        #lägger till ett till långt sträck till stringen
 
-    for i in range(0, len(itemNames)):
-        charInventory += "╵──" + "─"*(len(itemNames[i]))
-    charInventory += "╵"
-    return charInventory
+        for i in range(0, len(itemNames)):
+            charInventory += "╵──" + "─"*(len(itemNames[i]))
+        charInventory += "╵"
+        return charInventory
 
 def PrintCharStats():
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
-    charStats += PrintInventory()
+    charStats += PrintInventory(False)
     return charStats
         
 
