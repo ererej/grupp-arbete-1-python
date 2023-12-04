@@ -150,11 +150,14 @@ class Inventory():
         
         if key == "0":
             return
-        if key in range(1, len(player.inventory.items)):
-            foundItem.ItemPickup() 
         if len(player.inventory.items) == 6:
             self.items[int(key)-1].ItemDrop()
             foundItem.ItemPickup # kanske ska lägga till att den lägger till det nya itemet i samma slot 
+            return
+        if int(key) in range(1, len(player.inventory.items)+1):
+            foundItem.ItemPickup() 
+            return
+        
 
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
