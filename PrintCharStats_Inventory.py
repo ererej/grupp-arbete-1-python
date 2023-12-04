@@ -57,7 +57,6 @@ class Monster():
 
 class Item():
     def __init__(self, name, strength, health, elements, consumable: bool, itemType, power, boostTypes: list):
-
         self.name = name
 
 # These are stats given to the player who holds the item.
@@ -74,6 +73,7 @@ class Item():
         self.boostTypes = boostTypes
 
     def ItemPickup(self):
+        """hej"""
         player.health += self.health
         player.maxhealth += self.health
         player.strength += self.strength
@@ -126,7 +126,7 @@ class Inventory():
         print(f"you found a {foundItem.name}")
         print(PrintCharStats(False)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
         if len(player.inventory.items) < 6:
-            keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
+            keybinds_string = f"[1-{len(player.inventory.items)+1}] Add the item to your inventory"
         else:
             keybinds_string = f" [1-6] to replace an item in your iventory with the new item"
         keybinds_string += "\n[0] to discard the item and move on"
@@ -138,20 +138,20 @@ class Inventory():
         
         if key == "0":
             return
-        if int(key) == len(player.inventory.items)+1:
-            foundItem.ItemPickup() #ska troligen använda items.ItemPickup
-        else:
+        if key in range(1, len(player.inventory.items)):
+            foundItem.ItemPickup() 
+        if len(player.inventory.items) == 6:
             self.items[int(key)-1].ItemDrop()
-            self.items.append(foundItem) # kanske ska lägga till att den lägger till det nya itemet i samma slot 
+            foundItem.ItemPickup # kanske ska lägga till att den lägger till det nya itemet i samma slot 
 
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
 
 itemDictionary = {
-    0: [["Fire item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["Fire item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    1: [["Ice item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["iqce item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    2: [["Knight item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["knight item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    3: [["Exam awnser key", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["teacher item place holder", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    0: [["Fire resistens potion", 0, 1, 3, True, "boost", [], []], ["Fire item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    1: [["Ice item place holder1", 2, 1, 3, True, "weapon", [], []], ["iqce item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    2: [["Knight item place holder1", 2, 1, 3, True, "weapon", [], []], ["knight item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, True, "weapon", [], []]],
 }  
     
 
