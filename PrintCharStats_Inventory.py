@@ -54,9 +54,18 @@ class Monster():
         self.attackMoveDesc = attackMoveDesc        
         self.deathDesc = deathDesc
 
-
+# self: ett visst item. Används troligen inte utanför klassen
+# name: Monstrets namn. Används för intro descriptions etcetc
+# strength: give the player this amount of strength, empowering their attacks.
+# health: Give the player this amount of health, granting them vigor in combat.
+# elements: A
+# consumable: If set to True, this item will remove itself from the player's inventory upon being used.
+# itemType: defines the functionality of the item. Can be a damage-dealing weapon, a healing potion ("pot"), or a 
+# resistance potion that halves damage taken from some damage types.
+# power: Defines the amount of health restored by healing potions and damage multiplier for weapons.
 class Item():
-    def __init__(self, name, strength, health, elements, consumable: bool, itemType, power, boostTypes: list):
+    def __init__(self, name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list):
+
         self.name = name
 
 # These are stats given to the player who holds the item.
@@ -70,7 +79,7 @@ class Item():
 
 # Stats important for the functionality of specific items.
         self.power = power
-        self.boostTypes = boostTypes
+        self.resistancePotEffects = resistancePotEffects
 
     def ItemPickup(self):
         """hej"""
@@ -113,7 +122,10 @@ class Item():
             player.health += self.power
 
         if self.itemType == "boost":
-            player.elements.append()
+            player.elements[1].append()
+
+
+
 
 class Inventory():
     def __init__(self):
