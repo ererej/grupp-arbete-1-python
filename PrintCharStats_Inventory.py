@@ -4,6 +4,7 @@ import random as RND
 import math
 from termcolor import colored
 import roman
+
 difficulty = 1
 
 screen1 = ""
@@ -20,34 +21,6 @@ doorDescriptions = [[" Istället för ett vanligt handtag så har den första d�
 
     
 
-class Inventory():
-    def __init__(self):
-        self.items: list[Item] = []
-
-        self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
-        self.items.append(Item("another item's name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
-    
-    def PickUpItem(self, foundItem):
-        print(f"you found a {foundItem.name}")
-        print(PrintInventory(False)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
-        if len(player.inventory.items) < 6:
-            keybinds_string = f" [{len(player.inventory.items)+1}] to add the item to your inventory"
-        else:
-            keybinds_string = f" [1-{len(player.inventory.items)}] to replace an item i your iventory with the new item"
-        keybinds_string += "\n [0] to discard the item and move on"
-        print(keybinds_string)
-        key = Input()
-        #väntar på en valid input
-        while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
-            key = Input()
-        
-        if key == "0":
-            return
-        if len(player.inventory.items) < 6 and int(key) == len(player.inventory.items)+1:
-            self.items.append(foundItem) #ska troligen använda items.ItemPickup
-        else:
-            self.items[int(key)-1].ItemDrop()
-            self.items.append(foundItem) # kanske ska lägga till att den lägger till det nya itemet i samma slot 
 
 
 
@@ -141,6 +114,35 @@ class Item():
 
         if self.itemType == "boost":
             player.elements.append()
+
+class Inventory():
+    def __init__(self):
+        self.items: list[Item] = []
+
+        self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
+        self.items.append(Item("another item's name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
+    
+    def PickUpItem(self, foundItem:Item):
+        print(f"you found a {foundItem.name}")
+        print(PrintCharStats(False)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
+        if len(player.inventory.items) < 6:
+            keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
+        else:
+            keybinds_string = f" [1-6] to replace an item in your iventory with the new item"
+        keybinds_string += "\n[0] to discard the item and move on"
+        print(keybinds_string)
+        key = Input()
+        #väntar på en valid input
+        while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
+            key = Input()
+        
+        if key == "0":
+            return
+        if int(key) == len(player.inventory.items)+1:
+            foundItem.ItemPickup() #ska troligen använda items.ItemPickup
+        else:
+            self.items[int(key)-1].ItemDrop()
+            self.items.append(foundItem) # kanske ska lägga till att den lägger till det nya itemet i samma slot 
 
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
@@ -243,6 +245,7 @@ def Combat(element):
     try:
         MStats : list = list(encounterDictionary[element])[RND.randint(2, math.floor((player.level / 10) * (len(encounterDictionary[element]) - 2)))]
     except:
+        # If the player has not yet reached the level 2 monster, it will simply grab the lvl 1 monsters stats. This is because randint function does not accept two identical parameters.
         MStats: list = list(encounterDictionary[element])[2]
 
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
@@ -283,7 +286,6 @@ def Treasure(element):
     print(encounterDictionary[element][0][2] + "\n")
 
 
-    isTresure = False
 
 
 def Trap(element):
@@ -304,7 +306,7 @@ def Main():
             doorSet[i-1] = ( RND.randint(0,3) )
             screen1 += '\n'*2 + f"[{i}]" + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
  
-        print(screen1 + "\n"*3 + PrintCharStats())
+        print(screen1 + "\n"*3 + PrintCharStats(False))
         
         key = ''
         while key not in ['r', 'q', '1', '2', '3']:
@@ -333,45 +335,40 @@ def Main():
                 Combat(doorSet[int(key)-1])
 
         
-def PrintInventory(allData: bool):
+def PrintInventory():
+    pass
+
+def PrintCharStats(canAct):
+    charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
     itemNames = []
-    charInventory = ""
+
     for i in range(0, len(player.inventory.items)):
         itemNames.append((player.inventory.items[i]).name)
     for i in range (0, 6 - len(player.inventory.items)):
         itemNames.append(".........")
 
-    if allData == True:
-        pass
-    else:
+    for i in range(0, len(itemNames)):
 
-        for i in range(0, len(itemNames)):
-
-            if isCombat or isTresure:
-                charInventory += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
-            else:
-                charInventory += "^──" + "─"*len(itemNames[i])
+        if canAct:
+            charStats += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
+        else:
+            charStats += "^──" + "─"*len(itemNames[i])
 
 
 
 
-        charInventory += "╷ \n| "
+    charStats += "╷ \n| "
 
-        #lägger till item namen till stränge
-        for i in range(0, len(itemNames)):
-            charInventory += itemNames[i] + " | "
+        #lägger till item namen till string var
+    for i in range(0, len(itemNames)):
+        charStats += itemNames[i] + " | "
         
-        charInventory += "\n"
+    charStats += "\n"
         #lägger till ett till långt sträck till stringen
 
-        for i in range(0, len(itemNames)):
-            charInventory += "╵──" + "─"*(len(itemNames[i]))
-        charInventory += "╵"
-        return charInventory
-
-def PrintCharStats():
-    charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
-    charStats += PrintInventory(False)
+    for i in range(0, len(itemNames)):
+        charStats += "╵──" + "─"*(len(itemNames[i]))
+    charStats += "╵"
     return charStats
         
 
