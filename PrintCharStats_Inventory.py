@@ -14,6 +14,10 @@ doorSet = [0, 0, 0]
 global canAct 
 canAct = False
 
+ELEMENT_WEAKNESS = 0
+ELEMENT_RESISTANCE = 1
+ELEMENT_ATTACK_TYPE = 2
+
 
 doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", "red"), colored(" Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", "red"), colored(" Den tredje dörren verkar vara gjord utav kol.", "red")], 
 [colored(" En stor istapp hänger från den första dörrens handtag.", "light_cyan"), colored(" Den andra dörren ser exakt ut som en snöflinga.", "light_cyan"), colored(" Den tredje dörren verkar vara gjord av is.", "light_cyan")], 
@@ -27,14 +31,14 @@ doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den f�
 
 
 class Player():
-    def __init__(self, health, maxhealth, strength):
+    def __init__(self):
         #innehåller all data om spelaren.
         self.level = 1
         self.exp = 0
         self.exp
-        self.health = math.floor(health / difficultyMap[difficultyIndex][0])
-        self.maxhealth = maxhealth
-        self.strength = strength
+        self.maxhealth = 10
+        self.health = math.floor(self.maxhealth / difficultyMap[difficultyIndex][0])
+        self.strength = 3
         self.inventory = Inventory()
         self.elements = [[], [], []]
 
@@ -109,12 +113,12 @@ class Item():
 
             damage: float = player.strength
 
-            for i in monster.elements[0]:
-                if monster.elements[0][i] in self.elements:
+            for i in monster.elements[ELEMENT_WEAKNESS]:
+                if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
                     damage *= 2
 
-            for i in monster.elements[1]:
-                if monster.elements[0][i] in self.elements:
+            for i in monster.elements[ELEMENT_RESISTANCE]:
+                if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
             monster.health -= math.ceil(damage * self.power)
@@ -123,7 +127,8 @@ class Item():
             player.health += self.power
 
         if self.itemType == "resistance-giver":
-            player.elements[1].append()
+            for i in self.resistancePotEffects:
+                player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
 
         if self.consumable == True:
             self.ItemDrop()
@@ -140,7 +145,7 @@ class Inventory():
     def PickUpItem(self, foundItem:Item):
         while True:
             os.system("cls")
-            print(colored(f"\nYou found a {foundItem.name}") + " that is a ", colored(f"{foundItem.itemType}\n", "red"))
+            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}\n", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
@@ -287,14 +292,16 @@ def Combat(element):
         usedItem = player.inventory.items[int(key) - 1]
         print(f"You used {usedItem.name}!")
         usedItem.CombatActive(encounteredMonster)
-
-        attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
+        try:
+            attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
+        except:
+            attackIndex = 0
 
         print(encounteredMonster.attackMoveDesc[attackIndex])
 
         damage = encounteredMonster.strength
 
-        for i in player.elements[0]:
+        for i in player.elements[]:
             if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
                 damage *= 2
 
