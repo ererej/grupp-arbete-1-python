@@ -1,3 +1,5 @@
+# Team Outrun: the ones that ran out of time
+
 import os
 import keyboard
 import random as RND
@@ -9,8 +11,8 @@ difficulty = 1
 
 screen1 = ""
 doorSet = [0, 0, 0]
-isCombat = False
-isTresure = False
+global canAct 
+canAct = False
 
 
 doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", "red"), colored(" Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", "red"), colored(" Den tredje dörren verkar vara gjord utav kol.", "red")], 
@@ -53,6 +55,9 @@ class Monster():
         self.enterDesc = enterDesc
         self.attackMoveDesc = attackMoveDesc        
         self.deathDesc = deathDesc
+
+
+    
 
 # self: ett visst item. Används troligen inte utanför klassen
 # name: Monstrets namn. Används för intro descriptions etcetc
@@ -114,10 +119,10 @@ class Item():
             
             monster.health -= math.ceil(damage * self.power)
         
-        if self.itemType == "pot":
+        if self.itemType == "health potion":
             player.health += self.power
 
-        if self.itemType == "boost":
+        if self.itemType == "resistance-giver":
             player.elements[1].append()
 
         if self.consumable == True:
@@ -182,29 +187,27 @@ itemDictionary = {
 # Monster finns på horizontal index 2-4.
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
-
-encounterDictionary = {
-    0: [["the lava pool", "placeholder enter disc", "place holder exit disc"], 
+CONST_VALUE = 7
+encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holder exit disc"], 
         [""], 
-        ["THE FIRE SLIME", 1, 6, [[], [], []], "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], 
-        ["", 0, 0, [[], [], []], "", "", ""], 
-        ["dragon"], 0, 0, [[], [], []], "", "", ""],
-    1: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
+        ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
+        ["DASTARDLY IMP", 0, 0, [[], [], []], "", "", ""], 
+        ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
+        [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
-        ["THE MAD SNOWMAN", 4, 3, [[], [], []], "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
-        ["THE FROZEN SPIRIT", 0, 0, [[], [], []], "", "", ""], 
-        ["THE GLACIER GOLEM"], 0, 0, [[], [], []], "", "", ""],
-    2: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
+        ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go closer to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
+        ["THE FROZEN SPIRIT", 8, 5, [[], [], ["psy","frost"]], "", "", ""], 
+        ["THE GLACIER GOLEM"], 12, 10, [[], [], []], "", "", ""],
+        [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
-    3: [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
+        [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
         [""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
         ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
-        ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]
-}
+        ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]]
 
 
 def Input():
@@ -258,9 +261,10 @@ def Enter(difficultyIndex):
             Main()
 
 def Combat(element):
+    global canAct
+    canAct = True
     os.system('cls')
     print("this is combat") #temp
-    isCombat = True
     # Grams stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
 
     try:
@@ -271,6 +275,8 @@ def Combat(element):
 
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
+
+
     while (encounteredMonster.health > 0 and player.health > 0):
         print(encounteredMonster.enterDesc)
 
@@ -279,18 +285,32 @@ def Combat(element):
             key = Input()
         
         usedItem = player.inventory.items[int(key) - 1]
-
-        print(f"Du använde {usedItem.name}!")
-
+        print(f"You used {usedItem.name}!")
         usedItem.CombatActive(encounteredMonster)
 
+        attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
+
+        print(encounteredMonster.attackMoveDesc[attackIndex])
+
+        damage = encounteredMonster.strength
+
+        for i in player.elements[0]:
+            if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
+                damage *= 2
+
+        for i in monster.elements[1]:
+            if monster.elements[0][i] in self.elements:
+                damage /= 2        
+
+
+
+
+        
+    
         
 
-        pass
 
 
-
-        isCombat = False
     Input()
 
 
@@ -367,7 +387,8 @@ def PrintInventory():
     while keyboard.read_key() != 'q':
         pass
 
-def PrintCharStats(canAct):
+def PrintCharStats():
+    global canAct
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
     itemNames = []
 
