@@ -13,10 +13,10 @@ isCombat = False
 isTresure = False
 
 
-doorDescriptions = [[" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", " Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", " Den tredje dörren verkar vara gjord utav kol."], 
-[" En stor istapp hänger från den första dörrens handtag.", " Den andra dörren ser exakt ut som en snöflinga.", " Den tredje dörren verkar vara gjord av is."], 
-[" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen."," Den andra dörren har formen av en upp-och-ner vänd sköld."," Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen."], 
-[" Den första dörren har en linjal istället för ett handtag."," Den andra dörren har en form som liknar grafen f(x)= -x**2 + 8x i intervallet 0 <= x <= 8."," Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd."]]
+doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", "red"), colored(" Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", "red"), colored(" Den tredje dörren verkar vara gjord utav kol.", "red")], 
+[colored(" En stor istapp hänger från den första dörrens handtag.", "light_cyan"), colored(" Den andra dörren ser exakt ut som en snöflinga.", "light_cyan"), colored(" Den tredje dörren verkar vara gjord av is.", "light_cyan")], 
+[colored(" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen.", "dark_grey"), colored(" Den andra dörren har formen av en upp-och-ner vänd sköld.", "dark_grey"), colored(" Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen.", "dark_grey")], 
+[colored(" The first door has a ruller as the doorhandel", "yellow"), colored(" Behind the secound door you hear the faint buzzing of a procjector", "yellow"), colored(" Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd.", "yellow")]]
 
 
     
@@ -82,6 +82,7 @@ class Item():
         self.resistancePotEffects = resistancePotEffects
 
     def ItemPickup(self):
+        """hej"""
         player.health += self.health
         player.maxhealth += self.health
         player.strength += self.strength
@@ -130,17 +131,16 @@ class Inventory():
     def __init__(self):
         self.items: list[Item] = []
 
-        self.items.append(Item("item name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
-        self.items.append(Item("another item's name", 1, 3, [["asd"], ["asgas"], ["hgf"]], False, "Weapon", 3, ["Classy", "really cool"]))
+
     
     def PickUpItem(self, foundItem:Item):
         print(f"you found a {foundItem.name}")
-        print(PrintCharStats(False)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
+        print(PrintCharStats(True)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
         if len(player.inventory.items) < 6:
-            keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
+            keybinds_string = f"[1-{len(player.inventory.items)+1}] Add the item to your inventory"
         else:
-            keybinds_string = f" [1-6] to replace an item in your iventory with the new item"
-        keybinds_string += "\n[0] to discard the item and move on"
+            keybinds_string = f" [1-6] press the index of an item in your iventory to replace it with the new item"
+        keybinds_string += "\n[0] to just discard the item and move on"
         print(keybinds_string)
         key = Input()
         #väntar på en valid input
@@ -149,20 +149,23 @@ class Inventory():
         
         if key == "0":
             return
-        if int(key) == len(player.inventory.items)+1:
-            foundItem.ItemPickup() #ska troligen använda items.ItemPickup
-        else:
+        if len(player.inventory.items) == 6:
             self.items[int(key)-1].ItemDrop()
-            self.items.append(foundItem) # kanske ska lägga till att den lägger till det nya itemet i samma slot 
+            foundItem.ItemPickup # kanske ska lägga till att den lägger till det nya itemet i samma slot 
+            return
+        if int(key) in range(1, len(player.inventory.items)+1):
+            foundItem.ItemPickup() 
+            return
+        
 
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
 
 itemDictionary = {
-    0: [["Fire item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["Fire item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    1: [["Ice item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["iqce item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    2: [["Knight item place holder1", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["knight item place holder2", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
-    3: [["Exam awnser key", 2, 1, 3, True, "weapon", "n/a", "n/a"], ["teacher item place holder", 2, 1, 3, True, "weapon", "n/a", "n/a"]],
+    0: [["Fire resistens potion", 0, 1, 0, True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
+    1: [["Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["iqce item place holder2", 2, 1, 1, False, "weapon", [], []]],
+    2: [["Wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
+    3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
 }  
     
 
@@ -191,7 +194,7 @@ encounterDictionary = {
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
-    3: [["Teacher desk drawer", " You enter the port and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
+    3: [["Teacher desk drawer", " You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
         [""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
         ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
@@ -287,7 +290,6 @@ def Combat(element):
 def Treasure(element):
     os.system("cls")
     isTresure = True
-    print("you found a tresure")
     print(encounterDictionary[element][0][1])
     
     ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
@@ -310,8 +312,8 @@ def Main():
     
     while(True):
         #os.system('cls')
-        os.system('cls')
-        screen1 = f"I nästa sal ser du tre portar... "
+        
+        screen1 = f"In the next room you see three doors"
 
         doorSet = [0, 0, 0]
         for i in range(1, len(doorSet) + 1):
@@ -362,7 +364,7 @@ def PrintCharStats(canAct):
     for i in range(0, len(itemNames)):
 
         if canAct:
-            charStats += "^──" + f"[{i + 1}]" + "─"*(len(itemNames[i]) - 3)
+            charStats += "^" + "─"*math.floor(len(itemNames[i])/2) + f"[{i + 1}]" + "─"*math.ceil(len(itemNames[i])/2-1)
         else:
             charStats += "^──" + "─"*len(itemNames[i])
 
@@ -385,6 +387,6 @@ def PrintCharStats(canAct):
         
 
 player = Player(7, 10, 4)
+Item("Wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
 
 Enter(difficultyIndex)
-
