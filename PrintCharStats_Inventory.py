@@ -14,6 +14,10 @@ doorSet = [0, 0, 0]
 global canAct 
 canAct = False
 
+ELEMENT_WEAKNESS = 0
+ELEMENT_RESISTANCE = 1
+ELEMENT_ATTACK_TYPE = 2
+
 
 doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", "red"), colored(" Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", "red"), colored(" Den tredje dörren verkar vara gjord utav kol.", "red")], 
 [colored(" En stor istapp hänger från den första dörrens handtag.", "light_cyan"), colored(" Den andra dörren ser exakt ut som en snöflinga.", "light_cyan"), colored(" Den tredje dörren verkar vara gjord av is.", "light_cyan")], 
@@ -27,14 +31,14 @@ doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den f�
 
 
 class Player():
-    def __init__(self, health, maxhealth, strength):
+    def __init__(self):
         #innehåller all data om spelaren.
         self.level = 1
         self.exp = 0
         self.exp
-        self.health = math.floor(health / difficultyMap[difficultyIndex][0])
-        self.maxhealth = maxhealth
-        self.strength = strength
+        self.maxhealth = 10
+        self.health = math.floor(self.maxhealth / difficultyMap[difficultyIndex][0])
+        self.strength = 3
         self.inventory = Inventory()
         self.elements = [[], [], []]
 
@@ -109,12 +113,12 @@ class Item():
 
             damage: float = player.strength
 
-            for i in monster.elements[0]:
-                if monster.elements[0][i] in self.elements:
+            for i in monster.elements[ELEMENT_WEAKNESS]:
+                if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
                     damage *= 2
 
-            for i in monster.elements[1]:
-                if monster.elements[0][i] in self.elements:
+            for i in monster.elements[ELEMENT_RESISTANCE]:
+                if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
             monster.health -= math.ceil(damage * self.power)
@@ -123,7 +127,8 @@ class Item():
             player.health += self.power
 
         if self.itemType == "resistance-giver":
-            player.elements[1].append()
+            for i in self.resistancePotEffects:
+                player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
 
         if self.consumable == True:
             self.ItemDrop()
@@ -140,7 +145,7 @@ class Inventory():
     def PickUpItem(self, foundItem:Item):
         while True:
             os.system("cls")
-            print(colored(f"\nYou found a {foundItem.name}") + " that is a ", colored(f"{foundItem.itemType}\n\n", "red"))
+            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}\n", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
@@ -198,12 +203,12 @@ encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holde
         [""], 
         ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go closer to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
-        ["THE GLACIER GOLEM"], 12, 10, [[], [], []], "", "", ""],
+        ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
         [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
-        ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
-        ["", 0, 0, [[], [], []], "", "", ""], 
-        ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
+        ["THE DESERTER", 3, 7, [["psy"], ["phys"], ["phys","fire"]], "You spot a soldier infront of you! Judging by the fact he seems to be lacking a lot of equipment, he has likely deserted whatever army he once swore allegance to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
+        ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""], 
+        ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["phys"], ["phys, phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
         [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
         [""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
@@ -288,14 +293,16 @@ def Combat(element):
         usedItem = player.inventory.items[int(key) - 1]
         print(f"You used {usedItem.name}!")
         usedItem.CombatActive(encounteredMonster)
-
-        attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
+        try:
+            attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
+        except:
+            attackIndex = 0
 
         print(encounteredMonster.attackMoveDesc[attackIndex])
 
         damage = encounteredMonster.strength
 
-        for i in player.elements[0]:
+        for i in player.elements[]:
             if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
                 damage *= 2
 
