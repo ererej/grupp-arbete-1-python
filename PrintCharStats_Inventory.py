@@ -1,3 +1,5 @@
+# Team Outrun: the ones that ran out of time
+
 import os
 import keyboard
 import random as RND
@@ -114,10 +116,10 @@ class Item():
             
             monster.health -= math.ceil(damage * self.power)
         
-        if self.itemType == "pot":
+        if self.itemType == "health potion":
             player.health += self.power
 
-        if self.itemType == "boost":
+        if self.itemType == "resistance-giver":
             player.elements[1].append()
 
         if self.consumable == True:
@@ -184,7 +186,7 @@ encounterDictionary = {
         [""], 
         ["THE FIRE SLIME", 1, 6, [[], [], []], "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], 
         ["", 0, 0, [[], [], []], "", "", ""], 
-        ["dragon"], 0, 0, [[], [], []], "", "", ""],
+        ["dragon"], 0, 0, [[], [], ["physical", "fire"]], "", ["Hugger med klorna", "It breathes fire, coolish"], ""],
     1: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE MAD SNOWMAN", 4, 3, [[], [], []], "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
