@@ -133,21 +133,25 @@ class Inventory():
 
     
     def PickUpItem(self, foundItem:Item):
-
-        print(f"\nYou found a {foundItem.name} \n")
+        while True:
+            os.system("cls")
+            print(colored(f"\nYou found a {foundItem.name}") + " that is a ", colored(f"{foundItem.itemType}\n", "red"))
         
-        if len(player.inventory.items) < 6:
-            keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
-        else:
-            keybinds_string = f" [1-6] Replace an item in your inventory"
-        keybinds_string += "\n[0] discard the item and move on"
-        print(keybinds_string)
+            if len(player.inventory.items) < 6:
+                keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
+            else:
+                keybinds_string = f" [1-6] Replace an item in your inventory"
+            keybinds_string += "\n[0] discard the item and move on"
+            print(keybinds_string)
 
-        key = Input()
-        #väntar på en valid input
-        while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
             key = Input()
-        
+            #väntar på en valid input
+            while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
+                if key == "i":
+                    PrintInventory()
+                key = Input()
+            break
+            
         if key == "0":
             return
         if len(player.inventory.items) == 6:
@@ -163,10 +167,10 @@ class Inventory():
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
 
 itemDictionary = {
-    0: [["a fire resistance potion", 0, 1, [], True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
-    1: [["<>Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["ice item place holder2", 2, 1, 1, False, "weapon", [], []]],
-    2: [["a wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
-    3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
+    0: [[colored("a fire resistance potion", "red"), 0, 1, [], True, "boost", [], []], [colored("Fire item place holder2", "red"), 2, 1, 0, False, "weapon", [], []]],
+    1: [[colored("Ice item place holder1", "light_cyan"), 2, 1, 1, False, "weapon", [], []], [colored("ice item place holder2", "light_cyan"), 2, 1, 1, False, "weapon", [], []]],
+    2: [[colored("a wooden sword", "dark_grey"), 2, 0, 2, False, "weapon", [], []], [colored("knight item place holder2", "dark_grey"), 2, 1, 2, False, "weapon", [], []]],
+    3: [[colored("Exam awnser key", "yellow"), 2, 1, 3, True, "weapon", [], []], [colored("teacher item place holder", "yellow"), 2, 1, 3, False, "weapon", [], []]],
 }  
     
 
@@ -215,7 +219,6 @@ def PrintHelpMenu():
     print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door")
     while keyboard.read_key() != 'q':
         pass
-    os.system("cls")
 
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
 difficultyIndex = 1
@@ -242,6 +245,9 @@ def Enter(difficultyIndex):
 
         if key == "r":
             PrintHelpMenu()
+        
+        if key == "i":
+            PrintInventory()
 
         if key == "d":
             difficultyIndex -= 1
@@ -323,11 +329,14 @@ def Main():
         print(screen1 + "\n"*3 + PrintCharStats(False))
         
         key = ''
-        while key not in ['r', 'q', '1', '2', '3']:
+        while key not in ["i", 'r', 'q', '1', '2', '3']:
             key = Input()
 
         if key == "r": 
             PrintHelpMenu()
+
+        if key == "i":
+            PrintInventory()
 
         if key == 'q':
             break
@@ -350,7 +359,13 @@ def Main():
 
         
 def PrintInventory():
-    pass
+    os.system("cls")
+    inventoryString = ""
+    for item in player.inventory.items:
+        inventoryString = f"{item.name}, "
+    print(inventoryString)
+    while keyboard.read_key() != 'q':
+        pass
 
 def PrintCharStats(canAct):
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
