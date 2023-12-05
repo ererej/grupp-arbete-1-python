@@ -140,7 +140,7 @@ class Inventory():
     def PickUpItem(self, foundItem:Item):
         while True:
             os.system("cls")
-            print(colored(f"\nYou found a {foundItem.name}") + " that is a ", colored(f"{foundItem.itemType}\n", "red"))
+            print(colored(f"\nYou found a {foundItem.name}") + " that is a ", colored(f"{foundItem.itemType}\n\n", "red"))
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
@@ -148,13 +148,14 @@ class Inventory():
                 keybinds_string = f" [1-6] Replace an item in your inventory"
             keybinds_string += "\n[0] discard the item and move on"
             print(keybinds_string)
-
+            print("\n"*2 + PrintCharStats())
             key = Input()
             #väntar på en valid input
             while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
                 if key == "i":
                     PrintInventory()
-                key = Input()
+                    break
+                pass
             break
             
         if key == "0":
@@ -346,7 +347,7 @@ def Main():
             doorSet[i-1] = ( RND.randint(0,3) )
             screen1 += '\n'*2 + f"[{i}]" + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
  
-        print(screen1 + "\n"*3 + PrintCharStats(False))
+        print(screen1 + "\n"*3 + PrintCharStats())
         
         key = ''
         while key not in ["i", 'r', 'q', '1', '2', '3']:
@@ -386,6 +387,7 @@ def PrintInventory():
     print(inventoryString)
     while keyboard.read_key() != 'q':
         pass
+    return
 
 def PrintCharStats():
     global canAct
