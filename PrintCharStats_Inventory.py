@@ -296,6 +296,7 @@ def Treasure(element):
     player.inventory.PickUpItem(foundItem)
     os.system("cls")
     print(encounterDictionary[element][0][2] + "\n")
+    Input()
 
 
 
@@ -303,13 +304,13 @@ def Treasure(element):
 def Trap(element):
     print('you encoundered a trap')
     Input()
-    os.system("cls")
+    os.system('cls')
 
 
 def Main():
     
     while(True):
-        #os.system('cls')
+        os.system('cls')
         
         screen1 = f"In the next room you see three doors"
 
