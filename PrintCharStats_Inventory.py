@@ -311,7 +311,7 @@ def Trap(element):
 def Main():
     
     while(True):
-        #os.system('cls')
+        os.system('cls')
         
         screen1 = f"In the next room you see three doors"
 
