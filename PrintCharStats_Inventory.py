@@ -11,8 +11,8 @@ difficulty = 1
 
 screen1 = ""
 doorSet = [0, 0, 0]
-isCombat = False
-isTresure = False
+global canAct 
+canAct = False
 
 
 doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", "red"), colored(" Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", "red"), colored(" Den tredje dörren verkar vara gjord utav kol.", "red")], 
@@ -55,6 +55,9 @@ class Monster():
         self.enterDesc = enterDesc
         self.attackMoveDesc = attackMoveDesc        
         self.deathDesc = deathDesc
+
+
+    
 
 # self: ett visst item. Används troligen inte utanför klassen
 # name: Monstrets namn. Används för intro descriptions etcetc
@@ -254,9 +257,10 @@ def Enter(difficultyIndex):
             Main()
 
 def Combat(element):
+    global canAct
+    canAct = True
     os.system('cls')
     print("this is combat") #temp
-    isCombat = True
     # Grams stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
 
     try:
@@ -267,6 +271,8 @@ def Combat(element):
 
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
+
+
     while (encounteredMonster.health > 0 and player.health > 0):
         print(encounteredMonster.enterDesc)
 
@@ -275,18 +281,32 @@ def Combat(element):
             key = Input()
         
         usedItem = player.inventory.items[int(key) - 1]
-
-        print(f"Du använde {usedItem.name}!")
-
+        print(f"You used {usedItem.name}!")
         usedItem.CombatActive(encounteredMonster)
 
+        attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
+
+        print(encounteredMonster.attackMoveDesc[attackIndex])
+
+        damage = encounteredMonster.strength
+
+        for i in player.elements[0]:
+            if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
+                damage *= 2
+
+        for i in monster.elements[1]:
+            if monster.elements[0][i] in self.elements:
+                damage /= 2        
+
+
+
+
+        
+    
         
 
-        pass
 
 
-
-        isCombat = False
     Input()
 
 
@@ -354,7 +374,8 @@ def Main():
 def PrintInventory():
     pass
 
-def PrintCharStats(canAct):
+def PrintCharStats():
+    global canAct
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
     itemNames = []
 
