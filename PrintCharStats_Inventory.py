@@ -133,14 +133,16 @@ class Inventory():
 
     
     def PickUpItem(self, foundItem:Item):
-        print(f"you found a {foundItem.name}")
-        print(PrintCharStats(True)) #ska byttas ut till att printa inventoryt med all data när den delen av funktionen är klar!
+
+        print(f"\nYou found a {foundItem.name} \n")
+        
         if len(player.inventory.items) < 6:
-            keybinds_string = f"[1-{len(player.inventory.items)+1}] Add the item to your inventory"
+            keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
         else:
-            keybinds_string = f" [1-6] press the index of an item in your iventory to replace it with the new item"
-        keybinds_string += "\n[0] to just discard the item and move on"
+            keybinds_string = f" [1-6] Replace an item in your inventory"
+        keybinds_string += "\n[0] discard the item and move on"
         print(keybinds_string)
+
         key = Input()
         #väntar på en valid input
         while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
@@ -161,9 +163,9 @@ class Inventory():
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
 
 itemDictionary = {
-    0: [["Fire resistens potion", 0, 1, 0, True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
-    1: [["Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["iqce item place holder2", 2, 1, 1, False, "weapon", [], []]],
-    2: [["Wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
+    0: [["a fire resistance potion", 0, 1, [], True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
+    1: [["<>Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["ice item place holder2", 2, 1, 1, False, "weapon", [], []]],
+    2: [["a wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
     3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
 }  
     
@@ -178,22 +180,22 @@ itemDictionary = {
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = {
-    0: [["the lava pool", " place holder enter disc", "place holder exit disc"], 
+    0: [["the lava pool", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE FIRE SLIME", 1, 6, [[], [], []], "En slemmig, sfärisk varelse som dessutom brinner står framför dig!", "Monstret hoppar in i dig! Lyckligtvis så skadar inte dens kropp dig. Dock gör lågorna det.", "Lågorna på monstret slocknar, och det stelnar till och blir orörligt."], 
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["dragon"], 0, 0, [[], [], []], "", "", ""],
-    1: [["place holder tresure", " place holder enter disc", "place holder exit disc"], 
+    1: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE MAD SNOWMAN", 4, 3, [[], [], []], "En snögubbe står framför dig! Han verkar dock inte glad att se dig.", "Snögubben kastar en snöboll på dig! Det skadar dig inte, men dock så gör kniven han kör in i din arm det.", "Snögubbens huvud och faller till marken, och ingen mer rörelse händer."], 
         ["THE FROZEN SPIRIT", 0, 0, [[], [], []], "", "", ""], 
         ["THE GLACIER GOLEM"], 0, 0, [[], [], []], "", "", ""],
-    2: [["place holder tresure", " place holder enter disc", "place holder exit disc"], 
+    2: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
-    3: [["Teacher desk drawer", " You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
+    3: [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
         [""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
         ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
@@ -288,7 +290,6 @@ def Combat(element):
 
 def Treasure(element):
     os.system("cls")
-    isTresure = True
     print(encounterDictionary[element][0][1])
     
     ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
@@ -302,9 +303,9 @@ def Treasure(element):
 
 
 def Trap(element):
-    print('you encoundered a trap')
-    Input()
     os.system('cls')
+    print('you encoundered a trap.')
+    Input()
 
 
 def Main():
