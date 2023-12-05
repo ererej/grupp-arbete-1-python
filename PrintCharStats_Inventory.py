@@ -164,8 +164,7 @@ class Inventory():
             return
         
 
-#the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
-#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
+
 
 itemDictionary = {
     0: [["a fire resistance potion", 0, 1, [], True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
@@ -173,7 +172,8 @@ itemDictionary = {
     2: [["a wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
     3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
 }  
-    
+#the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
+#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 
