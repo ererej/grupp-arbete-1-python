@@ -197,7 +197,7 @@ encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holde
         [""], 
         ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go closer to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
-        ["THE GLACIER GOLEM"], 12, 10, [[], [], []], "", "", ""],
+        ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
         [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
