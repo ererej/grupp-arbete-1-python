@@ -183,29 +183,27 @@ itemDictionary = {
 # Monster finns på horizontal index 2-4.
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
-
-encounterDictionary = {
-    0: [["the lava pool", "placeholder enter disc", "place holder exit disc"], 
+CONST_VALUE = 7
+encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
-        ["DASTARDLY IMP", 0, 0, [[weak], [resist], [dmg tyhp]], "", "", ""], 
+        ["DASTARDLY IMP", 0, 0, [[""], [""], [""]], "", "", ""], 
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
-    1: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
+        [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go closer to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 8, 5, [[], [], ["psy","frost"]], "", "", ""], 
         ["THE GLACIER GOLEM"], 12, 10, [[], [], []], "", "", ""],
-    2: [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
+        [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""],
         ["", 0, 0, [[], [], []], "", "", ""], 
         ["THE THOUSAND-PIERCED BEAR", 0, 0, [[], [], []], "", "", ""]],
-    3: [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
+        [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
         [""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
         ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
-        ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]
-}
+        ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]]
 
 
 def Input():
