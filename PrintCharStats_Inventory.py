@@ -99,10 +99,6 @@ class Item():
 
     def CombatActive(self, monster: Monster):
 
-        
-        if self.consumable == True:
-            self.ItemDrop()
-
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
 
@@ -123,6 +119,9 @@ class Item():
 
         if self.itemType == "boost":
             player.elements[1].append()
+
+        if self.consumable == True:
+            self.ItemDrop()
 
 
 
