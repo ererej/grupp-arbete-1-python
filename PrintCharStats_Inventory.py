@@ -168,8 +168,7 @@ class Inventory():
             return
         
 
-#the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
-#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes
+
 
 itemDictionary = {
     0: [[colored("a fire resistance potion", "red"), 0, 1, [], True, "boost", [], []], [colored("Fire item place holder2", "red"), 2, 1, 0, False, "weapon", [], []]],
@@ -177,7 +176,8 @@ itemDictionary = {
     2: [[colored("a wooden sword", "dark_grey"), 2, 0, 2, False, "weapon", [], []], [colored("knight item place holder2", "dark_grey"), 2, 1, 2, False, "weapon", [], []]],
     3: [[colored("Exam awnser key", "yellow"), 2, 1, 3, True, "weapon", [], []], [colored("teacher item place holder", "yellow"), 2, 1, 3, False, "weapon", [], []]],
 }  
-    
+#the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
+#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 
@@ -187,7 +187,7 @@ itemDictionary = {
 # Monster finns på horizontal index 2-4.
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
-CONST_VALUE = 7
+
 encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holder exit disc"], 
         [""], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
