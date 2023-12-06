@@ -19,10 +19,10 @@ ELEMENT_RESISTANCE = 1
 ELEMENT_ATTACK_TYPE = 2
 
 
-doorDescriptions = [[colored(" Istället för ett vanligt handtag så har den första dörren en enorm tändsticka som handtag.", "red"), colored(" Den andra dörren verkar långsamt bli mindre, som om den försvinner på samma sätt trä försvinner när det brinner.", "red"), colored(" Den tredje dörren verkar vara gjord utav kol.", "red")], 
-[colored(" En stor istapp hänger från den första dörrens handtag.", "light_cyan"), colored(" Den andra dörren ser exakt ut som en snöflinga.", "light_cyan"), colored(" Den tredje dörren verkar vara gjord av is.", "light_cyan")], 
-[colored(" Den första dörren verkar ha en dolk istället för ett handtag, bäst att inte ta i den vassa delen.", "dark_grey"), colored(" Den andra dörren har formen av en upp-och-ner vänd sköld.", "dark_grey"), colored(" Den tredje dörrens utsida verkar se ut som man smälte ihop en stor mängd olika vapen.", "dark_grey")], 
-[colored(" The first door has a ruller as the doorhandel", "yellow"), colored(" Behind the secound door you hear the faint buzzing of a procjector", "yellow"), colored(" Den tredje dörren ser ut att vara gjord linjaler, pennor och sudd.", "yellow")]]
+doorDescriptions = [[colored(" Instead of having a regular doorhandle, the door has a lighter instead.", "red"), colored(" The door seems to be slowly vanishing, like the way wood dissapears when it's burning", "red"), colored(" The third door seems to be made out of coal.", "red")], 
+[colored(" A large icicle is hanging from the doorknob of this door.", "light_cyan"), colored(" The door has the shape of a snowflake.", "light_cyan"), colored(" This door seems to be made entirely of ice.", "light_cyan")], 
+[colored(" The door handle seems to have been crudely replaced with a dagger, don't touch the sharp end.", "dark_grey"), colored(" The door seems to have the shape of a shield flipped upside-down.", "dark_grey"), colored(" The door seems to have been made out weapons that were hastely melted down, since you can still tell the door was made out of weapon metal.", "dark_grey")], 
+[colored(" The first door has a ruler as a doorhandle.", "yellow"), colored(" Behind the second door you hear the faint buzzing of a projector.", "yellow"), colored(" The materials used to make this door seems to have been the following: Pens, erasers and rulers.", "yellow")]]
 
 
     
