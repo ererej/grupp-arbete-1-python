@@ -309,9 +309,6 @@ def Enter(difficultyIndex):
 def Combat(element):
     global canAct
     canAct = True
-    os.system('cls')
-    print("this is combat") #temp
-
 
     # Grabs stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
     try:
@@ -325,6 +322,7 @@ def Combat(element):
 
 
     while (encounteredMonster.health > 0 and player.health > 0):
+        os.system('cls')
         print(encounteredMonster.enterDesc + "\n"*2 + "Use an item in your inventory to combat the shit out of it!\n")
 
         print(PrintCharStats())
