@@ -132,11 +132,11 @@ class Item():
             # 
             damage: float = player.strength
 
-            for i in range(0, len(monster.elements[ELEMENT_WEAKNESS])):
+            for i in range(0, len(monster.elements[ELEMENT_WEAKNESS]) - 1):
                 if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
                     damage *= 2
 
-            for i in range(0, len(monster.elements[ELEMENT_RESISTANCE])):
+            for i in range(0, len(monster.elements[ELEMENT_RESISTANCE]) - 1):
                 if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
@@ -339,7 +339,7 @@ def Treasure(element):
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
     player.inventory.PickUpItem(foundItem)
 
-    print(encounterDictionary[element][1][1] + "\n"*2 + "Press any key to continue!")
+    print(encounterDictionary[element][0][1] + "\n"*2 + "Press any key to continue!")
     Input()
 
 
