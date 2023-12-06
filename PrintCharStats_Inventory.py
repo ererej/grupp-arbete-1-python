@@ -156,12 +156,16 @@ class Inventory():
             print("\n"*2 + PrintCharStats())
             key = Input()
             #väntar på en valid input
-            while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
+            try:
+                if len(player.inventory.items) == 6:
+                    if int(key) < len(player.inventory.items):
+                        break
+                if int(key) <= len(player.inventory.items)+1:
+                    break
+            except:
                 if key == "i":
                     PrintInventory()
-                    break
                 pass
-            break
             
         if key == "0":
             return
@@ -169,18 +173,17 @@ class Inventory():
             self.items[int(key)-1].ItemDrop()
             foundItem.ItemPickup # kanske ska lägga till att den lägger till det nya itemet i samma slot 
             return
-        if int(key) in range(1, len(player.inventory.items)+1):
-            foundItem.ItemPickup() 
-            return
+        foundItem.ItemPickup() 
+        return
         
 
 
 
 itemDictionary = {
-    0: [[colored("a fire resistance potion", "red"), 0, 1, [], True, "boost", [], []], [colored("Fire item place holder2", "red"), 2, 1, 0, False, "weapon", [], []]],
-    1: [[colored("Ice item place holder1", "light_cyan"), 2, 1, 1, False, "weapon", [], []], [colored("ice item place holder2", "light_cyan"), 2, 1, 1, False, "weapon", [], []]],
-    2: [[colored("a wooden sword", "dark_grey"), 2, 0, 2, False, "weapon", [], []], [colored("knight item place holder2", "dark_grey"), 2, 1, 2, False, "weapon", [], []]],
-    3: [[colored("Exam awnser key", "yellow"), 2, 1, 3, True, "weapon", [], []], [colored("teacher item place holder", "yellow"), 2, 1, 3, False, "weapon", [], []]],
+    0: [["a fire resistance potion", 0, 1, [], True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
+    1: [["Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["ice item place holder2", 2, 1, 1, False, "weapon", [], []]],
+    2: [["a wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
+    3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
 }  
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
@@ -195,7 +198,7 @@ itemDictionary = {
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
 encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holder exit disc"], 
-        [""], 
+        ["Fire trap", "As you enter the room you here mechanical sounds from the walls before getting enveloped by fire", "You quickly leave the room to avoid taking more damage"], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
         ["DASTARDLY IMP", 6, 8, [["phys"], ["fire"], ["fire","psy"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
@@ -302,13 +305,13 @@ def Combat(element):
 
         damage = encounteredMonster.strength
 
-        for i in player.elements[]:
-            if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
-                damage *= 2
+        #for i in player.elements[]:
+            #if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
+                #damage *= 2
 
-        for i in monster.elements[1]:
-            if monster.elements[0][i] in self.elements:
-                damage /= 2        
+        #for i in monster.elements[1]:
+            #if monster.elements[0][i] in self.elements:
+                #damage /= 2        
 
 
 
@@ -330,7 +333,7 @@ def Treasure(element):
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
     player.inventory.PickUpItem(foundItem)
     os.system("cls")
-    print(encounterDictionary[element][0][2] + "\n")
+    print(encounterDictionary[element][0][2] + "\n"*2 + "Press any key to continue!")
     Input()
 
 
@@ -338,7 +341,13 @@ def Treasure(element):
 
 def Trap(element):
     os.system('cls')
-    print('you encoundered a trap.')
+    print(encounterDictionary[element][1][1])
+    damageTaken = RND.randint(1, 2)
+    player.health -= damageTaken
+    print(f"You took {damageTaken}damage")
+    if player.health <= 0:
+        pass #game over screen?
+    print(encounterDictionary[element][1][2])
     Input()
 
 
@@ -431,7 +440,7 @@ def PrintCharStats():
     return charStats
         
 
-player = Player(7, 10, 4)
-Item("Wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
+player = Player()
+Item("a wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
 
 Enter(difficultyIndex)
