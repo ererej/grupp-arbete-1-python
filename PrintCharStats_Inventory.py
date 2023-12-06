@@ -143,23 +143,30 @@ class Inventory():
 
     
     def PickUpItem(self, foundItem:Item):
-        while True:
+        hasntActed = True
+        while hasntActed:
             os.system("cls")
-            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}\n", "red") + "-type item")
+            print(f"\nYou found {foundItem.name}" + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
             else:
                 keybinds_string = f" [1-6] Replace an item in your inventory"
             keybinds_string += "\n[0] discard the item and move on"
+
             print(keybinds_string)
             print("\n"*2 + PrintCharStats())
+
+            
             key = Input()
-            #väntar på en valid input
+            #väntar på en valid input. int(key) kommer inte köras om det är en annan input än 0 - 6.
             while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
-                if key == "i":
+                if key == 'i':
                     PrintInventory()
+                elif key == '0':
                     break
+                elif key in []:
+                    pass
                 
             break
             
@@ -326,12 +333,11 @@ def Combat(element):
 
 def Treasure(element):
     os.system("cls")
-    print(encounterDictionary[element][0][1])
-    
+
     ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
     player.inventory.PickUpItem(foundItem)
-    os.system("cls")
+
     print(encounterDictionary[element][0][2] + "\n")
     Input()
 
@@ -433,7 +439,7 @@ def PrintCharStats():
     return charStats
         
 
-player = Player(7, 10, 4)
+player = Player()
 Item("Wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
 
 Enter(difficultyIndex)
