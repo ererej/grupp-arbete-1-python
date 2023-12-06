@@ -80,6 +80,8 @@ class Monster():
 
         player.health -= damage
 
+        print("\nYou sustain " + str(damage) + " damage.")
+
 
     
 
@@ -127,6 +129,8 @@ class Item():
 
     def CombatActive(self, monster: Monster):
 
+        print("You used " + self.name + "!")
+
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
             # 
@@ -141,15 +145,18 @@ class Item():
                     damage /= 2
             
             monster.health -= math.ceil(damage * self.power)
+            print("Your opponent sustained " + str(damage) + " damage!")
         
         if self.itemType == "health potion":
             # gives the player HP
             player.health += self.power
+            print(f"You restored {self.power} health!")
 
         if self.itemType == "resistance-giver":
             # gives the player ALL resistances in the "resistancePotEffects" list
             for i in self.resistancePotEffects:
                 player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
+            print("You gained some magical resistances!")
 
         if self.consumable == True:
             self.ItemDrop()
@@ -164,17 +171,18 @@ class Inventory():
 
     
     def PickUpItem(self, foundItem:Item, element):
+
         while True:
             os.system("cls")
             global canAct
             canAct = True
-            print(colored(encounterDictionary[element][0][0]))
+            print(colored(encounterList[element][0][0]))
             print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
             if len(player.inventory.items) < 6:
-                print(f"[E] Add the item to your inventory")
+                keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
             else:
                 print("\nPress the index of an item in your inventory to replace it with the new item")
-            print("\n[q] discard the item and move on")
+            print("\n[Q] discard the item and move on")
             print("\n[I] to open inventory")
             print("\n"*2 + PrintCharStats())
             key = Input()
@@ -192,16 +200,14 @@ class Inventory():
             except:
                 pass
             
-        if key == "q":
+        if key == "0":
             return
         if len(player.inventory.items) == 6:
 
             self.items[int(key) - 1].ItemDrop()
             foundItem.ItemPickup() # kanske ska lägga till att den lägger till det nya itemet i samma slot 
-            canAct = False
             return
         foundItem.ItemPickup() 
-        canAct = False
         return
         
 # element types: fire, frost, phys (physical), psy (psionic)
@@ -210,12 +216,12 @@ class Inventory():
 # "true" item types: pendant, weapon, healing potion, resistance potion
 # weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
 
-itemDictionary = [
+itemList = [
     [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"]], 
      ["the blade of infinite infernal power", 2, 2, ["fire", "phys"], False, "weapon", 2.5, []]],
     [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, []], 
      ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "health potion", 2, []]],
-    [["a wooden sword", 0.5, 0, ["phys"], False, "weapon", 1, []], 
+    [["a wooden sword", 0.5, 0, ["phys"], False, "weapon", 0.75, []], 
      ["the gauntlets of strength", 3, 1, 2, False, "weapon", [], []]],
     [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
      ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
@@ -234,7 +240,7 @@ itemDictionary = [
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
-encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #The lava pit 
+encounterList = [[["placeholder enter disc", "place holder exit disc"], #The lava pit 
         ["As you enter a long corridor, you hear mechanical sounds coming from within the walls. The door locks behind you. Before you can react, you are ENVELOPED IN FIRE", "You sprint through the flames and exit this trapped room."], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
         ["DASTARDLY IMP", 6, 8, [["phys"], ["fire"], ["fire","psy"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
@@ -311,10 +317,10 @@ def Combat(element):
 
     # Grabs stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
     try:
-        MStats : list = list(encounterDictionary[element])[RND.randint(2, math.floor((player.level / 10) * (len(encounterDictionary[element]) - 2)))]
+        MStats : list = list(encounterList[element])[RND.randint(2, math.floor((player.level / 10) * (len(encounterList[element]) - 2)))]
     except:
         # If the player has not yet reached the level 2 monster, it will simply grab the lvl 1 monsters stats. This is because randint function does not accept two identical parameters.
-        MStats: list = list(encounterDictionary[element])[2]
+        MStats: list = list(encounterList[element])[2]
 
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
@@ -330,27 +336,29 @@ def Combat(element):
             key = Input()
         
         usedItem = player.inventory.items[int(key) - 1]
-        print(f"You used {usedItem.name}!\n")
         usedItem.CombatActive(encounteredMonster)
 
 
         if encounteredMonster.health > 0:
             encounteredMonster.CombatActive()
 
-        print("\nPress any key to continue")
-        Input()
+    if player.health > 0:
+        print(encounteredMonster.name + " has fallen. You emerge victorious..." + "\n"*2 + "...For now.")
+    else:
+        print(encounteredMonster.name + " has slain you! Your fighting was futile! To no avail! Pointless!")
 
+    print("\nPress any key to continue")
 
     Input()
 
 
 def Treasure(element):
     os.system("cls")
-    ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
+    ItemStats: list = list(itemList[element])[RND.randint(0, len(itemList[element])-1)]
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
     player.inventory.PickUpItem(foundItem, element)
 
-    print(encounterDictionary[element][0][1] + "\n"*2 + "Press any key to continue!")
+    print(encounterList[element][0][1] + "\n"*2 + "Press any key to continue!")
     Input()
 
 
@@ -358,7 +366,7 @@ def Treasure(element):
 
 def Trap(element):
     os.system('cls')
-    print(encounterDictionary[element][1][0])
+    print(encounterList[element][1][0])
 
     if element == 3:
         player.elements[1] = []
@@ -376,10 +384,10 @@ def Trap(element):
 
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
-    print(f"You took {damageTaken} damage")
+    print(f"\nYou took {damageTaken} damage")
     if player.health <= 0:
         pass #game over screen?
-    print(encounterDictionary[element][1][1])
+    print(encounterList[element][1][1])
     print("Press any key to continue!")
     Input()
 
