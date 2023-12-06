@@ -60,6 +60,26 @@ class Monster():
         self.attackMoveDesc = attackMoveDesc        
         self.deathDesc = deathDesc
 
+    def CombatActive(self):
+        try:
+            attackIndex = RND.randint(0, len(self.attackMoveDesc) - 1)
+        except:
+            attackIndex = 0
+
+        print(self.attackMoveDesc[attackIndex])
+
+        damage = self.strength
+
+        for i in player.elements[ELEMENT_WEAKNESS]:
+            if player.elements[ELEMENT_WEAKNESS][i] == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
+                damage *= 2
+
+        for i in player.elements[ELEMENT_RESISTANCE]:
+            if player.elements[ELEMENT_RESISTANCE][i] == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
+                damage /= 2
+
+        player.health -= damage
+
 
     
 
@@ -105,12 +125,11 @@ class Item():
 
         player.inventory.items.remove(self)
 
-
     def CombatActive(self, monster: Monster):
 
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
-
+            # 
             damage: float = player.strength
 
             for i in monster.elements[ELEMENT_WEAKNESS]:
@@ -124,9 +143,11 @@ class Item():
             monster.health -= math.ceil(damage * self.power)
         
         if self.itemType == "health potion":
+            # gives the player HP
             player.health += self.power
 
         if self.itemType == "resistance-giver":
+            # gives the player ALL resistances in the "resistancePotEffects" list
             for i in self.resistancePotEffects:
                 player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
 
@@ -160,7 +181,7 @@ class Inventory():
                 if len(player.inventory.items) == 6:
                     if int(key) < len(player.inventory.items):
                         break
-                if int(key) <= len(player.inventory.items)+1:
+                if int(key) <= len(player.inventory.items) + 1:
                     break
             except:
                 if key == "i":
@@ -170,8 +191,9 @@ class Inventory():
         if key == "0":
             return
         if len(player.inventory.items) == 6:
-            self.items[int(key)-1].ItemDrop()
-            foundItem.ItemPickup # kanske ska lägga till att den lägger till det nya itemet i samma slot 
+
+            self.items[int(key) - 1].ItemDrop()
+            foundItem.ItemPickup() # kanske ska lägga till att den lägger till det nya itemet i samma slot 
             return
         foundItem.ItemPickup() 
         return
@@ -274,8 +296,9 @@ def Combat(element):
     canAct = True
     os.system('cls')
     print("this is combat") #temp
-    # Grams stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
 
+
+    # Grabs stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
     try:
         MStats : list = list(encounterDictionary[element])[RND.randint(2, math.floor((player.level / 10) * (len(encounterDictionary[element]) - 2)))]
     except:
@@ -296,32 +319,10 @@ def Combat(element):
         usedItem = player.inventory.items[int(key) - 1]
         print(f"You used {usedItem.name}!")
         usedItem.CombatActive(encounteredMonster)
-        try:
-            attackIndex = RND.randint(0, len(encounteredMonster.attackMoveDesc) - 1)
-        except:
-            attackIndex = 0
-
-        print(encounteredMonster.attackMoveDesc[attackIndex])
-
-        damage = encounteredMonster.strength
-
-        for i in player.elements[ELEMENT_WEAKNESS]:
-            if player.elements[ELEMENT_WEAKNESS][i] in encounteredMonster.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
-                damage *= 2
-
-        for i in player.elements[ELEMENT_RESISTANCE]:
-            if player.elements[ELEMENT_RESISTANCE][i] in encounteredMonster.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
-                damage /= 2
-
-        player.health -= damage
 
 
-
-
-        
-    
-        
-
+        if encounteredMonster.health > 0:
+            encounteredMonster.CombatActive()
 
 
     Input()
