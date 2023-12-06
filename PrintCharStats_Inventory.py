@@ -33,7 +33,7 @@ class Player():
         #innehåller all data om spelaren.
         self.level = 1
         self.exp = 0
-        self.expRequirement = 2
+        self.expRequirement = 3
         self.maxhealth = 10
         self.health = 10
         self.strength = 3
@@ -323,10 +323,15 @@ def Combat(element):
     encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
 
-
+    monsterStartHealth = encounteredMonster.health
     while (encounteredMonster.health > 0 and player.health > 0):
         os.system('cls')
-        print(encounteredMonster.enterDesc + "\n"*2 + "Use an item in your inventory to combat the shit out of it!\n")
+        print(encounteredMonster.enterDesc + "\n"*2)
+
+        if encounteredMonster.health == monsterStartHealth:
+            print("Use an item in your inventory to combat the sh*t out of that sorry sack of sob")
+        else:
+            print("The enemy has sustained a total of " + str(monsterStartHealth - encounteredMonster.health) + " damage.")
 
         print(PrintCharStats(True))
         key = Input()
