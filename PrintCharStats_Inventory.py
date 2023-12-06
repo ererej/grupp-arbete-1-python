@@ -166,7 +166,7 @@ class Inventory():
     def PickUpItem(self, foundItem:Item):
         while True:
             os.system("cls")
-            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}\n", "red") + "-type item")
+            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
