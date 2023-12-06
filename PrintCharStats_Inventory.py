@@ -11,8 +11,6 @@ difficulty = 1
 
 screen1 = ""
 doorSet = [0, 0, 0]
-global canAct 
-canAct = False
 
 ELEMENT_WEAKNESS = 0
 ELEMENT_RESISTANCE = 1
@@ -35,7 +33,7 @@ class Player():
         #innehåller all data om spelaren.
         self.level = 1
         self.exp = 0
-        self.exp
+        self.expRequirement = 2
         self.maxhealth = 10
         self.health = 10
         self.strength = 3
@@ -78,9 +76,10 @@ class Monster():
             if player.elements[ELEMENT_RESISTANCE][i] == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
                 damage /= 2
 
-        player.health -= damage
+        player.health -= math.floor(damage)
 
-        print(colored("\nYou sustain " + str(damage) + " damage.", "on_light_red") + " [any] to continue")
+        print(colored("\nYou sustain " + str(damage) + " damage.", "red") + "\nPress [any] to continue")
+        Input()
 
 
     
@@ -134,7 +133,7 @@ class Item():
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
             # 
-            damage: float = player.strength
+            damage = float(player.strength)
 
             for i in range(0, len(monster.elements[ELEMENT_WEAKNESS]) - 1):
                 if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
@@ -144,8 +143,8 @@ class Item():
                 if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
-            monster.health -= math.ceil(damage * self.power)
-            print("Your opponent sustained " + str(damage) + " damage!")
+            monster.health -= math.floor(damage * self.power)
+            print("Your opponent sustained " + str(math.floor(damage * self.power)) + " damage!")
         
         if self.itemType == "rejuveration":
             # gives the player HP
@@ -184,7 +183,7 @@ class Inventory():
                 print("\nPress the index of an item in your inventory to replace it with the new item")
             print("\n[Q] discard the item and move on")
             print("\n[I] to open inventory")
-            print("\n"*2 + PrintCharStats())
+            print("\n"*2 + PrintCharStats(True))
             key = Input()
             #väntar på en valid input
             if key == "q" or key == "e":
@@ -213,7 +212,7 @@ class Inventory():
 # element types: fire, frost, phys (physical), psy (psionic)
 # name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list
 
-# "true" item types: pendant, weapon, healing potion, resistance potion
+# "true" item types: stat stick, weapon, healing potion, resistance potion
 # weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
 
 itemList = [
@@ -225,7 +224,7 @@ itemList = [
      ["the gauntlets of strength", 3, 1, ["phys"], False, "weapon", 0.5, []]],
     [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
      ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
-#the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
+
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
@@ -233,12 +232,11 @@ itemList = [
 # Tresures are on horizontal index 0
 # Tresures have 3 paramiters: Name(idk why but why not (deleate it later if i dont need it)), enter_discription, exit_discription 
 
-#traps are horizontal index 1
-#traps have 2 paramiters: enterdisc, exitdisc
+# traps are horizontal index 1
+# traps have 2 paramiters: enterdisc, exitdisc
 
 # Monster finns på horizontal index 2-4.
-# Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
-# Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
+# monsterName, strength, health, elements: list[list[str]], enterDesc, attackMoveDesc, deathDesc
 
 encounterList = [[["placeholder enter disc", "place holder exit disc"], #The lava pit 
         ["As you enter a long corridor, you hear mechanical sounds coming from within the walls. The door locks behind you. Before you can react, you are ENVELOPED IN FIRE", "You sprint through the flames and exit this trapped room."], 
@@ -247,7 +245,7 @@ encounterList = [[["placeholder enter disc", "place holder exit disc"], #The lav
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
         [["placeholder enter disc", "place holder exit disc"], 
         ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
-        ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
+        ["THE MAD SNOWMAN", 4, 4, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
         ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
         [["placeholder enter disc", "place holder exit disc"], 
@@ -330,7 +328,7 @@ def Combat(element):
         os.system('cls')
         print(encounteredMonster.enterDesc + "\n"*2 + "Use an item in your inventory to combat the shit out of it!\n")
 
-        print(PrintCharStats())
+        print(PrintCharStats(True))
         key = Input()
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
@@ -343,6 +341,9 @@ def Combat(element):
             encounteredMonster.CombatActive()
 
     if player.health > 0:
+
+        player.exp += encounteredMonster.strength
+
         print(encounteredMonster.name + " has fallen, and you emerge victorious..." + "\n"*2 + "...For now.\n")
     else:
         print(encounteredMonster.name + " has slain you! Your fighting was to no avail! Futile! Pointless!")
@@ -379,7 +380,7 @@ def Trap(element):
 
     if element == 0:
         killedItem = player.inventory.items[RND.randint(0, len(player.inventory.items) - 1)]
-        print("\n"*2 + killedItem.name + " has been destroyed.")
+        print("\n"*2 + killedItem.name + " in your inventory has been destroyed.")
         killedItem.ItemDrop()
 
     damageTaken = RND.randint(1, 2)
@@ -397,6 +398,16 @@ def Main():
     while(True):
         os.system('cls')
         
+        if player.health > player.maxhealth:
+            player.health = player.maxhealth
+
+        while player.exp >= player.expRequirement:
+            player.exp -= player.expRequirement
+            player.level += 1
+            player.health += 2
+            player.expRequirement = math.floor(player.expRequirement * 1.3)
+
+
         screen1 = f"In the next room you see three doors"
 
         doorSet = [0, 0, 0]
@@ -404,7 +415,7 @@ def Main():
             doorSet[i-1] = ( RND.randint(0,3) )
             screen1 += '\n'*2 + f"[{i}]" + list( doorDescriptions[ doorSet[i-1] ] )[i - 1]
  
-        print(screen1 + "\n"*3 + PrintCharStats())
+        print(screen1 + "\n"*3 + PrintCharStats(False))
         
         key = ''
         while key not in ["i", 'r', '1', '2', '3']:
@@ -443,8 +454,7 @@ def PrintInventory():
         pass
     return
 
-def PrintCharStats():
-    global canAct
+def PrintCharStats(canAct:bool):
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
     itemNames = []
 
@@ -474,11 +484,11 @@ def PrintCharStats():
 
     for i in range(0, len(itemNames)):
         charStats += "╵──" + "─"*(len(itemNames[i]))
-    charStats += "╵"
+    charStats += "╵\n"
     return charStats
         
 
 player = Player()
-Item("a wooden sword", 0.5, 0, ["phys"], False, "weapon", 1, []).ItemPickup()
+Item("a wooden sword", 0.5, 0, ["phys"], False, "weapon", 0.7, []).ItemPickup()
 
 Enter(difficultyIndex)
