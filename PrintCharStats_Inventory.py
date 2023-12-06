@@ -143,33 +143,29 @@ class Inventory():
 
     
     def PickUpItem(self, foundItem:Item):
-        hasntActed = True
-        while hasntActed:
+        while True:
             os.system("cls")
-            print(f"\nYou found {foundItem.name}" + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
+            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}\n", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
             else:
                 keybinds_string = f" [1-6] Replace an item in your inventory"
             keybinds_string += "\n[0] discard the item and move on"
-
             print(keybinds_string)
             print("\n"*2 + PrintCharStats())
-
-            
             key = Input()
-            #väntar på en valid input. int(key) kommer inte köras om det är en annan input än 0 - 6.
-            while key not in ['0','1','2','3','4','5','6'] or int(key) > len(player.inventory.items)+1:
-                if key == 'i':
-                    PrintInventory()
-                elif key == '0':
+            #väntar på en valid input
+            try:
+                if len(player.inventory.items) == 6:
+                    if int(key) < len(player.inventory.items):
+                        break
+                if int(key) <= len(player.inventory.items)+1:
                     break
-                elif key in ['1','2','3','4','5','6']:
-                    pass
-                
-            break
-                
+            except:
+                if key == "i":
+                    PrintInventory()
+                pass
             
         if key == "0":
             return
