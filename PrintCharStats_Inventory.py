@@ -187,6 +187,8 @@ class Inventory():
             except:
                 if key == "i":
                     PrintInventory()
+                elif key == "r":
+                    PrintHelpMenu()
                 pass
             
         if key == "0":
@@ -223,22 +225,22 @@ itemDictionary = {
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
-encounterDictionary = [[["You enter the room. It contains a massive lava pit! A bridge goes over the pit and you decide to cross it. But when you've gone roughly half-way across the bridge, you spot a useful item.", "You continue crossing the bridge, and you make it to the other side safe and sound."], #The lava pit 
-        ["As you enter the room you hear mechanical sounds coming from the walls before you get enveloped by fire", "You quickly leave the room to avoid burning up."], 
+encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #The lava pit 
+        ["Fire trap", "As you enter the room you hear mechanical sounds coming from the walls before you get enveloped by fire", "You quickly leave the room to avoid burning up."], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
         ["DASTARDLY IMP", 6, 8, [["phys"], ["fire"], ["fire","psy"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
-        [["You enter the room and see a valuable item on the frozen ground!", "You leave the treasure room."], 
+        [["placeholder enter disc", "place holder exit disc"], 
         ["Entering the room, you don't see anything. Then the moment you look up and see a bunch of very sharp icicles, the room starts shaking and the icicles start falling onto you!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
         ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
         ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
-        [["You enter a large armoury! Unfortunatly, almost everything appears to be broken or unusable. Fortunatly 'almost everything' does not mean 100%, and there is something there you can use. ", "You leave the abandoned armoury"], 
+        [["placeholder enter disc", "place holder exit disc"], 
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
         ["THE DESERTER", 3, 7, [["psy"], ["phys"], ["phys","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
         ["THE RIDER IN THE DARK", 2, 25, [["frost"], ["psy"], ["phys","psy"]], "You enter a dimly-lit room. Standing infront of you seems to be a person riding a horse. You aren't to sure of its intentions, but best to attempt to kill it.", ["The rider attacks you with a spear! Or does it? It does not hurt that much...","The rider messes with your mind... in some unknown way. You are not entirely sure what he did, but you don't feel as healthy as before"], "The rider... disapears. It does not vanish, but at the same time it just... Well, it is dead, and you won, and that is what matters."], 
         ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["phys"], ["phys, phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
-        [["You enter the door   and find an empty classroom. You follow your natural instinct and start looting the teachers desk for useful items.", "You close the drawer and quickly run out of the classroom to not get caught red-handed."], 
+        [["You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for useful items.", "You close the drawer and quickly run out of the classroom to not get caught red-handed."], 
         ["The room does not seem to have anything in it, so you go decide to go forwards through the door at the other side of the room. But when you are half-way through it, it slams shut at lightning speed! Unfortunatly, you stood in the way.", "After you get up from the ground, you stagger your way to the door, open it and venture on."], 
         ["JESPER ENGELMARK", 3, 8, [["phys"], ["psy"], ["phys","psy"]], "", ["",""], ""], 
         ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["psy","psy"]], "", ["",""], ""], 
@@ -254,7 +256,7 @@ def Input():
 
 def PrintHelpMenu():
     os.system('cls')
-    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door")
+    print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door\n\nPress any key to return to where you where!")
     while keyboard.read_key() != 'q':
         pass
 
@@ -314,14 +316,15 @@ def Combat(element):
 
 
     while (encounteredMonster.health > 0 and player.health > 0):
-        print(encounteredMonster.enterDesc)
+        print(encounteredMonster.enterDesc + "\n"*2 + "Use an item in your inventory to combat the shit out of it!\n")
 
+        print(PrintCharStats())
         key = Input()
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
         
         usedItem = player.inventory.items[int(key) - 1]
-        print(f"You used {usedItem.name}!")
+        print(f"You used {usedItem.name}!\n")
         usedItem.CombatActive(encounteredMonster)
 
 
@@ -346,13 +349,14 @@ def Treasure(element):
 
 def Trap(element):
     os.system('cls')
-    print(encounterDictionary[element][1][0])
+    print(encounterDictionary[element][0][0])
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
     print(f"You took {damageTaken}damage")
     if player.health <= 0:
         pass #game over screen?
     print(encounterDictionary[element][1][1])
+    print("Press any key to continue!")
     Input()
 
 
@@ -371,7 +375,7 @@ def Main():
         print(screen1 + "\n"*3 + PrintCharStats())
         
         key = ''
-        while key not in ["i", 'r', 'q', '1', '2', '3']:
+        while key not in ["i", 'r', '1', '2', '3']:
             key = Input()
 
         if key == "r": 
@@ -379,9 +383,6 @@ def Main():
 
         if key == "i":
             PrintInventory()
-
-        if key == 'q':
-            break
 
         if key in ['1', '2', '3']:
             
