@@ -427,7 +427,7 @@ def PrintCharStats():
         if canAct:
             charStats += "╷" + "─"*math.floor(len(itemNames[i])/2) + f"[{i + 1}]" + "─"*math.ceil(len(itemNames[i])/2-1)
         else:
-            charStats += "^──" + "─"*len(itemNames[i])
+            charStats += "╷──" + "─"*len(itemNames[i])
 
 
 
