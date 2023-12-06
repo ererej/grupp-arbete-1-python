@@ -315,6 +315,7 @@ def Combat(element):
     while (encounteredMonster.health > 0 and player.health > 0):
         print(encounteredMonster.enterDesc + "\n"*2 + "Use an item in your inventory to combat the shit out of it!\n")
 
+        print(PrintCharStats())
         key = Input()
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
