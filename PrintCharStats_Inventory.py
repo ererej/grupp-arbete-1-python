@@ -205,15 +205,21 @@ class Inventory():
         canAct = False
         return
         
+# element types: fire, frost, phys (physical), psy (psionic)
+# name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list
 
+# "true" item types: pendant, weapon, healing potion, resistance potion
+# weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
 
-
-itemDictionary = {
-    0: [["a fire resistance potion", 0, 1, [], True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
-    1: [["Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["ice item place holder2", 2, 1, 1, False, "weapon", [], []]],
-    2: [["a wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
-    3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
-}  
+itemDictionary = [
+    [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"]], 
+     ["the blade of infinite infernal power", 2, 2, ["fire", "phys"], False, "weapon", 2.5, []]],
+    [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, []], 
+     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "health potion", 2, []]],
+    [["a wooden sword", 0.5, 0, ["phys"], False, "weapon", 1, []], 
+     ["the gauntlets of strength", 3, 1, 2, False, "weapon", [], []]],
+    [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
+     ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
 
