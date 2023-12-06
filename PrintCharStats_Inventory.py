@@ -200,26 +200,26 @@ itemDictionary = {
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
-encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #the lava pit
-        ["Fire trap", "As you enter the room you here mechanical sounds from the walls before getting enveloped by fire", "You quickly leave the room to avoid taking more damage"], 
+encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #The lava pit 
+        ["Fire trap", "As you enter the room you hear mechanical sounds coming from the walls before you get enveloped by fire", "You quickly leave the room to avoid burning up."], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
         ["DASTARDLY IMP", 6, 8, [["phys"], ["fire"], ["fire","psy"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
-        [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
+        [["placeholder enter disc", "place holder exit disc"], 
         ["", ""], 
-        ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go closer to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
+        ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
         ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
-        [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
+        [["placeholder enter disc", "place holder exit disc"], 
         ["", ""], 
-        ["THE DESERTER", 3, 7, [["psy"], ["phys"], ["phys","fire"]], "You spot a soldier infront of you! Judging by the fact he seems to be lacking a lot of equipment, he has likely deserted whatever army he once swore allegance to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
-        ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""], 
+        ["THE DESERTER", 3, 7, [["psy"], ["phys"], ["phys","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
+        ["THE RIDER IN THE DARK", 2, 25, [["frost"], ["psy"], ["phys","psy"]], "You enter a dimly-lit room. Standing infront of you seems to be a person riding a horse. You aren't to sure of its intentions, but best to attempt to kill it.", ["The rider attacks you with a spear! Or does it? It does not hurt that much...","The rider messes with your mind... in some unknown way. You are not entirely sure what he did, but you don't feel as healthy as before"], "The rider... disapears. It does not vanish, but at the same time it just... Well, it is dead, and you won, and that is what matters."], 
         ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["phys"], ["phys, phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
-        [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
+        [["You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for useful items.", "You close the drawer and quickly run out of the classroom to not get caught red-handed."], 
         ["", ""], 
-        ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
-        ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
-        ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]]
+        ["JESPER ENGELMARK", 3, 8, [["phys"], ["psy"], ["phys","psy"]], "", ["",""], ""], 
+        ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["psy","psy"]], "", ["",""], ""], 
+        ["MARTIN LOMAN", 12, 24, [["fire"], ["psy"], ["frost","psy"]], "", ["",""], ""]]]
 
 
 def Input():
