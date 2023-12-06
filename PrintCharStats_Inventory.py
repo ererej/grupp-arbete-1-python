@@ -132,11 +132,11 @@ class Item():
             # 
             damage: float = player.strength
 
-            for i in range(0, len(monster.elements[ELEMENT_WEAKNESS])):
+            for i in range(0, len(monster.elements[ELEMENT_WEAKNESS]) - 1):
                 if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
                     damage *= 2
 
-            for i in range(0, len(monster.elements[ELEMENT_RESISTANCE])):
+            for i in range(0, len(monster.elements[ELEMENT_RESISTANCE]) - 1):
                 if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
@@ -163,9 +163,10 @@ class Inventory():
 
 
     
-    def PickUpItem(self, foundItem:Item):
+    def PickUpItem(self, foundItem:Item, element):
         while True:
             os.system("cls")
+            print(encounterDictionary[element][0][0])
             print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
@@ -333,12 +334,11 @@ def Combat(element):
 
 def Treasure(element):
     os.system("cls")
-
     ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
-    player.inventory.PickUpItem(foundItem)
+    player.inventory.PickUpItem(foundItem, element)
 
-    print(encounterDictionary[element][0][2] + "\n"*2 + "Press any key to continue!")
+    print(encounterDictionary[element][0][1] + "\n"*2 + "Press any key to continue!")
     Input()
 
 
@@ -423,9 +423,9 @@ def PrintCharStats():
     for i in range(0, len(itemNames)):
 
         if canAct:
-            charStats += "^" + "─"*math.floor(len(itemNames[i])/2) + f"[{i + 1}]" + "─"*math.ceil(len(itemNames[i])/2-1)
+            charStats += "╷" + "─"*math.floor(len(itemNames[i])/2) + f"[{i + 1}]" + "─"*math.ceil(len(itemNames[i])/2-1)
         else:
-            charStats += "^──" + "─"*len(itemNames[i])
+            charStats += "╷──" + "─"*len(itemNames[i])
 
 
 
