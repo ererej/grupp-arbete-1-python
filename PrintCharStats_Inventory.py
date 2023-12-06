@@ -305,13 +305,15 @@ def Combat(element):
 
         damage = encounteredMonster.strength
 
-        #for i in player.elements[]:
-            #if player.elements[0][i] in encounteredMonster.elements[2][attackIndex]:
-                #damage *= 2
+        for i in player.elements[ELEMENT_WEAKNESS]:
+            if player.elements[ELEMENT_WEAKNESS][i] in encounteredMonster.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
+                damage *= 2
 
-        #for i in monster.elements[1]:
-            #if monster.elements[0][i] in self.elements:
-                #damage /= 2        
+        for i in player.elements[ELEMENT_RESISTANCE]:
+            if player.elements[ELEMENT_RESISTANCE][i] in encounteredMonster.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
+                damage /= 2
+
+        player.health -= damage
 
 
 
