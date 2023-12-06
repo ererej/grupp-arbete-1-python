@@ -350,8 +350,7 @@ def Combat(element):
         player.exp += encounteredMonster.strength
 
         print(encounteredMonster.name + " has fallen, and you emerge victorious..." + "\n"*2 + "...For now.\n")
-    else:
-        print(encounteredMonster.name + " has slain you! Your fighting was to no avail! Futile! Pointless!")
+
 
     print("\nPress any key to continue")
 
@@ -391,8 +390,7 @@ def Trap(element):
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
     print("\nYou took "+ colored(f"{damageTaken} damage!", "red") + "\n")
-    if player.health <= 0:
-        pass #game over screen?
+    player.exp += math.ceil(player.expRequirement / 4)
     print(encounterList[element][1][1])
     print("\nPress any key to continue!")
     Input()
@@ -402,13 +400,19 @@ def Main():
     
     while(True):
         os.system('cls')
+
+        if player.health <= 0:
+
+            print("it would seem you lost. Dont blame me. its you whos total garbage. Wanna play again?")
+            Input()
+            break
         
         if player.health > player.maxhealth:
             player.health = player.maxhealth
 
         while player.exp >= player.expRequirement:
 
-            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)")
+            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n")
             player.exp -= player.expRequirement
             player.level += 1
             player.health += 2
