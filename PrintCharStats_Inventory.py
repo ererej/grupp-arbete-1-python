@@ -453,6 +453,6 @@ def PrintCharStats():
         
 
 player = Player()
-Item("Wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
+Item("a wooden sword", 0.5, 0, ["phys"], False, "weapon", 1, []).ItemPickup()
 
 Enter(difficultyIndex)
