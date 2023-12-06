@@ -353,6 +353,7 @@ def Trap(element):
     if player.health <= 0:
         pass #game over screen?
     print(encounterDictionary[element][1][1])
+    print("Press any key to continue!")
     Input()
 
 
