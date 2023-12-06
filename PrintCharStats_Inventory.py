@@ -37,7 +37,7 @@ class Player():
         self.exp = 0
         self.exp
         self.maxhealth = 10
-        self.health = math.floor(self.maxhealth / difficultyMap[difficultyIndex][0])
+        self.health = 10
         self.strength = 3
         self.inventory = Inventory()
         self.elements = [[], [], []]
@@ -132,11 +132,11 @@ class Item():
             # 
             damage: float = player.strength
 
-            for i in monster.elements[ELEMENT_WEAKNESS]:
+            for i in range(0, len(monster.elements[ELEMENT_WEAKNESS])):
                 if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
                     damage *= 2
 
-            for i in monster.elements[ELEMENT_RESISTANCE]:
+            for i in range(0, len(monster.elements[ELEMENT_RESISTANCE])):
                 if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
@@ -166,7 +166,7 @@ class Inventory():
     def PickUpItem(self, foundItem:Item):
         while True:
             os.system("cls")
-            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}\n", "red") + "-type item")
+            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
                 keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
