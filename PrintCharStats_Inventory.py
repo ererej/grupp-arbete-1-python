@@ -314,14 +314,15 @@ def Combat(element):
 
 
     while (encounteredMonster.health > 0 and player.health > 0):
-        print(encounteredMonster.enterDesc)
+        print(encounteredMonster.enterDesc + "\n"*2 + "Use an item in your inventory to combat the shit out of it!\n")
 
+        print(PrintCharStats())
         key = Input()
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
         
         usedItem = player.inventory.items[int(key) - 1]
-        print(f"You used {usedItem.name}!")
+        print(f"You used {usedItem.name}!\n")
         usedItem.CombatActive(encounteredMonster)
 
 
@@ -346,7 +347,7 @@ def Treasure(element):
 
 def Trap(element):
     os.system('cls')
-    print(encounterDictionary[element][1][0])
+    print(encounterDictionary[element][0][0])
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
     print(f"You took {damageTaken}damage")
