@@ -254,7 +254,7 @@ encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #T
         ["The room does not seem to have anything in it, so you go decide to go forwards through the door at the other side of the room. But when you are half-way through it, it slams shut at lightning speed! Unfortunatly, you stood in the way.", "After you get up from the ground, you stagger your way to the door, open it and venture on."], 
         ["JESPER ENGELMARK", 3, 8, [["phys"], ["psy"], ["phys","psy"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper slams you with a small door!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
         ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["phys","psy"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
-        ["MARTIN LOMAN", 12, 24, [["fire"], ["psy"], ["frost","psy"]], "", ["",""], ""]]] # ADD DESCS HERE
+        ["MARTIN LOMAN", 12, 24, [["fire"], ["psy"], ["frost","psy"]], "vi skriver lite text här", ["",""], ""]]] # ADD DESCS HERE
 
 
 def Input():
