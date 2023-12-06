@@ -384,7 +384,7 @@ def Trap(element):
 
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
-    print(f"\nYou took {damageTaken} damage\n")
+    print("\nYou took "+ colored(f"{damageTaken} damage!", "red") + "\n")
     if player.health <= 0:
         pass #game over screen?
     print(encounterList[element][1][1])
@@ -437,7 +437,7 @@ def PrintInventory():
     os.system("cls")
     inventoryString = ""
     for item in player.inventory.items:
-        inventoryString = f"{item.name}, "
+        inventoryString = f"{item.name}:, {item.strength}"
     print(inventoryString)
     while keyboard.read_key() != 'q':
         pass
