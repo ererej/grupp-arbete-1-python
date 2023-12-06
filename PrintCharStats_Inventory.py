@@ -37,7 +37,7 @@ class Player():
         self.exp = 0
         self.exp
         self.maxhealth = 10
-        self.health = math.floor(self.maxhealth / difficultyMap[difficultyIndex][0])
+        self.health = 10
         self.strength = 3
         self.inventory = Inventory()
         self.elements = [[], [], []]
