@@ -132,11 +132,11 @@ class Item():
             # 
             damage: float = player.strength
 
-            for i in monster.elements[ELEMENT_WEAKNESS]:
+            for i in range(0, len(monster.elements[ELEMENT_WEAKNESS])):
                 if monster.elements[ELEMENT_WEAKNESS][i] in self.elements:
                     damage *= 2
 
-            for i in monster.elements[ELEMENT_RESISTANCE]:
+            for i in range(0, len(monster.elements[ELEMENT_RESISTANCE])):
                 if monster.elements[ELEMENT_RESISTANCE][i] in self.elements:
                     damage /= 2
             
