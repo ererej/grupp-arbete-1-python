@@ -80,7 +80,7 @@ class Monster():
 
         player.health -= damage
 
-        print("\nYou sustain " + str(damage) + " damage.")
+        print(colored("\nYou sustain " + str(damage) + " damage.", "on_light_red") + " [any] to continue")
 
 
     
@@ -129,7 +129,7 @@ class Item():
 
     def CombatActive(self, monster: Monster):
 
-        print("You used " + self.name + "!")
+        print("You used " + self.name + "!\n")
 
         # Weapons deal (player strength * damageMultiplier) damage of the item's type. Monsters can 
         if self.itemType == "weapon":
@@ -147,7 +147,7 @@ class Item():
             monster.health -= math.ceil(damage * self.power)
             print("Your opponent sustained " + str(damage) + " damage!")
         
-        if self.itemType == "health potion":
+        if self.itemType == "rejuveration":
             # gives the player HP
             player.health += self.power
             print(f"You restored {self.power} health!")
@@ -177,9 +177,9 @@ class Inventory():
             global canAct
             canAct = True
             print(colored(encounterList[element][0][0]))
-            print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
+            print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a", colored(f"{foundItem.itemType}", "red") + "-type item")
             if len(player.inventory.items) < 6:
-                keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
+                print(f"[{len(player.inventory.items)+1}] Add the item to your inventory")
             else:
                 print("\nPress the index of an item in your inventory to replace it with the new item")
             print("\n[Q] discard the item and move on")
@@ -197,7 +197,7 @@ class Inventory():
                 if len(player.inventory.items) == 6:
                     if int(key) <= len(player.inventory.items):
                         break
-            except:
+            finally:
                 pass
             
         if key == "0":
@@ -220,9 +220,9 @@ itemList = [
     [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"]], 
      ["the blade of infinite infernal power", 2, 2, ["fire", "phys"], False, "weapon", 2.5, []]],
     [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, []], 
-     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "health potion", 2, []]],
+     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, []]],
     [["a wooden sword", 0.5, 0, ["phys"], False, "weapon", 0.75, []], 
-     ["the gauntlets of strength", 3, 1, 2, False, "weapon", [], []]],
+     ["the gauntlets of strength", 3, 1, ["phys"], False, "weapon", 0.5, []]],
     [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
      ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
@@ -246,7 +246,7 @@ encounterList = [[["placeholder enter disc", "place holder exit disc"], #The lav
         ["DASTARDLY IMP", 6, 8, [["phys"], ["fire"], ["fire","psy"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
         [["placeholder enter disc", "place holder exit disc"], 
-        ["The cold, cold gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
+        ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
         ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
         ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
@@ -343,9 +343,9 @@ def Combat(element):
             encounteredMonster.CombatActive()
 
     if player.health > 0:
-        print(encounteredMonster.name + " has fallen. You emerge victorious..." + "\n"*2 + "...For now.")
+        print(encounteredMonster.name + " has fallen, and you emerge victorious..." + "\n"*2 + "...For now.\n")
     else:
-        print(encounteredMonster.name + " has slain you! Your fighting was futile! To no avail! Pointless!")
+        print(encounteredMonster.name + " has slain you! Your fighting was to no avail! Futile! Pointless!")
 
     print("\nPress any key to continue")
 
@@ -377,18 +377,18 @@ def Trap(element):
         print("\n"*2 + "You feel some of your strength leave you.")
         player.strength -= 0.5
 
-    if element == 2:
+    if element == 0:
         killedItem = player.inventory.items[RND.randint(0, len(player.inventory.items) - 1)]
         print("\n"*2 + killedItem.name + " has been destroyed.")
         killedItem.ItemDrop()
 
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
-    print(f"\nYou took {damageTaken} damage")
+    print(f"\nYou took {damageTaken} damage\n")
     if player.health <= 0:
         pass #game over screen?
     print(encounterList[element][1][1])
-    print("Press any key to continue!")
+    print("\nPress any key to continue!")
     Input()
 
 
