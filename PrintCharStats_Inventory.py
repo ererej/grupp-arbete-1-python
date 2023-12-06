@@ -193,27 +193,30 @@ itemDictionary = {
 # Tresures are on horizontal index 0
 # Tresures have 3 paramiters: Name(idk why but why not (deleate it later if i dont need it)), enter_discription, exit_discription 
 
+#traps are horizontal index 1
+#traps have 2 paramiters: enterdisc, exitdisc
+
 # Monster finns på horizontal index 2-4.
 # Monster har 6 in-parameters: namn, str, hp, och tre descriptions. 
 # Descriptions ska vara om entry i rummet, när monstret attakerar, när monstret dör
 
-encounterDictionary = [[["the lava pool", "placeholder enter disc", "place holder exit disc"], 
+encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #the lava pit
         ["Fire trap", "As you enter the room you here mechanical sounds from the walls before getting enveloped by fire", "You quickly leave the room to avoid taking more damage"], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire, fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
         ["DASTARDLY IMP", 6, 8, [["phys"], ["fire"], ["fire","psy"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
         ["DRAGON"], 8, 25, [["psy"], ["phys"], ["fire","phys"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."],
         [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
-        [""], 
+        ["", ""], 
         ["THE MAD SNOWMAN", 4, 3, [["fire"], ["frost"], ["phys","frost"]], "You notice a snowman in the room. When you go closer to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psy"], ["phys"], ["psy","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
         ["THE GLACIER GOLEM"], 14, 8, [["phys"], ["psy"], ["frost","phys"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
         [["place holder tresure", "placeholder enter disc", "place holder exit disc"], 
-        [""], 
+        ["", ""], 
         ["THE DESERTER", 3, 7, [["psy"], ["phys"], ["phys","fire"]], "You spot a soldier infront of you! Judging by the fact he seems to be lacking a lot of equipment, he has likely deserted whatever army he once swore allegance to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
         ["THE RIDER IN THE DARK", 0, 0, [[], [], []], "", "", ""], 
         ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["phys"], ["phys, phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
         [["Teacher desk drawer", "You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for usefull items.", "you close the drawer and quickly run out of the class room to not get cougt red handed"], 
-        [""], 
+        ["", ""], 
         ["JESPER ENGELMARK", 0, 0, [[], [], []], "", "", ""], 
         ["ANNIKA WESTIN", 0, 0, [[], [], []], "", "", ""], 
         ["MARTIN LOMAN", 0, 0, [[], [], []], "", "", ""]]]
@@ -248,7 +251,7 @@ def Enter(difficultyIndex):
 .----.   .--.   .-.  .-. .----.    .-. .-.   .--.   .-.  .-. .----.    .----. .---.  .---.   .---.  .---.  
 | |--'  / {} \  }  \/  { } |__}    |  \{ |  / {} \  }  \/  { } |__}    } |__} } }}_} } }}_} / {-. \ } }}_} 
 | }-`} /  /\  \ | {  } | } '__}    | }\  { /  /\  \ | {  } | } '__}    } '__} | } \  | } \  \ '-} / | } \  
-`----' `-'  `-' `-'  `-' `----'    `-' `-' `-'  `-' `-'  `-' `----'    `----' `-'-'  `-'-'   `---'  `-'-'  """, 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
+`----' `-'  `-' `-'  `-' `----'    `-' `-' `-'  `-' `-'  `-' `----'    `----' `-'-'  `-'-'   `---'  `-'-'  """, 'yellow') + "\n"*3 + "Difficulty: " + currentDifficulty[1] + "\nPress [D] to change difficulty" + "\n"*3 + "For rules and keybinds, press [R] at any point in the game" + "\n"*3 + colored("Press [S] to start", "green") + "\n"*3 + colored("Press [Q] to rage quit", "red")
         print(screen1)
         key = Input()
 
@@ -262,9 +265,9 @@ def Enter(difficultyIndex):
             PrintInventory()
 
         if key == "d":
-            difficultyIndex -= 1
-            if difficultyIndex == -1:
-                difficultyIndex = len(difficultyMap)-1
+            difficultyIndex += 1
+            if difficultyIndex == len(difficultyMap):
+                difficultyIndex = 0
         if key == "s":
             os.system("cls")
             Main()
@@ -342,13 +345,13 @@ def Treasure(element):
 
 def Trap(element):
     os.system('cls')
-    print(encounterDictionary[element][1][1])
+    print(encounterDictionary[element][1][0])
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
     print(f"You took {damageTaken}damage")
     if player.health <= 0:
         pass #game over screen?
-    print(encounterDictionary[element][1][2])
+    print(encounterDictionary[element][1][1])
     Input()
 
 
