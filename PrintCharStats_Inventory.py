@@ -168,29 +168,28 @@ class Inventory():
             os.system("cls")
             global canAct
             canAct = True
-            print(encounterDictionary[element][0][0])
-            print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
-        
+            print(colored(encounterDictionary[element][0][0]))
+            print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
             if len(player.inventory.items) < 6:
                 print(f"[E] Add the item to your inventory")
             else:
                 print("\nPress the index of an item in your inventory to replace it with the new item")
-            print("\n[0] discard the item and move on")
+            print("\n[q] discard the item and move on")
             print("\n[I] to open inventory")
             print("\n"*2 + PrintCharStats())
             key = Input()
             #väntar på en valid input
+            if key == "q" or key == "e":
+                break
+            elif key == "i":
+                PrintInventory()
+            elif key == "r":
+                PrintHelpMenu()
             try:
                 if len(player.inventory.items) == 6:
-                    if int(key) < len(player.inventory.items):
+                    if int(key) <= len(player.inventory.items):
                         break
             except:
-                if key == "q" or key == "e":
-                    break
-                elif key == "i":
-                    PrintInventory()
-                elif key == "r":
-                    PrintHelpMenu()
                 pass
             
         if key == "q":
@@ -252,7 +251,7 @@ encounterDictionary = [[["placeholder enter disc", "place holder exit disc"], #T
         ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["phys"], ["phys, phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
         [["You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for useful items.", "You close the drawer and quickly run out of the classroom to not get caught red-handed."],
         ["Slowly, you enter the room. To your horror, you find on a whiteboard 100 meter wide, proof that you CANNOT REASONABLY still possess all the magical properties given to you in past rounds, proven with #FAXX and #Logic!", "'Can't argue with that', you think. You leave the room through a window, deeply appaled by this news."], 
-        ["JESPER ENGELMARK", 3, 8, [["phys"], ["psy"], ["phys","psy"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper slams you with a small door!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
+        ["JESPER ENGELMARK", 3, 8, [["phys"], ["psy"], ["phys","psy"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
         ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["phys","psy"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
         ["MARTIN LOMAN", 12, 24, [["fire"], ["psy"], ["frost","psy"]], "vi skriver lite text här", ["",""], ""]]] # ADD DESCS HERE
 
@@ -359,7 +358,7 @@ def Treasure(element):
 
 def Trap(element):
     os.system('cls')
-    print(encounterDictionary[element][0][0])
+    print(encounterDictionary[element][1][0])
 
     if element == 3:
         player.elements[1] = []
