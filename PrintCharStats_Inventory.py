@@ -78,7 +78,7 @@ class Monster():
 
         player.health -= math.floor(damage)
 
-        print(colored("\nYou sustain " + str(damage) + self.elements[ELEMENT_ATTACK_TYPE][attackIndex] + "-type damage.", "red") + "\nPress [any] to continue")
+        print(colored("\nYou sustain " + str(damage) + " " + self.elements[ELEMENT_ATTACK_TYPE][attackIndex] + "-type damage.", "red") + "\nPress [any] to continue")
         Input()
 
 
