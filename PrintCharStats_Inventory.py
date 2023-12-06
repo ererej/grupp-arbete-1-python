@@ -329,12 +329,11 @@ def Combat(element):
 
 def Treasure(element):
     os.system("cls")
-    print(encounterDictionary[element][0][1])
-    
+
     ItemStats: list = list(itemDictionary[element])[RND.randint(0, len(itemDictionary[element])-1)]
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
     player.inventory.PickUpItem(foundItem)
-    os.system("cls")
+
     print(encounterDictionary[element][0][2] + "\n"*2 + "Press any key to continue!")
     Input()
 
@@ -443,6 +442,6 @@ def PrintCharStats():
         
 
 player = Player()
-Item("a wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
+Item("Wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
 
 Enter(difficultyIndex)
