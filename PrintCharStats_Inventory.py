@@ -402,9 +402,12 @@ def Main():
             player.health = player.maxhealth
 
         while player.exp >= player.expRequirement:
+
+            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)")
             player.exp -= player.expRequirement
             player.level += 1
             player.health += 2
+            player.strength += 0.5
             player.expRequirement = math.floor(player.expRequirement * 1.3)
 
 
@@ -429,19 +432,26 @@ def Main():
 
         if key in ['1', '2', '3']:
             
-            encounterStyle = RND.randint(1, 5)
+            encounterStyle = RND.randint(1, 10)
 
-            if(encounterStyle == 1):
+            if player.level <= 2:
+                if encounterStyle < 2:
+                    Treasure(doorSet[int(key) - 1])
+                else: 
+                    Combat(doorSet[int(key) - 1])
 
-                Treasure(doorSet[int(key)-1])
 
-            elif(encounterStyle == 2):
-
-                Trap(doorSet[int(key)-1])
+            elif player.level <= 8:
+                if encounterStyle < 3:
+                    Trap(doorSet[int(key) - 1])
+                elif encounterStyle < 6:
+                    Treasure(doorSet[int(key) - 1])
+                else:
+                    Combat(doorSet[int(key) - 1])
 
             else:
-
-                Combat(doorSet[int(key)-1])
+                Combat(doorSet[int(key) - 1])
+            
 
         
 def PrintInventory():
