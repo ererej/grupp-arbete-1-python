@@ -166,15 +166,17 @@ class Inventory():
     def PickUpItem(self, foundItem:Item, element):
         while True:
             os.system("cls")
+            global canAct
+            canAct = True
             print(encounterDictionary[element][0][0])
             print(colored(f"\nYou found {foundItem.name}") + ", a ", colored(f"{foundItem.itemType}", "red") + "-type item")
         
             if len(player.inventory.items) < 6:
-                keybinds_string = f"[{len(player.inventory.items)+1}] Add the item to your inventory"
+                print(f"[E] Add the item to your inventory")
             else:
-                keybinds_string = f" [1-6] Replace an item in your inventory"
-            keybinds_string += "\n[0] discard the item and move on"
-            print(keybinds_string)
+                print("\nPress the index of an item in your inventory to replace it with the new item")
+            print("\n[0] discard the item and move on")
+            print("\n[I] to open inventory")
             print("\n"*2 + PrintCharStats())
             key = Input()
             #väntar på en valid input
@@ -182,34 +184,42 @@ class Inventory():
                 if len(player.inventory.items) == 6:
                     if int(key) < len(player.inventory.items):
                         break
-                if int(key) <= len(player.inventory.items) + 1:
-                    break
             except:
-                if key == "i":
+                if key == "q" or key == "e":
+                    break
+                elif key == "i":
                     PrintInventory()
                 elif key == "r":
                     PrintHelpMenu()
                 pass
             
-        if key == "0":
+        if key == "q":
             return
         if len(player.inventory.items) == 6:
 
             self.items[int(key) - 1].ItemDrop()
             foundItem.ItemPickup() # kanske ska lägga till att den lägger till det nya itemet i samma slot 
+            canAct = False
             return
         foundItem.ItemPickup() 
+        canAct = False
         return
         
+# element types: fire, frost, phys (physical), psy (psionic)
+# name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list
 
+# "true" item types: pendant, weapon, healing potion, resistance potion
+# weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
 
-
-itemDictionary = {
-    0: [["a fire resistance potion", 0, 1, [], True, "boost", [], []], ["Fire item place holder2", 2, 1, 0, False, "weapon", [], []]],
-    1: [["Ice item place holder1", 2, 1, 1, False, "weapon", [], []], ["ice item place holder2", 2, 1, 1, False, "weapon", [], []]],
-    2: [["a wooden sword", 2, 0, 2, False, "weapon", [], []], ["knight item place holder2", 2, 1, 2, False, "weapon", [], []]],
-    3: [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]],
-}  
+itemDictionary = [
+    [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"]], 
+     ["the blade of infinite infernal power", 2, 2, ["fire", "phys"], False, "weapon", 2.5, []]],
+    [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, []], 
+     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "health potion", 2, []]],
+    [["a wooden sword", 0.5, 0, ["phys"], False, "weapon", 1, []], 
+     ["the gauntlets of strength", 3, 1, 2, False, "weapon", [], []]],
+    [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
+     ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
 #the diffirent groups represent different elements. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
 
@@ -257,8 +267,7 @@ def Input():
 def PrintHelpMenu():
     os.system('cls')
     print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door\n\nPress any key to return to where you where!")
-    while keyboard.read_key() != 'q':
-        pass
+    Input()
 
 difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
 difficultyIndex = 1
@@ -447,6 +456,6 @@ def PrintCharStats():
         
 
 player = Player()
-Item("Wooden sword", 2, 0, 2, False, "weapon", [], []).ItemPickup()
+Item("a wooden sword", 0.5, 0, ["phys"], False, "weapon", 1, []).ItemPickup()
 
 Enter(difficultyIndex)
