@@ -338,6 +338,12 @@ def Combat(element):
         key = Input()
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
+
+            if key == 'i':
+                PrintInventory()
+            elif key == 'r':
+                PrintHelpMenu()
+
         
         usedItem = player.inventory.items[int(key) - 1]
         usedItem.CombatActive(encounteredMonster)
@@ -363,6 +369,8 @@ def Treasure(element):
     ItemStats: list = list(itemList[element])[RND.randint(0, len(itemList[element])-1)]
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7], ItemStats[8])
     player.inventory.PickUpItem(foundItem, element)
+
+    os.system('cls')
 
     print(encounterList[element][0][1] + "\n"*2 + PrintCharStats(False) + "Press any key to continue!")
     Input()
