@@ -505,7 +505,7 @@ def PrintInventory():
                 printedText += resistance + ", "
 
             
-        print(printedText)
+        print(printedText + "\n")
     
     print(PrintCharStats(False) + "\nPress [Q] to return")
     
