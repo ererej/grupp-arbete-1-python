@@ -659,3 +659,30 @@ Enter(difficultyIndex)
 #                                            ~~~~~~^^^
 #IndexError: list index out of range
 #
+# Försökte gå in i dörr 2
+#In the next room you see three doors
+
+#[1] Instead of having a regular doorhandle, the door has a lighter instead.
+
+#[2] The door has the shape of a snowflake.
+
+#[3] The door seems to have been made out weapons that were hastely melted down, since you can still tell the door was made out of weapon metal.
+
+
+
+#Health: [■■■■■■■■■■■■■■■■] Strength: 15.0 Level: VIII 
+#╷────────────────╷─────────────────╷───────────────────────────╷──────────────────────────────────────╷──────────────────────────╷─────────────────╷
+#| a wooden sword | Exam awnser key | the gauntlets of strength | the blade of infinite infernal power | a fire resistance potion | Exam awnser key |
+#╵────────────────╵─────────────────╵───────────────────────────╵──────────────────────────────────────╵──────────────────────────╵─────────────────╵
+
+#Traceback (most recent call last):
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 545, in <module>
+##    Enter(difficultyIndex)
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter
+#    Main()
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 471, in Main
+#    Combat(doorSet[int(key) - 1])
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 324, in Combat
+#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+#                                            ~~~~~~^^^
+#IndexError: list index out of range
