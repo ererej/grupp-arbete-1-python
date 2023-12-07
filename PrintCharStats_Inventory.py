@@ -549,8 +549,40 @@ Enter(difficultyIndex)
 # Notes: Öka antalet health spelaren börjar med, det är för lite ||| Förlorar man spelet behöver man starta upp koden igen ||| the blade of infinite infernal power är: 1. OP 2. typ ett måste för att vinna just nu p.g.a balancing |||
 # Rapporterar buggar till folk som kan koden bättre: Jonas
 
-# kan inte använda fire res potion:
+# problem med tier 3 monster kanske?
 
+
+#In the next room you see three doors
+
+#[1] Instead of having a regular doorhandle, the door has a lighter instead.
+
+#[2] The door has the shape of a snowflake.
+
+#[3] The door seems to have been made out weapons that were hastely melted down, since you can still tell the door was made out of weapon metal.
+
+
+
+#Health: [■■■■■■■■■■■■■■■■■■ ] Strength: 8.0 Level: VIII 
+#╷────────────────╷──────────────────────────────────────╷──────────────────────────╷────────────────────────────────╷───────────╷───────────╷  
+#| a wooden sword | the blade of infinite infernal power | a fire resistance potion | a pendant of winter's vitality | ......... | ......... |  
+#╵────────────────╵──────────────────────────────────────╵──────────────────────────╵────────────────────────────────╵───────────╵───────────╵
+
+#Traceback (most recent call last):
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 546, in <module>
+#    Enter(difficultyIndex)
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter
+#    Main()
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 472, in Main
+#    Combat(doorSet[int(key) - 1])
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 324, in Combat
+#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+#                                                                  ~~~~~~^^^
+#IndexError: list index out of range
+
+
+
+
+# kan inte använda fire res potion:
 
 #You used a fire resistance potion!
 
