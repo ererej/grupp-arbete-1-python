@@ -475,17 +475,16 @@ def Main():
         
 def PrintInventory():
     os.system("cls")
-    inventoryString = ""
     for item in player.inventory.items:
 
+        print(f"{item.name}: \n{item.descripion}" + "\n"*2 + f"Bonus strength: {item.strength} | Bonus health: {item.health}")
 
+        if item.itemType == "weapon":
+            print("Item type: WEAPON |")
 
-        inventoryString = f"{item.name}: \n{item.descripion}" + "\n"*2 + " "
-    print(inventoryString)
-
-
-
-
+    
+    print(PrintCharStats + "\nPress [Q] to return")
+    
     while keyboard.read_key() != 'q':
         pass
 
