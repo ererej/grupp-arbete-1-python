@@ -415,7 +415,7 @@ def Main():
 
         if player.health <= 0:
 
-            print("it would seem you lost. Dont blame me. its you whos total garbage. Wanna play again?")
+            print("it would seem like you lost. Don't blame me. it's you who is total garbage. Wanna play again?")
             Input()
             break
         
