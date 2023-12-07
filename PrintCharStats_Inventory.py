@@ -223,8 +223,8 @@ itemList = [
      ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, [], ""]],
     [["a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.75, [], ""], 
      ["the gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], ""]],
-    [["Blue Exam awnser key", 2, 1, 3, True, "weapon", [], [], ""], 
-     ["teacher item place holder", 2, 1, 3, False, "weapon", [], [], ""]]]
+    [["Exam awnser key", 2, 1, [], True, "weapon", 1, [], ""], 
+     ["teacher item place holder", 2, 1, 3, False, "weapon", 1, [], ""]]]
 
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
 
@@ -239,17 +239,17 @@ itemList = [
 # Monster finns på horizontal index 2-4.
 # monsterName, strength, health, elements: list[list[str]], enterDesc, attackMoveDesc, deathDesc
 
-encounterList = [[["placeholder enter disc", "place holder exit disc"], #The lava pit 
+encounterList = [[["You enter the door and see a chest slowly sinking down in lava, you quickly save the chest and open it", "You close the chest and throw it back and exit the room"], #The lava pit 
         ["As you enter a long corridor, you hear mechanical sounds coming from within the walls. The door locks behind you. Before you can react, you are ENVELOPED IN FIRE", "You sprint through the flames and exit this trapped room."], 
         ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire", "fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
         ["DASTARDLY IMP", 6, 8, [["physical"], ["fire"], ["fire","psychic"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
         ["DRAGON", 8, 25, [["psychic"], ["physical"], ["fire","physical"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."]],
-        [["placeholder enter disc", "place holder exit disc"], 
+        [["Inside the room you see a item frozen in a block of ice, You brake the ice suronding it and!", "You quickly run out of the room to get away from the cold"], 
         ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
-        ["THE MAD SNOWMAN", 3, 4, [["fire"], ["frost"], ["physical","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snow man throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
+        ["THE MAD SNOWMAN", 3, 4, [["fire"], ["frost"], ["physical","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snowman throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psychic"], ["physical"], ["psychic","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
         ["THE GLACIER GOLEM"], 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
-        [["placeholder enter disc", "place holder exit disc"], 
+        [["In the middle of the room you see a chest of weapons you start looking through it.", "You leave the room and go on to the next adventure"], 
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
         ["THE SOLDIER", 3, 7, [["psychic"], ["physical"], ["physical","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
         ["THE RIDER IN THE DARK", 2, 25, [["frost"], ["psychic"], ["physical","psychic"]], "You enter a dimly-lit room. Standing infront of you seems to be a person riding a horse. You aren't to sure of its intentions, but best to attempt to kill it.", ["The rider attacks you with a spear! Or does it? It does not hurt that much...","The rider messes with your mind... in some unknown way. You are not entirely sure what he did, but you don't feel as healthy as before"], "The rider... disapears. It does not vanish, but at the same time it just... Well, it is dead, and you won, and that is what matters."], 
