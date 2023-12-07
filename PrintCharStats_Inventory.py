@@ -178,7 +178,7 @@ class Inventory():
             print(colored(encounterList[element][0][0]))
             print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a", colored(f"{foundItem.itemType}", "red") + "-type item")
             if len(player.inventory.items) < 6:
-                print(f"[{len(player.inventory.items)+1}] Add the item to your inventory")
+                print(f"[Q] Add the item to your inventory")
             else:
                 print("\nPress the index of an item in your inventory to replace it with the new item")
             print("\n[Q] discard the item and move on")
@@ -199,7 +199,7 @@ class Inventory():
             finally:
                 pass
             
-        if key == "0":
+        if key == "q":
             return
         if len(player.inventory.items) == 6:
 
@@ -272,7 +272,7 @@ def PrintHelpMenu():
     print("\n\nHow to play: \n   1: Use items strategically to defeat monsters etcetcetc \n   2: eznella plz do not hold keys plzzz \n\nKeybinds:\n   [R]: Brings up this menu \n   [I]: Opens the inventory\n   [1/2/3]: Enter a room through chosen door\n\nPress any key to return to where you where!")
     Input()
 
-difficultyMap = [[1, "nuuuuub"], [1.2, "normal"], [1.4, "martin going godmode"]]
+difficultyMap = [[1, colored("nuuuuub", "green")], [1.2, colored("normal", "yellow")], [1.4, colored("martin going godmode", "red")]]
 difficultyIndex = 1
 
 def Enter(difficultyIndex):
@@ -363,7 +363,7 @@ def Treasure(element):
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
     player.inventory.PickUpItem(foundItem, element)
 
-    print(encounterList[element][0][1] + "\n"*2 + "Press any key to continue!")
+    print(encounterList[element][0][1] + "\n"*2 + PrintCharStats() + "Press any key to continue!")
     Input()
 
 
