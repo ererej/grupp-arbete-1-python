@@ -650,7 +650,11 @@ Enter(difficultyIndex)
 #    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 #                                            ~~~~~~^^^
 #IndexError: list index out of range
-#
+
+
+
+
+
 # Försökte gå in i dörr 2
 #In the next room you see three doors
 
