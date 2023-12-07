@@ -179,7 +179,7 @@ class Inventory():
             print(colored(encounterList[element][0][0]))
             print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a", colored(f"{foundItem.itemType}", "red") + "-type item")
             if len(player.inventory.items) < 6:
-                print(f"[Q] Add the item to your inventory")
+                print(f"\n[E] Add the item to your inventory")
             else:
                 print("\nPress the index of an item in your inventory to replace it with the new item")
             print("\n[Q] discard the item and move on")
@@ -218,13 +218,13 @@ class Inventory():
 
 itemList = [
     [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"], "A burning flower is suspended in "], 
-     ["the blade of infinite infernal power", 2, 2, ["fire", "physical"], False, "weapon", 2.5, []]],
-    [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, []], 
-     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, []]],
-    [["a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.75, []], 
-     ["the gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, []]],
-    [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
-     ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
+     ["the blade of infinite infernal power", 2, 2, ["fire", "physical"], False, "weapon", 2.5, [], ""]],
+    [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, [], ""], 
+     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, [], ""]],
+    [["a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.75, [], ""], 
+     ["the gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], ""]],
+    [["Exam awnser key", 2, 1, 3, True, "weapon", [], [], ""], 
+     ["teacher item place holder", 2, 1, 3, False, "weapon", [], [], ""]]]
 
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
 
@@ -361,10 +361,10 @@ def Combat(element):
 def Treasure(element):
     os.system("cls")
     ItemStats: list = list(itemList[element])[RND.randint(0, len(itemList[element])-1)]
-    foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7])
+    foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7], ItemStats[8])
     player.inventory.PickUpItem(foundItem, element)
 
-    print(encounterList[element][0][1] + "\n"*2 + PrintCharStats() + "Press any key to continue!")
+    print(encounterList[element][0][1] + "\n"*2 + PrintCharStats(False) + "Press any key to continue!")
     Input()
 
 
@@ -402,11 +402,13 @@ def Main():
     
     global player
 
+    player = Player()
+
     for i in player.inventory.items:
         player.inventory.items.remove(i)
 
     player.health = player.maxhealth
-    Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, []).ItemPickup()
+    Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, [], "A sparring sword to swing at your opponents").ItemPickup()
 
     while(True):
         os.system('cls')
@@ -454,16 +456,16 @@ def Main():
             encounterStyle = RND.randint(1, 10)
 
             if player.level <= 2:
-                if encounterStyle < 2:
+                if encounterStyle <= 3:
                     Treasure(doorSet[int(key) - 1])
                 else: 
                     Combat(doorSet[int(key) - 1])
 
 
             elif player.level <= 8:
-                if encounterStyle < 3:
+                if encounterStyle <= 2:
                     Trap(doorSet[int(key) - 1])
-                elif encounterStyle < 6:
+                elif encounterStyle <= 5:
                     Treasure(doorSet[int(key) - 1])
                 else:
                     Combat(doorSet[int(key) - 1])
@@ -480,16 +482,32 @@ def PrintInventory():
         print(f"{item.name}: \n{item.descripion}" + "\n"*2 + f"Bonus strength: {item.strength} | Bonus health: {item.health}")
 
         if item.itemType == "weapon":
-            print("Item type: WEAPON |")
+            printedText = "Item type: WEAPON | Damage types: "
 
+            for element in item.elements:
+                printedText += element + ", "
+            
+            printedText += str(item.power) + " power." 
+
+        elif item.itemType == "rejuveration":
+            printedText = f"Item type: REJUVERATION | {item.power} power"
+
+        elif item.itemType == "resistance-giver":
+            printedText = "Item type: RESISTANCE-GIVER | Resistance types: "
+
+            for resistance in item.resistancePotEffects:
+                printedText += resistance + ", "
+
+            
+        print(printedText)
     
-    print(PrintCharStats + "\nPress [Q] to return")
+    print(PrintCharStats(False) + "\nPress [Q] to return")
     
     while keyboard.read_key() != 'q':
         pass
 
 def PrintCharStats(canAct:bool):
-    charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
+    charStats = (colored("\nHealth: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
     itemNames = []
 
     for i in range(0, len(player.inventory.items)):
