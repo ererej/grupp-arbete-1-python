@@ -338,10 +338,11 @@ def Combat(element):
         print(PrintCharStats(True))
         key = Input()
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
-            key = Input()
-
             if key == 'i' or key == "r":
                 break
+            key = Input()
+
+            
         if key == "i":
             PrintInventory()
             continue
@@ -427,7 +428,7 @@ def Main():
 
         if player.health <= 0:
 
-            print("it would seem like you lost. Don't blame me. it's you who is total garbage. Wanna play again?")
+            print("it would seem like you lost. Don't blame me. it's you who is total garbage.\n\n press [any] key to return to main menu!")
             Input()
             break
         
@@ -436,7 +437,7 @@ def Main():
 
         while player.exp >= player.expRequirement:
 
-            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n")
+            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n\n")
             player.exp -= player.expRequirement
             player.level += 1
             player.health += 2
