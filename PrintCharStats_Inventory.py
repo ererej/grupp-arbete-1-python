@@ -406,14 +406,14 @@ def Main():
         player.inventory.items.remove(i)
 
     player.health = player.maxhealth
-    Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, []).ItemPickup()
+    Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, []).ItemPickup() # tror det saknas description här koden fungerar ej
 
     while(True):
         os.system('cls')
 
         if player.health <= 0:
 
-            print("it would seem you lost. Dont blame me. its you whos total garbage. Wanna play again?")
+            print("it would seem like you lost. Don't blame me. it's you who is total garbage. Wanna play again?")
             Input()
             break
         
