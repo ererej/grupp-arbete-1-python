@@ -428,7 +428,7 @@ def Main():
 
         if player.health <= 0:
 
-            print("it would seem like you lost. Don't blame me. it's you who is total garbage.\n\n press [any] key to return to main menu!")
+            print(colored("it would seem like you lost. Don't blame me. it's you who is total garbage.", "red") + colored("\n\n press [any] key to return to main menu!", "green"))
             Input()
             break
         
