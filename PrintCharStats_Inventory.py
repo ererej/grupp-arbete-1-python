@@ -94,9 +94,10 @@ class Monster():
 # resistance potion that halves damage taken from some damage types.
 # power: Defines the amount of health restored by healing potions and damage multiplier for weapons.
 class Item():
-    def __init__(self, name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list):
+    def __init__(self, name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list, description):
 
         self.name = name
+        self.descripion = description
 
 # These are stats given to the player who holds the item.
         self.strength = strength
@@ -216,7 +217,7 @@ class Inventory():
 # weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
 
 itemList = [
-    [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"]], 
+    [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"], "A burning flower is suspended in "], 
      ["the blade of infinite infernal power", 2, 2, ["fire", "physical"], False, "weapon", 2.5, []]],
     [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, []], 
      ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, []]],
@@ -225,7 +226,7 @@ itemList = [
     [["Exam awnser key", 2, 1, 3, True, "weapon", [], []], 
      ["teacher item place holder", 2, 1, 3, False, "weapon", [], []]]]
 
-#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes    
+#items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
 
 # This dictionary contains all data on different monster types. They are sorted into different groups. Group 0: fire. Group 1: ice. Group 2: Knighs/weaponry. 3: lärare
 
@@ -383,9 +384,10 @@ def Trap(element):
         player.strength -= 0.5
 
     if element == 0:
-        killedItem = player.inventory.items[RND.randint(0, len(player.inventory.items) - 1)]
-        print("\n"*2 + killedItem.name + " in your inventory has been destroyed.")
-        killedItem.ItemDrop()
+        if len(player.inventory.items) > 1:
+            killedItem = player.inventory.items[RND.randint(0, len(player.inventory.items) - 1)]
+            print("\n"*2 + killedItem.name + " in your inventory has been destroyed.")
+            killedItem.ItemDrop()
 
     damageTaken = RND.randint(1, 2)
     player.health -= damageTaken
@@ -404,6 +406,7 @@ def Main():
         player.inventory.items.remove(i)
 
     player.health = player.maxhealth
+    Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, []).ItemPickup()
 
     while(True):
         os.system('cls')
@@ -474,11 +477,17 @@ def PrintInventory():
     os.system("cls")
     inventoryString = ""
     for item in player.inventory.items:
-        inventoryString = f"{item.name}:, {item.strength}"
+
+
+
+        inventoryString = f"{item.name}: \n{item.descripion}" + "\n"*2 + " "
     print(inventoryString)
+
+
+
+
     while keyboard.read_key() != 'q':
         pass
-    return
 
 def PrintCharStats(canAct:bool):
     charStats = (colored("Health: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
@@ -515,7 +524,6 @@ def PrintCharStats(canAct:bool):
         
 
 player = Player()
-Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, []).ItemPickup()
 
 Enter(difficultyIndex)
 
