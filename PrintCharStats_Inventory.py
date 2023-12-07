@@ -398,6 +398,13 @@ def Trap(element):
 
 def Main():
     
+    global player
+
+    for i in player.inventory.items:
+        player.inventory.items.remove(i)
+
+    player.health = player.maxhealth
+
     while(True):
         os.system('cls')
 
