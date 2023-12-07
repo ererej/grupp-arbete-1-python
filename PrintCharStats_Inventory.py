@@ -223,7 +223,7 @@ itemList = [
      ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, [], ""]],
     [["a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.75, [], ""], 
      ["the gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], ""]],
-    [["Exam awnser key", 2, 1, 3, True, "weapon", [], [], ""], 
+    [["Blue Exam awnser key", 2, 1, 3, True, "weapon", [], [], ""], 
      ["teacher item place holder", 2, 1, 3, False, "weapon", [], [], ""]]]
 
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
@@ -509,10 +509,9 @@ def PrintInventory():
             
         print(printedText + "\n")
     
-    print(PrintCharStats(False) + "\nPress [Q] to return")
+    print(PrintCharStats(False) + "\nPress anything to return")
     
-    while keyboard.read_key() != 'q':
-        pass
+    Input()
 
 def PrintCharStats(canAct:bool):
     charStats = (colored("\nHealth: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
