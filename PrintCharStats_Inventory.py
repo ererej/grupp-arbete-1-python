@@ -340,11 +340,15 @@ def Combat(element):
         while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
             key = Input()
 
-            if key == 'i':
-                PrintInventory()
-            elif key == 'r':
-                PrintHelpMenu()
-        
+            if key == 'i' or key == "r":
+                break
+        if key == "i":
+            PrintInventory()
+            continue
+        elif key == "r":
+            PrintHelpMenu()
+            continue
+
         usedItem = player.inventory.items[int(key) - 1]
         usedItem.CombatActive(encounteredMonster)
 
