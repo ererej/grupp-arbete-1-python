@@ -526,7 +526,7 @@ player = Player()
 
 Enter(difficultyIndex)
 
-
+# DET FINNS INGET VAPEN I INVENTORY VID SPELETS START JUST NU MAN KAN EJ ANFALLA JUST NU
 # Notes: Öka antalet health spelaren börjar med, det är för lite ||| Förlorar man spelet behöver man starta upp koden igen ||| the blade of infinite infernal power är: 1. OP 2. typ ett måste för att vinna just nu p.g.a balancing |||
 # Rapporterar buggar till folk som kan koden bättre: Jonas
 #1. Försöker använda "teacher item placeholder"
