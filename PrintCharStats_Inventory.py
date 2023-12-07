@@ -345,12 +345,6 @@ def Combat(element):
             elif key == 'r':
                 PrintHelpMenu()
         
-
-            if key == 'i':
-                PrintInventory()
-            elif key == 'r':
-                PrintHelpMenu()
-        
         usedItem = player.inventory.items[int(key) - 1]
         usedItem.CombatActive(encounteredMonster)
 
