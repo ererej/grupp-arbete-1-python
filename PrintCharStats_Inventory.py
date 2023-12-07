@@ -370,6 +370,8 @@ def Treasure(element):
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7], ItemStats[8])
     player.inventory.PickUpItem(foundItem, element)
 
+    os.system('cls')
+
     print(encounterList[element][0][1] + "\n"*2 + PrintCharStats(False) + "Press any key to continue!")
     Input()
 
