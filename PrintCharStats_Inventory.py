@@ -178,7 +178,7 @@ class Inventory():
             canAct = True
             print(colored(encounterList[element][0][0]))
             print(f"\nYou found " + colored(f"{foundItem.name}", "green") + ", a", colored(f"{foundItem.itemType}", "red") + "-type item")
-            if len(player.inventory.items) < 6:
+            if len(player.inventory.items) < 5:
                 print(f"\n[E] Add the item to your inventory")
             else:
                 print("\nPress the index of an item in your inventory to replace it with the new item")
@@ -194,7 +194,7 @@ class Inventory():
             elif key == "r":
                 PrintHelpMenu()
             try:
-                if len(player.inventory.items) == 6:
+                if len(player.inventory.items) == 5:
                     if int(key) <= len(player.inventory.items):
                         break
             except:
@@ -202,7 +202,7 @@ class Inventory():
             
         if key == "q":
             return
-        if len(player.inventory.items) == 6:
+        if len(player.inventory.items) == 5:
 
             self.items[int(key) - 1].ItemDrop()
             foundItem.ItemPickup() # kanske ska lägga till att den lägger till det nya itemet i samma slot 
@@ -347,7 +347,7 @@ def Combat(element):
 
         print(PrintCharStats(True))
         key = Input()
-        while key not in ['1','2','3','4','5','6'] or int(key) > len(player.inventory.items):
+        while key not in ['1','2','3','4','5'] or int(key) > len(player.inventory.items):
             if key == 'i' or key == "r":
                 break
             key = Input()
@@ -570,7 +570,7 @@ def PrintCharStats(canAct:bool):
 
     for i in range(0, len(player.inventory.items)):
         itemNames.append((player.inventory.items[i]).name)
-    for i in range (0, 6 - len(player.inventory.items)):
+    for i in range (0, 5 - len(player.inventory.items)):
         itemNames.append(".........")
 
     for i in range(0, len(itemNames)):
