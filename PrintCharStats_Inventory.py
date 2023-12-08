@@ -149,8 +149,8 @@ class Item():
         
         if self.itemType == "rejuveration":
             # gives the player HP
-            player.health += self.power
-            print(f"You restored {self.power} health!")
+            player.health += self.power*player.level
+            print(f"You restored {self.power*player.level} health!")
 
         if self.itemType == "resistance-giver":
             # gives the player ALL resistances in the "resistancePotEffects" list
@@ -248,7 +248,7 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
         ["THE MAD SNOWMAN", 3, 4, [["fire"], ["frost"], ["physical","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snowman throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psychic"], ["physical"], ["psychic","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
-        ["THE GLACIER GOLEM"], 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
+        ["THE GLACIER GOLEM", 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."]],
         [["In the middle of the room you see a chest of weapons you start looking through it.", "You leave the room and go on to the next adventure"], 
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
         ["THE SOLDIER", 3, 7, [["psychic"], ["physical"], ["physical","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
@@ -422,6 +422,7 @@ def Main():
 
     player.health = player.maxhealth
     Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, [], "A sparring sword to swing at your opponents").ItemPickup()
+    Item("a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, [], "").ItemPickup()
 
     while(True):
         os.system('cls')
