@@ -258,7 +258,7 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         ["Slowly, you enter the room. To your horror, you find on a whiteboard 100 meter wide, proof that you CANNOT REASONABLY still possess all the magical properties given to you in past rounds, proven with #FAXX and #Logic!", "'Can't argue with that', you think. You leave the room through a window, deeply appaled by this news."], 
         ["JESPER ENGELMARK", 3, 8, [["physical"], ["psychic"], ["physical","psychic"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
         ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["physical","psychic"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
-        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "vi skriver lite text här", ["",""], ""]]] # ADD DESCS HERE
+        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]
 
 
 def Input():
@@ -556,165 +556,21 @@ player = Player()
 
 Enter(difficultyIndex)
 
-# DET FINNS INGET VAPEN I INVENTORY VID SPELETS START JUST NU MAN KAN EJ ANFALLA JUST NU
-# Notes: Öka antalet health spelaren börjar med, det är för lite ||| Förlorar man spelet behöver man starta upp koden igen ||| the blade of infinite infernal power är: 1. OP 2. typ ett måste för att vinna just nu p.g.a balancing |||
-# Rapporterar buggar till folk som kan koden bättre: Jonas
 
-# problem med tier 3 monster kanske?
+# SPELET KAN EJ VINNAS vid nivå 10 just nu!
 
-
-#In the next room you see three doors
-
-#[1] Instead of having a regular doorhandle, the door has a lighter instead.
-
-#[2] The door has the shape of a snowflake.
-
-#[3] The door seems to have been made out weapons that were hastely melted down, since you can still tell the door was made out of weapon metal.
-
-
-
-#Health: [■■■■■■■■■■■■■■■■■■ ] Strength: 8.0 Level: VIII 
-#╷────────────────╷──────────────────────────────────────╷──────────────────────────╷────────────────────────────────╷───────────╷───────────╷  
-#| a wooden sword | the blade of infinite infernal power | a fire resistance potion | a pendant of winter's vitality | ......... | ......... |  
-#╵────────────────╵──────────────────────────────────────╵──────────────────────────╵────────────────────────────────╵───────────╵───────────╵
+# FIRE RES POTION FORFARANDE BROKEN
 
 #Traceback (most recent call last):
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 546, in <module>
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 557, in <module>    
 #    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter       
 #    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 472, in Main
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 484, in Main        
 #    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 324, in Combat
-#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
-#                                                                  ~~~~~~^^^
-#IndexError: list index out of range
-
-
-
-
-# kan inte använda fire res potion:
-
-#You used a fire resistance potion!
-
-#Traceback (most recent call last):
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 546, in <module>
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter   
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 463, in Main    
-#    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 344, in Combat  
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 354, in Combat      
 #    usedItem.CombatActive(encounteredMonster)
 #  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 158, in CombatActive
 #    player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
 #                                               ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 #TypeError: list indices must be integers or slices, not str
-
-
-
-
-#1. Försöker använda "teacher item placeholder"
-# Traceback (most recent call last):
-# File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 513, in <module>
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 310, in Enter   
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 450, in Main    
-#    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 342, in Combat  
-#    usedItem.CombatActive(encounteredMonster)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 146, in CombatActive
-#    monster.health -= math.floor(damage * self.power)
-#                                 ~~~~~~~^~~~~~~~~~~~
-#TypeError: can't multiply sequence by non-int of type 'float'
-#2. Försökte gå in i rum 1
-#In the next room you see three doors
-
-#[1] Instead of having a regular doorhandle, the door has a lighter instead.
-
-#[2] Behind the second door you hear the faint buzzing of a projector.
-
-#[3] The materials used to make this door seems to have been the following: Pens, erasers and rulers.
-
-
-#Health: [■■■■■■■■■■■■■■■■■■■■] Strength: 11.5 Level: VIII 
-#╷────────────────╷──────────────────────────────────────╷─────────────────╷────────────────────────────────╷───────────╷───────────╷ 
-#| a wooden sword | the blade of infinite infernal power | Exam awnser key | a pendant of winter's vitality | ......... | ......... | 
-#╵────────────────╵──────────────────────────────────────╵─────────────────╵────────────────────────────────╵───────────╵───────────╵ 
-
-#Traceback (most recent call last):
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 513, in <module>
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 310, in Enter   
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 459, in Main    
-#    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 323, in Combat
-#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
-#                                 ~~~~~~^^^
-#TypeError: 'int' object is not subscriptable
-#3. försökte trycka på q och inte plocka upp föremål
-#placeholder enter disc
-
-#You found a pendant of winter's vitality, a rejuveration-type item
-
-#Press the index of an item in your inventory to replace it with the new item
-
-#[Q] discard the item and move on
-
-#[I] to open inventory
-
-
-#Health: [■■■■■■■■■■■■■■■■■■  ] Strength: 11.5 Level: VI 
-#╷───────[1]──────╷──────────────────[2]─────────────────╷──────────[3]──────────╷───────────────[4]──────────────╷───────[5]──────╷────────────[6]────────────╷
-
-#| a wooden sword | the blade of infinite infernal power | a scroll of frostbite | a pendant of winter's vitality | a wooden sword | teacher item place holder |
-
-#╵────────────────╵──────────────────────────────────────╵───────────────────────╵────────────────────────────────╵────────────────╵───────────────────────────╵
-
-#Traceback (most recent call last):
-
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 513, in <module>
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 310, in Enter
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 457, in Main
-#    Treasure(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 364, in Treasure
-#    player.inventory.PickUpItem(foundItem, element)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 206, in PickUpItem
-#    self.items[int(key) - 1].ItemDrop()
-#              ^^^^^^^^
-#ValueError: invalid literal for int() with base 10: 'q'
-# 4. man plockar alltid upp föremål, även om man trycker på q
-# 5. försökte gå in i rum 3
-#Congrats! You leveled up! You might make it here yet...
-
-#In the next room you see three doors
-
-#[1] The door handle seems to have been crudely replaced with a dagger, don't touch the sharp end.
-
-#[2] The door has the shape of a snowflake.
-
-#[3] The third door seems to be made out of coal.
-
-
-#╷────────────────╷──────────────────────────────────────╷───────────────────────╷────────────────────────────────╷────────────────────────────────╷───────────╷
-
-#| a wooden sword | the blade of infinite infernal power | a scroll of frostbite | a pendant of winter's vitality | a pendant of winter's vitality | ......... |
-
-#╵────────────────╵──────────────────────────────────────╵───────────────────────╵────────────────────────────────╵────────────────────────────────╵───────────╵
-
-#Traceback (most recent call last):
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 513, in <module>
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 310, in Enter
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 459, in Main
-#    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 323, in Combat
-#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
-#                                            ~~~~~~^^^
-#IndexError: list index out of range
-#
