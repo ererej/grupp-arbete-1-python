@@ -197,7 +197,7 @@ class Inventory():
                 if len(player.inventory.items) == 6:
                     if int(key) <= len(player.inventory.items):
                         break
-            finally:
+            except:
                 pass
             
         if key == "q":
@@ -217,14 +217,19 @@ class Inventory():
 # weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
 
 itemList = [
-    [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"], "A burning flower is suspended in the liquid within this vial, although its petals and stem do not seem charred.\nDrink to gain resistance against fire damage, halving all damage taken of this type."], 
-     ["the blade of infinite infernal power", 0.5, 0, ["fire", "physical"], False, "weapon", 2, [], "A blade made of equal parts cold iron, sharp as death, molten rock, and infernal rage. \nSwing this at opponents to deal great amounts of damage, increased against enemies susceptible to its damage types."]],
-    [["a spell scroll: 'Fierce Blizzard", 1, 0, ["frost", "frost"], True, "weapon", 2, [], "On this scroll are neatly typed runes and instructions for casting the 'Fierce Blizzard' spell. \nRead the scroll to deal great amounts of damage, increased against enemies susceptible to its damage type."], 
-     ["a pendant of winter's vitality", 0, 7, ["frost"], False, "rejuvenation", 2, [], "Possessing this pendant, an unbreakable ice crystal worn around the neck, fills you with courage. \nPray to Beira, god of winter and cold, to restore a small amount of health to yourself."]],
-    [["a dark iron glaive", 1, 0, ["physical"], False, "weapon", 1.25, [], "A long, broad, jagged blade attached to a polearm. \nThrust or swing at opponents with this weapon to deal damage, increase against enemies susceptible to its damage types."], 
-     ["the gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], "Putting on these glaives fills your entire body with a fraction of the otherworldly strength of Ares, the god of war. \nWith these, your punch becomes just as mean as your cut was before, and you deal increased damage against enemies susceptible to its damage type."]],
-    [["an exam awnser sheet", 0, 0, ["answer", "answer", "answer", "psychic"], True, "weapon", 0.8, [], "A large stack of paper sheets that combined make up every answer to every test in every course in every year group in every country in all dimenttions. \nRead this to confuse most enemies, "], 
-     ["teacher item place holder", 2, 1, [], False, "weapon", 1, [], ""]]]
+    [["fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"], "A burning flower is suspended in the liquid within this vial, although its petals and stem do not seem charred.\nDrink to gain resistance against fire damage, halving all damage taken of this type."], 
+     ["Baal's blade of infernal power", 0.5, 0, ["fire", "physical"], False, "weapon", 2, [], "A blade made of equal parts cold iron, sharp as death, molten rock, and infernal rage. \nSwing this at opponents to deal great amounts of damage, increased against enemies susceptible to its damage types."]],
+    
+    [["spell scroll: 'Fierce Blizzard'", 1, 0, ["frost", "frost"], True, "weapon", 2, [], "On this scroll are neatly typed runes and instructions for casting the 'Fierce Blizzard' spell. \nRead the scroll to deal great amounts of damage, increased against enemies susceptible to its damage type."], 
+     ["pendant of winter's vitality", 0, 7, ["frost"], False, "rejuvenation", 2, [], "Possessing this pendant, an unbreakable ice crystal worn around the neck, fills you with courage. \nPray to Beira, god of winter and cold, to restore a small amount of health to yourself."],
+     ["Braum's door-shield", 1, 5, [], False, "resistance-giver", 0, ["physical", "physical", "cold", "fire"], "Is this door a shield? Is this shield a door? Either way, it serves just as well for keeping death away.\nHold this door-shield between yourself and an enemy to halve all damage taken from them of certain types."]],
+
+    [["regenerative potion", 0, 0, [], True, "rejuvenation", 4, [], "A small flask containing a blood-red liquid. \nDrink the contents to restore a small amount of health to yourself."],
+     ["dark iron glaive", 1, 0, ["physical"], False, "weapon", 1.25, [], "A long, broad, jagged blade attached to a polearm. \nThrust or swing at opponents with this weapon to deal damage, increase against enemies susceptible to its damage types."], 
+     ["gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], "Putting on these glaives fills your entire body with a fraction of the otherworldly strength of Ares, the god of war. \nWith these, your punch becomes just as mean as your cut was before, and you deal increased damage against enemies susceptible to its damage type."]],
+    
+    [["erasor", 0, 0, [], True, "rejuvenation", 4, [], "Its just a rubber/erasor. \nUse this item to rease some of your missing health."],
+     ["exam awnser sheet", 0, 0, ["answer", "answer", "answer", "psychic"], True, "weapon", 0.8, [], "A large stack of paper sheets that combined make up every answer to every test in every course in every year group in every country in all dimenttions. \nRead this to confuse most enemies, "]]]
 
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
 
@@ -371,7 +376,7 @@ def Combat(element):
 
 def Treasure(element):
     os.system("cls")
-    ItemStats: list = list(itemList[element])[RND.randint(0, len(itemList[element])-1)]
+    ItemStats: list = itemList[element][RND.randint( 0, math.ceil((player.level / 9) * len(itemList[element])) - 1)]
     foundItem = Item(ItemStats[0], ItemStats[1], ItemStats[2], ItemStats[3], ItemStats[4], ItemStats[5], ItemStats[6], ItemStats[7], ItemStats[8])
     player.inventory.PickUpItem(foundItem, element)
 
@@ -379,6 +384,7 @@ def Treasure(element):
 
     print(encounterList[element][0][1] + "\n"*2 + PrintCharStats(False) + "Press any key to continue!")
     Input()
+    os.system('cls')
 
 
 
@@ -409,6 +415,7 @@ def Trap(element):
     print(encounterList[element][1][1])
     print("\nPress any key to continue!")
     Input()
+    os.system('cls')
 
 
 def Main():
@@ -423,8 +430,9 @@ def Main():
     player.health = player.maxhealth
     Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, [], "A sparring sword to swing at your opponents").ItemPickup()
     Item("a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuvenation", 2, [], "").ItemPickup()
-
-    while(True):
+    global hasWon
+    hasWon = False
+    while(not hasWon):
         os.system('cls')
 
         if player.health <= 0:
@@ -435,43 +443,6 @@ def Main():
         
         if player.health > player.maxhealth:
             player.health = player.maxhealth
-
-        while player.exp >= player.expRequirement:
-
-            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n\n")
-            player.exp -= player.expRequirement
-            player.level += 1
-            player.health += 2
-            player.strength += 0.5
-            player.expRequirement = math.floor(player.expRequirement * 1.3)
-
-            if player.level == 10:
-                print("Your path forks. The left path leads deeper into the dungeon. At the end of a long tunnel, the right path ends in vibrant sunlight. [l/r]")
-                
-                while key not in ['l', 'r']:
-                    key = Input()
-
-                if key == 'r':
-                    print(colored("""
-     )    )                     (        )  
-  ( /( ( /(           (  (      )\ )  ( /(  
-  )\()))\())     (    )\))(   '(()/(  )\()) 
- ((_)\((_)\      )\  ((_)()\ )  /(_))((_)\  
-__ ((_) ((_)  _ ((_) _(())\_)()(_))   _((_) 
-\ \ / // _ \ | | | | \ \((_)/ /|_ _| | \| | 
- \ V /| (_) || |_| |  \ \/\/ /  | |  | .` | 
-  |_|  \___/  \___/    \_/\_/  |___| |_|\_|                       
-                                                                                                      
-                         """, "red"))
-                    break
-
-                
-
-
-
-            print("The gods have blessed you for your troubles! A new path opens up before you, this one without a door. Inside, you can smell treasure...")
-            Input()
-            Treasure(RND.randint(0, 3))
 
 
 
@@ -515,6 +486,46 @@ __ ((_) ((_)  _ ((_) _(())\_)()(_))   _((_)
 
             else:
                 Combat(doorSet[int(key) - 1])
+
+
+            while player.exp >= player.expRequirement:
+                os.system('cls')
+                print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n\n")
+                player.exp -= player.expRequirement
+                player.level += 1
+                player.health += 2
+                player.strength += 0.5
+                player.expRequirement = math.floor(player.expRequirement * 1.3)
+
+                if player.level == 10:
+                    print("Your path forks. The left path leads deeper into the dungeon. \nAt the end of a long tunnel, the right path ends in the vibrant sunlight of the outside. [l/r]")
+                    key = ""
+                    while key not in ['l', 'r']:
+                        key = Input()
+
+                    if key == 'r':
+                        print(colored("""
+          )    )                     (        )  
+      ( /( ( /(           (  (      )\ )  ( /(  
+       )\()))\())     (    )\))(   '(()/(  )\()) 
+      ((_)\((_)\      )\  ((_)()\ )  /(_))((_)\  
+    __ ((_) ((_)  _ ((_) _(())\_)()(_))   _((_) 
+    \ \ / // _ \ | | | | \ \((_)/ /|_ _| | \| | 
+     \ V /| (_) || |_| |  \ \/\/ /  | |  | .` | 
+      |_|  \___/  \___/    \_/\_/  |___| |_|\_|                       
+                                                                                                        
+                            """, "red"))
+                        
+                        hasWon = True
+                        break
+
+                    
+
+
+
+                print("The gods have blessed you! Your petty squabbles must be quite entertaining. A new path opens up before you, this one without a door. Inside, you can almost smell treasure...\n\nPress any key to collect it.")
+                Input()
+                Treasure(RND.randint(0, 3))
             
 
         
@@ -549,7 +560,7 @@ def PrintInventory():
     Input()
 
 def PrintCharStats(canAct:bool):
-    charStats = (colored("\nHealth: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ", "green") + "\n")
+    charStats = (colored("\nHealth: [" + '■'*(player.health) + ' '*(player.maxhealth-player.health) + "] ", "red") + colored(f"Strength: {player.strength} ", "yellow") + colored(f"Level: {roman.toRoman(player.level)} ({player.exp}/{player.expRequirement})", "green") + "\n")
     itemNames = []
 
     for i in range(0, len(player.inventory.items)):
