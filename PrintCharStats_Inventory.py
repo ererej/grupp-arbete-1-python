@@ -465,9 +465,13 @@ def Main():
             
             if key == "r": 
                 PrintHelpMenu()
+                os.system("cls")
+                print(screen1 + "\n"*3 + PrintCharStats(False))
 
             if key == "i":
                 PrintInventory()
+                os.system("cls")
+                print(screen1 + "\n"*3 + PrintCharStats(False))
 
         
             encounterStyle = RND.randint(1, 10)
