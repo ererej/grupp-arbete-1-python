@@ -253,7 +253,7 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
         ["THE SOLDIER", 3, 7, [["psychic"], ["physical"], ["physical","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
         ["THE RIDER IN THE DARK", 2, 25, [["frost"], ["psychic"], ["physical","psychic"]], "You enter a dimly-lit room. Standing infront of you seems to be a person riding a horse. You aren't to sure of its intentions, but best to attempt to kill it.", ["The rider attacks you with a spear! Or does it? It does not hurt that much...","The rider messes with your mind... in some unknown way. You are not entirely sure what he did, but you don't feel as healthy as before"], "The rider... disapears. It does not vanish, but at the same time it just... Well, it is dead, and you won, and that is what matters."], 
-        ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["physical"], ["phys, phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
+        ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["physical"], ["phys", "phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
         [["You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for useful items.", "You close the drawer and quickly run out of the classroom to not get caught red-handed."],
         ["Slowly, you enter the room. To your horror, you find on a whiteboard 100 meter wide, proof that you CANNOT REASONABLY still possess all the magical properties given to you in past rounds, proven with #FAXX and #Logic!", "'Can't argue with that', you think. You leave the room through a window, deeply appaled by this news."], 
         ["JESPER ENGELMARK", 3, 8, [["physical"], ["psychic"], ["physical","psychic"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
@@ -560,41 +560,3 @@ Enter(difficultyIndex)
 
 # SPELET KAN EJ VINNAS vid nivå 10 just nu!
 
-# FIRE RES POTION FORFARANDE BROKEN
-
-#Traceback (most recent call last):
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 557, in <module>    
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter       
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 484, in Main        
-#    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 354, in Combat      
-#    usedItem.CombatActive(encounteredMonster)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 158, in CombatActive
-#    player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
-#                                               ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
-#TypeError: list indices must be integers or slices, not str
-
-#NÅNTING FEL MED MONSTERSTATS
-
-#[3] This door seems to be made entirely of ice.
-
-
-
-#Health: [■■■■■■■■■■       ] Strength: 7.0 Level: VII 
-#╷────────────────╷────────────────────────────────╷───────────╷───────────╷───────────╷───────────╷ 
-#| a wooden sword | a pendant of winter's vitality | ......... | ......... | ......... | ......... | 
-#╵────────────────╵────────────────────────────────╵───────────╵───────────╵───────────╵───────────╵ 
-
-#Traceback (most recent call last):
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 557, in <module>
-#    Enter(difficultyIndex)
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter
-#    Main()
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 484, in Main
-#    Combat(doorSet[int(key) - 1])
-#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 324, in Combat
-#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
-#                                            ~~~~~~^^^
-#IndexError: list index out of range
