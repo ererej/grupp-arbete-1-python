@@ -258,7 +258,7 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         ["Slowly, you enter the room. To your horror, you find on a whiteboard 100 meter wide, proof that you CANNOT REASONABLY still possess all the magical properties given to you in past rounds, proven with #FAXX and #Logic!", "'Can't argue with that', you think. You leave the room through a window, deeply appaled by this news."], 
         ["JESPER ENGELMARK", 3, 8, [["physical"], ["psychic"], ["physical","psychic"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
         ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["physical","psychic"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
-        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]]
+        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]
 
 
 def Input():
