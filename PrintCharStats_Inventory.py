@@ -436,9 +436,6 @@ def Main():
         if player.health > player.maxhealth:
             player.health = player.maxhealth
 
-        if player.level > 10:
-            print(colored("You see a "))
-
         while player.exp >= player.expRequirement:
 
             print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n\n")
@@ -447,6 +444,30 @@ def Main():
             player.health += 2
             player.strength += 0.5
             player.expRequirement = math.floor(player.expRequirement * 1.3)
+
+            if player.level == 10:
+                print("Your path forks. The left path leads deeper into the dungeon. At the end of a long tunnel, the right path ends in vibrant sunlight. [l/r]")
+                
+                while key not in ['l', 'r']:
+                    key = Input()
+
+                if key == 'r':
+                    print(colored("""
+     )    )                     (        )  
+  ( /( ( /(           (  (      )\ )  ( /(  
+  )\()))\())     (    )\))(   '(()/(  )\()) 
+ ((_)\((_)\      )\  ((_)()\ )  /(_))((_)\  
+__ ((_) ((_)  _ ((_) _(())\_)()(_))   _((_) 
+\ \ / // _ \ | | | | \ \((_)/ /|_ _| | \| | 
+ \ V /| (_) || |_| |  \ \/\/ /  | |  | .` | 
+  |_|  \___/  \___/    \_/\_/  |___| |_|\_|                       
+                                                                                                      
+                         """, "red"))
+                    break
+
+                
+
+
 
             print("The gods have blessed you for your troubles! A new path opens up before you, this one without a door. Inside, you can smell treasure...")
             Input()
