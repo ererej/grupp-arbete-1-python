@@ -248,7 +248,7 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
         ["THE MAD SNOWMAN", 3, 4, [["fire"], ["frost"], ["physical","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snowman throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
         ["THE FROZEN SPIRIT", 5, 15, [["psychic"], ["physical"], ["psychic","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
-        ["THE GLACIER GOLEM"], 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
+        ["THE GLACIER GOLEM", 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."],
         [["In the middle of the room you see a chest of weapons you start looking through it.", "You leave the room and go on to the next adventure"], 
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
         ["THE SOLDIER", 3, 7, [["psychic"], ["physical"], ["physical","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
@@ -258,7 +258,7 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         ["Slowly, you enter the room. To your horror, you find on a whiteboard 100 meter wide, proof that you CANNOT REASONABLY still possess all the magical properties given to you in past rounds, proven with #FAXX and #Logic!", "'Can't argue with that', you think. You leave the room through a window, deeply appaled by this news."], 
         ["JESPER ENGELMARK", 3, 8, [["physical"], ["psychic"], ["physical","psychic"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
         ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["physical","psychic"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
-        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]
+        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]]
 
 
 def Input():
@@ -321,7 +321,7 @@ def Combat(element):
         # If the player has not yet reached the level 2 monster, it will simply grab the lvl 1 monsters stats. This is because randint function does not accept two identical parameters.
         MStats: list = list(encounterList[element])[2]
 
-    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6]) #NÅNTING ÄR MYCKET FEL HÄR
 
 
     monsterStartHealth = encounteredMonster.health
