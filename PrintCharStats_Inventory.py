@@ -469,27 +469,26 @@ def Main():
             if key == "i":
                 PrintInventory()
 
-        if key in ['1', '2', '3']:
-            
+        
             encounterStyle = RND.randint(1, 10)
 
-            if player.level <= 2:
-                if encounterStyle <= 3:
-                    Treasure(doorSet[int(key) - 1])
-                else: 
-                    Combat(doorSet[int(key) - 1])
+        if player.level <= 2:
+            if encounterStyle <= 3:
+                Treasure(doorSet[int(key) - 1])
+            else: 
+                Combat(doorSet[int(key) - 1])
 
 
-            elif player.level <= 8:
-                if encounterStyle <= 2:
-                    Trap(doorSet[int(key) - 1])
-                elif encounterStyle <= 5:
-                    Treasure(doorSet[int(key) - 1])
-                else:
-                    Combat(doorSet[int(key) - 1])
-
+        elif player.level <= 8:
+            if encounterStyle <= 2:
+                Trap(doorSet[int(key) - 1])
+            elif encounterStyle <= 5:
+                Treasure(doorSet[int(key) - 1])
             else:
                 Combat(doorSet[int(key) - 1])
+
+        else:
+            Combat(doorSet[int(key) - 1])
 
 
         while player.exp >= player.expRequirement:
