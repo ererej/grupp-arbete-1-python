@@ -574,3 +574,26 @@ Enter(difficultyIndex)
 #    player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
 #                                               ~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 #TypeError: list indices must be integers or slices, not str
+
+#NÅNTING FEL MED MONSTERSTATS
+
+#[3] This door seems to be made entirely of ice.
+
+
+
+#Health: [■■■■■■■■■■       ] Strength: 7.0 Level: VII 
+#╷────────────────╷────────────────────────────────╷───────────╷───────────╷───────────╷───────────╷ 
+#| a wooden sword | a pendant of winter's vitality | ......... | ......... | ......... | ......... | 
+#╵────────────────╵────────────────────────────────╵───────────╵───────────╵───────────╵───────────╵ 
+
+#Traceback (most recent call last):
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 557, in <module>
+#    Enter(difficultyIndex)
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 311, in Enter
+#    Main()
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 484, in Main
+#    Combat(doorSet[int(key) - 1])
+#  File "c:\Pythonprogramm\grupp-arbete-1-python\PrintCharStats_Inventory.py", line 324, in Combat
+#    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
+#                                            ~~~~~~^^^
+#IndexError: list index out of range
