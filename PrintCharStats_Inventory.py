@@ -150,7 +150,7 @@ class Item():
         if self.itemType == "rejuvenation":
             # gives the player HP
             player.health += self.power
-            print(f"You restored {self.power*player.level} health!")
+            print(f"You restored {self.power} health!")
 
         if self.itemType == "resistance-giver":
             # gives the player ALL resistances in the "resistancePotEffects" list
