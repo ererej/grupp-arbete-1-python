@@ -147,14 +147,14 @@ class Item():
             monster.health -= math.floor(damage * self.power)
             print("Your opponent sustained " + str(math.floor(damage * self.power)) + " damage!")
         
-        if self.itemType == "rejuveration":
+        if self.itemType == "rejuvenation":
             # gives the player HP
-            player.health += self.power*player.level
+            player.health += self.power
             print(f"You restored {self.power*player.level} health!")
 
         if self.itemType == "resistance-giver":
             # gives the player ALL resistances in the "resistancePotEffects" list
-            for i in self.resistancePotEffects:
+            for i in range(0, len(self.resistancePotEffects)):
                 player.elements[ELEMENT_RESISTANCE].append(self.resistancePotEffects[i])
             print("You gained some magical resistances!")
 
@@ -220,11 +220,11 @@ itemList = [
     [["a fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"], "A burning flower is suspended in "], 
      ["the blade of infinite infernal power", 2, 2, ["fire", "physical"], False, "weapon", 2.5, [], ""]],
     [["a scroll of frostbite", 1, 0, ["frost"], True, "weapon", 3, [], ""], 
-     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, [], ""]],
+     ["a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuvenation", 3, [], ""]],
     [["a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.75, [], ""], 
      ["the gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], ""]],
-    [["Exam awnser key", 2, 1, [], True, "weapon", 1, [], ""], 
-     ["teacher item place holder", 2, 1, 3, False, "weapon", 1, [], ""]]]
+    [["Exam awnser key", 2, 1, ["answer", "answer"], True, "weapon", 1, [], ""], 
+     ["teacher item place holder", 2, 1, [], False, "weapon", 1, [], ""]]]
 
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
 
@@ -422,7 +422,7 @@ def Main():
 
     player.health = player.maxhealth
     Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, [], "A sparring sword to swing at your opponents").ItemPickup()
-    Item("a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuveration", 2, [], "").ItemPickup()
+    Item("a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuvenation", 2, [], "").ItemPickup()
 
     while(True):
         os.system('cls')
@@ -503,7 +503,7 @@ def PrintInventory():
             
             printedText += str(item.power) + " power." 
 
-        elif item.itemType == "rejuveration":
+        elif item.itemType == "rejuvenation":
             printedText = f"Item type: REJUVERATION | {item.power} power"
 
         elif item.itemType == "resistance-giver":
