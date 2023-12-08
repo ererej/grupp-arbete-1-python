@@ -495,7 +495,7 @@ def Main():
 
         while player.exp >= player.expRequirement:
             os.system('cls')
-            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + colored("LEVEL +1\n", "green") + colored("STRENGTH +0.5", "yellow") + "\n"*2 + "You are filled with hope ("+ colored("heal 2", "red") + ")" + "\n\n")
+            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + colored("LEVEL +1\n", "green") + colored("STRENGTH +0.5", "yellow") + "\n"*2 + colored("You are filled with hope (heal 2)\n\n", "red"))
             player.exp -= player.expRequirement
             player.level += 1
             player.health += 2
