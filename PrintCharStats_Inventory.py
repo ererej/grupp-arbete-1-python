@@ -68,12 +68,12 @@ class Monster():
 
         damage = self.strength
 
-        for i in player.elements[ELEMENT_WEAKNESS]:
-            if player.elements[ELEMENT_WEAKNESS][i] == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
+        for weakness in player.elements[ELEMENT_WEAKNESS]:
+            if weakness == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
                 damage *= 2
 
-        for i in player.elements[ELEMENT_RESISTANCE]:
-            if player.elements[ELEMENT_RESISTANCE][i] == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
+        for resistance in player.elements[ELEMENT_RESISTANCE]:
+            if resistance == self.elements[ELEMENT_ATTACK_TYPE][attackIndex]:
                 damage /= 2
 
         player.health -= math.floor(damage)
