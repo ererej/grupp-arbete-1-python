@@ -78,7 +78,7 @@ class Monster():
 
         player.health -= math.floor(damage)
 
-        print(colored("\nYou sustain " + str(damage) + " " + self.elements[ELEMENT_ATTACK_TYPE][attackIndex] + "-type damage.", "red") + "\nPress [any] to continue")
+        print(colored("\nYou sustain " + str(math.floor(damage)) + " " + self.elements[ELEMENT_ATTACK_TYPE][attackIndex] + "-type damage.", "red") + "\nPress [any] to continue")
         Input()
 
 
@@ -255,8 +255,8 @@ encounterList = [[["You enter the door and see a chest slowly sinking down in la
         [["Inside the room you see a item frozen in a block of ice, You brake the ice suronding it and!", "You quickly run out of the room to get away from the cold"], 
         ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
         ["mad snowman", 3, 4, [["fire", "physical"], ["frost"], ["physical","frost"]], "A magical, wintery landscape is somehow enclosed under the dome you find yourself in as you enter the next room. \n", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snowman throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
-        ["snowstorm spirit", 5, 7, [[], ["physical"], ["psychic","frost"]], "", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
-        ["glacier golem", 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."]],
+        ["snowstorm spirit", 5, 7, [[""], ["physical", "physical"], ["physical","frost"]], "POWERFUL WINDS immediately pull you through the door and into the room. A mass of gleaming energy floats in the center.", ["Another strong wind pulls you high into the air and then drives you STRAIGHT DOWN, slamming you into the ground!", "Water vapour in the air condenses into droplets, and then hardens into icicles that are all propelled toward you at fast speeds!"], "Chimes play throughout the room as the sprit implodes."], 
+        ["glacier golem", 2, 30, [["frost", "frost"], [""], ["frost","physical"]], "The first thing that strikes you is the size of the thing. The second thing that strikes you is the glacier golem's giant fist.", ["The glacier golem renders itself immobile ","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."]],
         
         [["In the middle of the room you see a chest of weapons you start looking through it.", "You leave the room and go on to the next adventure"], 
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
