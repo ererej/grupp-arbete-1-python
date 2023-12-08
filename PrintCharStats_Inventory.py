@@ -325,7 +325,7 @@ def Combat(element):
 
     # Grabs stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
     try:
-        MStats : list = list(encounterList[element])[RND.randint(2, math.floor((player.level / 10) * (len(encounterList[element]) - 2)))]
+        MStats : list = list(encounterList[element])[RND.randint(2, 2 + math.floor((player.level / 10) * (len(encounterList[element]) - 2)))]
     except:
         # If the player has not yet reached the level 2 monster, it will simply grab the lvl 1 monsters stats. This is because randint function does not accept two identical parameters.
         MStats: list = list(encounterList[element])[2]
