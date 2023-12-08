@@ -460,14 +460,14 @@ def Main():
         print(screen1 + "\n"*3 + PrintCharStats(False))
         
         key = ''
-        while key not in ["i", 'r', '1', '2', '3']:
+        while key not in ['1', '2', '3']:
             key = Input()
+            
+            if key == "r": 
+                PrintHelpMenu()
 
-        if key == "r": 
-            PrintHelpMenu()
-
-        if key == "i":
-            PrintInventory()
+            if key == "i":
+                PrintInventory()
 
         if key in ['1', '2', '3']:
             
