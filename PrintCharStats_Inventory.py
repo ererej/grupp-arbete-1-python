@@ -204,6 +204,8 @@ class Inventory():
             return
         if len(player.inventory.items) == 5:
 
+            while key not in ['1','2','3','4','5']:
+                key = Input()
             self.items[int(key) - 1].ItemDrop()
             foundItem.ItemPickup() # kanske ska lägga till att den lägger till det nya itemet i samma slot 
             return
@@ -322,7 +324,7 @@ def Enter(difficultyIndex):
 def Combat(element):
     global canAct
     canAct = True
-
+    MStats = []
     # Grabs stats for monster. Randomized monster level. Max ceil scales as percentage as player level increases. lvl 10 is max lvl as of writing.
     if player.level > 3:
         MStats : list = encounterList[element][RND.randint(2, math.floor((player.level / 9) * (len(encounterList[element]) - 2)))]
@@ -330,7 +332,7 @@ def Combat(element):
         # If the player has not yet reached the level 2 monster, it will simply grab the lvl 1 monsters stats. This is because randint function does not accept two identical parameters.
         MStats: list = list(encounterList[element])[2]
 
-    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6]) #NÅNTING ÄR MYCKET FEL HÄR
+    encounteredMonster = Monster(MStats[0], MStats[1], MStats[2], MStats[3], MStats[4], MStats[5], MStats[6])
 
 
     monsterStartHealth = encounteredMonster.health
