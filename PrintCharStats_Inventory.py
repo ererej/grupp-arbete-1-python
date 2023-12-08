@@ -213,22 +213,24 @@ class Inventory():
 # element types: fire, frost, phys (physical), psy (psionic)
 # name, strength, health, elements, consumable: bool, itemType, power, resistancePotEffects: list
 
-# "true" item types: stat stick, weapon, healing potion, resistance potion
-# weapons need name, strength, hp, [damage types], consumable: bool, itemType ("weapon"), power (damage multiplier), [nothing]
+# damage weapons: fire, physical, frost, psychic, poison
 
 itemList = [
     [["fire resistance potion", 0, 0, [], True, "resistance-giver", 0, ["fire"], "A burning flower is suspended in the liquid within this vial, although its petals and stem do not seem charred.\nDrink to gain resistance against fire damage, halving all damage taken of this type."], 
-     ["Baal's blade of infernal power", 0.5, 0, ["fire", "physical"], False, "weapon", 2, [], "A blade made of equal parts cold iron, sharp as death, molten rock, and infernal rage. \nSwing this at opponents to deal great amounts of damage, increased against enemies susceptible to its damage types."]],
+     ["molten shield", 1, 3, [], False, "resistance-giver", 0, ["fire", "cold"], "Only the hilt of this shield is not set aflame. \nUse this shield to gain resistance against certain damage types, reducing their damage toward you."],
+     ["Baal's blade of infernal power", 0.5, 0, ["fire", "physical"], False, "weapon", 1.7, [], "A blade made of equal parts cold iron, sharp as death, molten rock, and infernal rage. \nSwing this at opponents to deal great amounts of damage, increased against enemies susceptible to its damage types."]],
     
     [["spell scroll: 'Fierce Blizzard'", 1, 0, ["frost", "frost"], True, "weapon", 2, [], "On this scroll are neatly typed runes and instructions for casting the 'Fierce Blizzard' spell. \nRead the scroll to deal great amounts of damage, increased against enemies susceptible to its damage type."], 
-     ["pendant of winter's vitality", 0, 7, ["frost"], False, "rejuvenation", 2, [], "Possessing this pendant, an unbreakable ice crystal worn around the neck, fills you with courage. \nPray to Beira, god of winter and cold, to restore a small amount of health to yourself."],
+     ["pendant of winter's vitality", 0, 7, ["frost"], False, "rejuvenation", 3, [], "Possessing this pendant, an unbreakable ice crystal worn around the neck, fills you with courage. \nPray to Beira, god of winter and cold, to restore a small amount of health to yourself."],
      ["Braum's door-shield", 1, 5, [], False, "resistance-giver", 0, ["physical", "physical", "cold", "fire"], "Is this door a shield? Is this shield a door? Either way, it serves just as well for keeping death away.\nHold this door-shield between yourself and an enemy to halve all damage taken from them of certain types."]],
 
     [["regenerative potion", 0, 0, [], True, "rejuvenation", 4, [], "A small flask containing a blood-red liquid. \nDrink the contents to restore a small amount of health to yourself."],
      ["dark iron glaive", 1, 0, ["physical"], False, "weapon", 1.25, [], "A long, broad, jagged blade attached to a polearm. \nThrust or swing at opponents with this weapon to deal damage, increase against enemies susceptible to its damage types."], 
-     ["gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.5, [], "Putting on these glaives fills your entire body with a fraction of the otherworldly strength of Ares, the god of war. \nWith these, your punch becomes just as mean as your cut was before, and you deal increased damage against enemies susceptible to its damage type."]],
+     ["quiver of poisoned arrows", 1, 0, ["poison"], False, "weapon", 1.4, [], "A quiver full of arrows. The tip of each one is covered in a mucus, toxic to the touch. \nFire this arrow at an opponent to deal great amounts of damage, increased against enemies suscetible to its damage types."],
+     ["gauntlets of strength", 3, 1, ["physical"], False, "weapon", 0.8, [], "Putting on these glauntlets fills your entire body with an uverwhelming yet miniscule fraction of the otherworldly strength of Ares, the god of war. \nWith these, your punch becomes just as mean as your cut was, and you deal increased damage against enemies susceptible to its damage type."]],
     
-    [["erasor", 0, 0, [], True, "rejuvenation", 4, [], "Its just a rubber/erasor. \nUse this item to rease some of your missing health."],
+    [["eraser", 0, 0, [], True, "rejuvenation", 4, [], "Its just a rubber/eraser. \nUse this item to erase some of your wounds, which somehow heals you."],
+     ["sick diss track", 0, 0, ["psychic", "psychic"], False, "weapon", 1.2, [], "Wow this rap slaps hard, right bro?\nRap your enemies into battle. Pop some caps out there, man."],
      ["exam awnser sheet", 0, 0, ["answer", "answer", "answer", "psychic"], True, "weapon", 0.8, [], "A large stack of paper sheets that combined make up every answer to every test in every course in every year group in every country in all dimenttions. \nRead this to confuse most enemies, "]]]
 
 #items have 8 paramiters: name, strength, health, elements, consumable, itemType, power, boostTypes, item description (for inventory)
@@ -244,26 +246,29 @@ itemList = [
 # Monster finns på horizontal index 2-4.
 # monsterName, strength, health, elements: list[list[str]], enterDesc, attackMoveDesc, deathDesc
 
-encounterList = [[["You enter the door and see a chest slowly sinking down in lava, you quickly save the chest and open it", "You close the chest and throw it back and exit the room"], #The lava pit 
+encounterList = [[["You enter the door and see a chest slowly sinking down in lava, you quickly save the chest and open it", "You close the chest and exit the room"], 
         ["As you enter a long corridor, you hear mechanical sounds coming from within the walls. The door locks behind you. Before you can react, you are ENVELOPED IN FIRE", "You sprint through the flames and exit this trapped room."], 
-        ["THE FIRE SLIME", 2, 6, [["frost"], ["fire"], ["fire", "fire"]], "A slimy, spherical creature that also appears to be on fire stands infront of you!", ["The slime jumps into you! Luckely its body does not hurt. The flames however, does.", "The slime spits out a stream of fire onto you!"], "The flames on the monster extinguish, and it solidifies."], 
-        ["DASTARDLY IMP", 6, 8, [["physical"], ["fire"], ["fire","psychic"]], "An imp appears! It seems to be quite cruel with its attacks.", ["The imp throws fireballs at you!","The imp casts a spell upon you! It seems like it damaged your mind."], "The imp lets out a shreik, and dies."], 
-        ["DRAGON", 8, 25, [["psychic"], ["physical"], ["fire","physical"]], "You spot a formidable dragon standing some distance away. You try to avoid it, but it notices you. Prepare for battle!", ["The Dragon breathes fire at you!","The Dragon slashes its claws at you!"], "The dragon lets out a cry of pain, before falling to the ground dead."]],
+        ["fire slime", 2, 6, [["fire", "fire"], ["frost"], ["fire", "fire"]], "You step into a room covered in some sticky substance, most of which is AFLAME. \nA slimy creature stands before you, its body quickly incinerating even as it moves with struggling toward you.", ["The slime leaps onto your leg, putting your clothes on fire and forcing you to shake the thing off!", "Part of the slime is catapulted from its body, straight at your face!"], "What remains of the monster becomes plumes of smoke as it incinerates."], 
+        ["dastardly imp", 6, 6, [["physical", "poison"], ["fire"], ["fire", "psychic"]], "A winged imp appears, although not at its full power; the skin around its head has been flayed off, and its wings are tattered.", ["The imp conjures fireballs from its hands and throws them at you!", "The imp lets out a terrible shriek, which tears through your mind!"], "The imp lets out a shreik of pain, clutching its wounds. Its wings become stale as it falls to the ground."], 
+        ["dragon", 5, 17, [["psychic", "psychic"], ["physical"], ["fire", "physical"]], "As you enter, wind blows fast through the cavern you find yourself in. A dragon swoops down, in its claws clutching a lesser imp, which it proudly presents to you. A grin of sable-teeth spreads across its face. \n\n'Prepare yourself, lesser being!'", ["The Dragon unleashes a breath of fire upon you, like it's bathing you in a hundred suns!","The dragon slashes at your entire body at once, rending your flesh!"], "The dragon lets out a cry of pain... \n\n...it falls...\n\nto the ground...\n\n...its eyes...\n\n...vacant."]],
+        
         [["Inside the room you see a item frozen in a block of ice, You brake the ice suronding it and!", "You quickly run out of the room to get away from the cold"], 
         ["The frigid gale of the north blows over you, FREEZING YOUR LIMBS!", "You run out of the room and when you do, the icicles stop falling and you see the massive pile of crushed ice that has formed."], 
-        ["THE MAD SNOWMAN", 3, 4, [["fire"], ["frost"], ["physical","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snowman throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
-        ["THE FROZEN SPIRIT", 5, 15, [["psychic"], ["physical"], ["psychic","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
-        ["THE GLACIER GOLEM", 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."]],
+        ["mad snowman", 3, 4, [["fire"], ["frost"], ["physical","frost"]], "You notice a snowman in the room. When you go to get a closer look, it wakes to life!", ["The snowman throws a snowball at you! It doesn't hurt you, but then he drives a knife into your arm.", "The snowman throws a water baloon at you! Atleast you think it was water, but it turns out to be filled with liquid nitrogen!"], "The head of the snowman falls to the ground, and there is no more movement."], 
+        ["frost spirit", 5, 15, [["psychic"], ["physical"], ["psychic","frost"]], "You enter a room, but it is empty. Then a spirit flies in through the wall!", ["The spirit casts a spell, draining your sanity and mental health.","The spirit causes the vapor in the air to freeze into icicles, then it throws them at you!"], "The sprits vanishes into thin air."], 
+        ["glacier golem", 14, 8, [["physical"], ["psychic"], ["frost","physical"]], "A gargantuan ice golem stands infront of you!", ["The golem cools the area significantly to the point you develop frostbite!","The golem slams you with its giant arm!"], "Cracks appear on the golem moments before it falls apart. Turns out being made of ice made it quite fragile."]],
+        
         [["In the middle of the room you see a chest of weapons you start looking through it.", "You leave the room and go on to the next adventure"], 
         ["The room you enter does not seem to have anything in it. But then the floor dissapears and you fall into a pit of spikes!", "You climb out of the pit and leave the room. A classic, but a dreadful trap."], 
-        ["THE SOLDIER", 3, 7, [["psychic"], ["physical"], ["physical","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
-        ["THE RIDER IN THE DARK", 2, 25, [["frost"], ["psychic"], ["physical","psychic"]], "You enter a dimly-lit room. Standing infront of you seems to be a person riding a horse. You aren't to sure of its intentions, but best to attempt to kill it.", ["The rider attacks you with a spear! Or does it? It does not hurt that much...","The rider messes with your mind... in some unknown way. You are not entirely sure what he did, but you don't feel as healthy as before"], "The rider... disapears. It does not vanish, but at the same time it just... Well, it is dead, and you won, and that is what matters."], 
-        ["THE THOUSAND-PIERCED BEAR", 10, 35, [["frost"], ["physical"], ["phys", "phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
+        ["deserter", 3, 7, [["psychic"], ["physical"], ["physical","fire"]], "You spot a soldier infront of you! He seems to have deserted the army he once belonged to.", ["The soldier tries to shoot you with his rifle, but it's jammed. So then he attacks you with it like a club!","The soldier attacks you with a miniature flamethrower!"], "The solder lets out a groan, before falling to the ground motionless"],
+        ["rider in the dark", 2, 25, [["frost"], ["psychic"], ["physical","psychic"]], "You enter a dimly-lit room. Standing infront of you seems to be a person riding a horse. You aren't to sure of its intentions, but best to attempt to kill it.", ["The rider attacks you with a spear! Or does it? It does not hurt that much...","The rider messes with your mind... in some unknown way. You are not entirely sure what he did, but you don't feel as healthy as before"], "The rider... disapears. It does not vanish, but at the same time it just... Well, it is dead, and you won, and that is what matters."], 
+        ["thousand-pierced bear", 10, 35, [["frost"], ["physical"], ["phys", "phys"]], "You spot a bear infront of you! Judging by the various weapons stuck in its fur, it seems to be very dangerous!", ["The bear mauls you with its razor-sharp teeth!","The bear thrusts its claws into you like they were daggers!"], "The bear screams in great pain and tries to go for another attack, but falls to the ground dead before it could."]],
+        
         [["You enter the door and find an empty classroom. You follow your natural instinct and start looting the teachers desk for useful items.", "You close the drawer and quickly run out of the classroom to not get caught red-handed."],
         ["Slowly, you enter the room. To your horror, you find on a whiteboard 100 meter wide, proof that you CANNOT REASONABLY still possess all the magical properties given to you in past rounds, proven with #FAXX and #Logic!", "'Can't argue with that', you think. You leave the room through a window, deeply appaled by this news."], 
-        ["JESPER ENGELMARK", 3, 8, [["physical"], ["psychic"], ["physical","psychic"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
-        ["ANNIKA WESTIN", 6, 12, [["fire"], ["frost"], ["physical","psychic"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
-        ["MARTIN LOMAN", 12, 24, [["fire"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]
+        ["jesper engelmark", 3, 8, [["physical", "answer"], ["psychic"], ["physical","psychic"]], "You enter the room and suprise! It's Jesper Engelmark, and he has a murderous intent!", ["Jesper summons a door that he promtly slams in your face!","Jesper does an epic roast! You mind can't handle it properly!"], "Jesper dies and falls to the ground. Although on closer inspection, it might have been a clone. Oh well."], 
+        ["annika westin", 6, 12, [["fire", "answer", "answer"], ["frost"], ["physical","psychic"]], "You enter the room. Suprise, it's Annika Westin!", ["Annika pulls out a pistol and shoots!","Annika pulls out a scroll and reads some magic! Your mind feels like it wants to go on vacation, away from this battle..."], "Annika falls to the ground and dies. It might have been a clone though, you are not sure."], 
+        ["martin loman", 12, 24, [["fire", "answer"], ["psychic"], ["frost","psychic"]], "Wow! It's Martin Loman!", ["Martin did something!","Martin gave you a bad grade!"], "Martin dies."]]]
 
 
 def Input():
@@ -428,8 +433,8 @@ def Main():
         player.inventory.items.remove(i)
 
     player.health = player.maxhealth
-    Item("a wooden sword", 0.5, 0, ["physical"], False, "weapon", 0.7, [], "A sparring sword to swing at your opponents").ItemPickup()
-    Item("a pendant of winter's vitality", 0.5, 7, ["frost"], False, "rejuvenation", 2, [], "").ItemPickup()
+    Item("a wooden sword", 0, 0, ["physical"], False, "weapon", 0.7, [], "A flimsy sparring sword to swing at your opponents").ItemPickup()
+
     global hasWon
     hasWon = False
     while(not hasWon):
@@ -488,44 +493,44 @@ def Main():
                 Combat(doorSet[int(key) - 1])
 
 
-            while player.exp >= player.expRequirement:
-                os.system('cls')
-                print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n\n")
-                player.exp -= player.expRequirement
-                player.level += 1
-                player.health += 2
-                player.strength += 0.5
-                player.expRequirement = math.floor(player.expRequirement * 1.3)
+        while player.exp >= player.expRequirement:
+            os.system('cls')
+            print("Congrats! You leveled up! You might make it here yet..." + "\n"*2 + "LEVEL +1\nSTRENGTH +0.5" + "\n"*2 + "You are filled with hope (heal 2)\n\n")
+            player.exp -= player.expRequirement
+            player.level += 1
+            player.health += 2
+            player.strength += 0.5
+            player.expRequirement = math.floor(player.expRequirement * 1.3)
 
-                if player.level == 10:
-                    print("Your path forks. The left path leads deeper into the dungeon. \nAt the end of a long tunnel, the right path ends in the vibrant sunlight of the outside. [l/r]")
-                    key = ""
-                    while key not in ['l', 'r']:
-                        key = Input()
+            if player.level == 10:
+                print("Your path forks. The left path leads deeper into the dungeon. \nAt the end of a long tunnel, the right path ends in the vibrant sunlight of the outside. [l/r]")
+                key = ""
+                while key not in ['l', 'r']:
+                    key = Input()
 
-                    if key == 'r':
-                        print(colored("""
-          )    )                     (        )  
-      ( /( ( /(           (  (      )\ )  ( /(  
-       )\()))\())     (    )\))(   '(()/(  )\()) 
-      ((_)\((_)\      )\  ((_)()\ )  /(_))((_)\  
+                if key == 'r':
+                    print(colored("""
+         )    )                     (        )  
+     ( /( ( /(           (  (      )\ )  ( /(  
+      )\()))\())     (    )\))(   '(()/(  )\()) 
+     ((_)\((_)\      )\  ((_)()\ )  /(_))((_)\  
     __ ((_) ((_)  _ ((_) _(())\_)()(_))   _((_) 
     \ \ / // _ \ | | | | \ \((_)/ /|_ _| | \| | 
      \ V /| (_) || |_| |  \ \/\/ /  | |  | .` | 
       |_|  \___/  \___/    \_/\_/  |___| |_|\_|                       
-                                                                                                        
-                            """, "red"))
-                        
-                        hasWon = True
-                        break
-
+                                                                                                    
+                        """, "red"))
                     
+                    hasWon = True
+                    break
+
+                
 
 
 
-                print("The gods have blessed you! Your petty squabbles must be quite entertaining. A new path opens up before you, this one without a door. Inside, you can almost smell treasure...\n\nPress any key to collect it.")
-                Input()
-                Treasure(RND.randint(0, 3))
+            print("The gods have blessed you! Your petty squabbles must be quite entertaining. A new path opens up before you, this one without a door. Inside, you can almost smell treasure...\n\nPress any key to collect it.")
+            Input()
+            Treasure(RND.randint(0, 3))
             
 
         
@@ -596,7 +601,3 @@ def PrintCharStats(canAct:bool):
 player = Player()
 
 Enter(difficultyIndex)
-
-
-# SPELET KAN EJ VINNAS vid nivå 10 just nu!
-
